@@ -22,13 +22,16 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var skinCancer: UIButton!
     @IBOutlet weak var riskLevel: UILabel!
     
+    let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
     /*let apiKey = "a61a7f7d9b2fef66fda503e39b384a9a267dcafb"
     var downloadPath = URL(string: "")
     var randomNumber = 0
     let version = "2017-11-19"*/
     
-    let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
     var request: VNCoreMLRequest!
+    
     var credits = 3
     
     override func viewDidLoad() {
@@ -261,9 +264,9 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             self.present(alertController, animated: true, completion: nil)
             self.deleteImage()
         }
-    } */
+    }*/
     
-    /* func watsonVisualRecognition() {
+    /*func watsonVisualRecognition() {
         if credits >= 1 {
             credits -= 1
             UserDefaults.standard.set(credits, forKey: "credits")
@@ -337,7 +340,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             self.present(alertController, animated: true, completion: nil)
             self.deleteImage()
         }
-    } */
+    }*/
     
     @IBAction func skinCancerButton(_ sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "percentage") as? Float) != nil {

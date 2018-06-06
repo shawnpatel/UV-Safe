@@ -10,5 +10,6 @@ Microsoft Skin Cancer Model: https://github.com/Azure/ai-toolkit-iot-edge/tree/m
 
 - Implement new skin cancer model with Core ML and Vision.
     - Remove Microsoft in UI.
+- New screenshots for tutorial.
 - Add in-app purchase to remove ads.
 - Redesign
