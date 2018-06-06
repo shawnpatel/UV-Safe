@@ -1,0 +1,518 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA091C651FC4AFC8002F1F85 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */; };
+		CA209A411F2C1AA200BF2AA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */; };
+		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
+		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
+		CAB18CD320C6F63100849F3A /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = CAB18CD220C6F63100849F3A /* TODO.txt */; };
+		CAB18CD520C72DB800849F3A /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */; };
+		CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C201EF999E40083F6DC /* AppDelegate.swift */; };
+		CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C261EF999E50083F6DC /* Main.storyboard */; };
+		CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C291EF999E50083F6DC /* Assets.xcassets */; };
+		CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */; };
+		CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C341EF99B960083F6DC /* HomeViewController.swift */; };
+		CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C361EF99E990083F6DC /* SearchViewController.swift */; };
+		F5ABA762C9D37DB12C200229 /* Pods_UV_Safe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CA00BFB01FC357FC006A5B68 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		20A7B90002CE9E59208FBD59 /* Pods-UV Safe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.debug.xcconfig"; sourceTree = "<group>"; };
+		B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.release.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.release.xcconfig"; sourceTree = "<group>"; };
+		CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
+		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
+		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
+		CAB18CD220C6F63100849F3A /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		CAC36C1D1EF999E40083F6DC /* UV Safe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UV Safe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC36C201EF999E40083F6DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CAC36C271EF999E50083F6DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CAC36C291EF999E50083F6DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAC36C2C1EF999E50083F6DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CAC36C2E1EF999E50083F6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAC36C341EF99B960083F6DC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		CAC36C361EF99E990083F6DC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UV_Safe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAC36C1A1EF999E40083F6DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5ABA762C9D37DB12C200229 /* Pods_UV_Safe.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B928B463541865084E254117 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF893A906F648679D52AC98F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20A7B90002CE9E59208FBD59 /* Pods-UV Safe.debug.xcconfig */,
+				B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA091C601FC4AF55002F1F85 /* UV Vision */ = {
+			isa = PBXGroup;
+			children = (
+				CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */,
+				CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */,
+			);
+			path = "UV Vision";
+			sourceTree = "<group>";
+		};
+		CA091C611FC4AF83002F1F85 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CAC36C341EF99B960083F6DC /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CA091C621FC4AF92002F1F85 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CAC36C361EF99E990083F6DC /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CA091C631FC4AFAA002F1F85 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				CA22BA301F26C34B00413405 /* InformationTableViewController.swift */,
+			);
+			path = Tips;
+			sourceTree = "<group>";
+		};
+		CAC36C141EF999E40083F6DC = {
+			isa = PBXGroup;
+			children = (
+				CAC36C1F1EF999E40083F6DC /* UV Safe */,
+				CAC36C1E1EF999E40083F6DC /* Products */,
+				BF893A906F648679D52AC98F /* Pods */,
+				B928B463541865084E254117 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CAC36C1E1EF999E40083F6DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAC36C1D1EF999E40083F6DC /* UV Safe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAC36C1F1EF999E40083F6DC /* UV Safe */ = {
+			isa = PBXGroup;
+			children = (
+				CAB18CD220C6F63100849F3A /* TODO.txt */,
+				CA4085611F245A4200BD4696 /* UV Safe.entitlements */,
+				CAC36C201EF999E40083F6DC /* AppDelegate.swift */,
+				CA091C611FC4AF83002F1F85 /* Home */,
+				CA091C621FC4AF92002F1F85 /* Search */,
+				CA091C601FC4AF55002F1F85 /* UV Vision */,
+				CA091C631FC4AFAA002F1F85 /* Tips */,
+				CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */,
+				CAC36C261EF999E50083F6DC /* Main.storyboard */,
+				CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */,
+				CAC36C291EF999E50083F6DC /* Assets.xcassets */,
+				CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */,
+				CAC36C2E1EF999E50083F6DC /* Info.plist */,
+			);
+			path = "UV Safe";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAC36C1C1EF999E40083F6DC /* UV Safe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAC36C311EF999E50083F6DC /* Build configuration list for PBXNativeTarget "UV Safe" */;
+			buildPhases = (
+				145C1A71E33351DFBD230907 /* [CP] Check Pods Manifest.lock */,
+				CAC36C191EF999E40083F6DC /* Sources */,
+				CAC36C1A1EF999E40083F6DC /* Frameworks */,
+				CAC36C1B1EF999E40083F6DC /* Resources */,
+				A57955B9164A19C32DE21C74 /* [CP] Embed Pods Frameworks */,
+				516FC7759D5D7D72DC035E3F /* [CP] Copy Pods Resources */,
+				CA00BFB01FC357FC006A5B68 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UV Safe";
+			productName = "UV Safe";
+			productReference = CAC36C1D1EF999E40083F6DC /* UV Safe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAC36C151EF999E40083F6DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Shawn Patel";
+				TargetAttributes = {
+					CAC36C1C1EF999E40083F6DC = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = YBJ2RY5U57;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = CAC36C181EF999E40083F6DC /* Build configuration list for PBXProject "UV Safe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CAC36C141EF999E40083F6DC;
+			productRefGroup = CAC36C1E1EF999E40083F6DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAC36C1C1EF999E40083F6DC /* UV Safe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAC36C1B1EF999E40083F6DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAB18CD320C6F63100849F3A /* TODO.txt in Resources */,
+				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
+				CA209A411F2C1AA200BF2AA3 /* GoogleService-Info.plist in Resources */,
+				CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */,
+				CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		145C1A71E33351DFBD230907 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UV Safe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		516FC7759D5D7D72DC035E3F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A57955B9164A19C32DE21C74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAC36C191EF999E40083F6DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */,
+				CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */,
+				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
+				CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */,
+				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,
+				CA091C651FC4AFC8002F1F85 /* DetailsViewController.swift in Sources */,
+				CAB18CD520C72DB800849F3A /* Inceptionv3.mlmodel in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CAC36C261EF999E50083F6DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAC36C271EF999E50083F6DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAC36C2C1EF999E50083F6DC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CAC36C2F1EF999E50083F6DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CAC36C301EF999E50083F6DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CAC36C321EF999E50083F6DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20A7B90002CE9E59208FBD59 /* Pods-UV Safe.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "UV Safe/UV Safe.entitlements";
+				DEVELOPMENT_TEAM = YBJ2RY5U57;
+				INFOPLIST_FILE = "UV Safe/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sapnapatel.UV-Safe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CAC36C331EF999E50083F6DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "UV Safe/UV Safe.entitlements";
+				DEVELOPMENT_TEAM = YBJ2RY5U57;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "UV Safe/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sapnapatel.UV-Safe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAC36C181EF999E40083F6DC /* Build configuration list for PBXProject "UV Safe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAC36C2F1EF999E50083F6DC /* Debug */,
+				CAC36C301EF999E50083F6DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAC36C311EF999E50083F6DC /* Build configuration list for PBXNativeTarget "UV Safe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAC36C321EF999E50083F6DC /* Debug */,
+				CAC36C331EF999E50083F6DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAC36C151EF999E40083F6DC /* Project object */;
+}

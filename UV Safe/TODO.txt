@@ -1,0 +1,14 @@
+TODO
+
+WWDC18 - AutoLayout Lab
+override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    Draw Storyboard with Constraints
+    Mysteries of AutoLayout
+}
+
+Microsoft Skin Cancer Model: https://github.com/Azure/ai-toolkit-iot-edge/tree/master/Skin%20cancer%20detection
+
+- Implement new skin cancer model with Core ML and Vision.
+    - Remove Microsoft in UI.
+- Add in-app purchase to remove ads.
+- Redesign
