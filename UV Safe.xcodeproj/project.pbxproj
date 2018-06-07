@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA091C651FC4AFC8002F1F85 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */; };
 		CA209A411F2C1AA200BF2AA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */; };
 		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
 		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
 		CAB18CD320C6F63100849F3A /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = CAB18CD220C6F63100849F3A /* TODO.txt */; };
-		CAB18CD520C72DB800849F3A /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */; };
+		CABDEA4B20C9CEFB00DC0A1C /* SkinCancerClassifier1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CABDEA4920C9CEFB00DC0A1C /* SkinCancerClassifier1.mlmodel */; };
+		CABDEA4E20C9CF1900DC0A1C /* SkinCancerClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CABDEA4D20C9CF1900DC0A1C /* SkinCancerClassifier2.mlmodel */; };
 		CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C201EF999E40083F6DC /* AppDelegate.swift */; };
 		CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C261EF999E50083F6DC /* Main.storyboard */; };
 		CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C291EF999E50083F6DC /* Assets.xcassets */; };
@@ -38,13 +38,13 @@
 /* Begin PBXFileReference section */
 		20A7B90002CE9E59208FBD59 /* Pods-UV Safe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.debug.xcconfig"; sourceTree = "<group>"; };
 		B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.release.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.release.xcconfig"; sourceTree = "<group>"; };
-		CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
 		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
 		CAB18CD220C6F63100849F3A /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
-		CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		CABDEA4920C9CEFB00DC0A1C /* SkinCancerClassifier1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier1.mlmodel; sourceTree = "<group>"; };
+		CABDEA4D20C9CF1900DC0A1C /* SkinCancerClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier2.mlmodel; sourceTree = "<group>"; };
 		CAC36C1D1EF999E40083F6DC /* UV Safe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UV Safe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC36C201EF999E40083F6DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAC36C271EF999E50083F6DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */,
-				CA091C641FC4AFC8002F1F85 /* DetailsViewController.swift */,
 			);
 			path = "UV Vision";
 			sourceTree = "<group>";
@@ -146,9 +145,10 @@
 				CA091C621FC4AF92002F1F85 /* Search */,
 				CA091C601FC4AF55002F1F85 /* UV Vision */,
 				CA091C631FC4AFAA002F1F85 /* Tips */,
+				CABDEA4920C9CEFB00DC0A1C /* SkinCancerClassifier1.mlmodel */,
+				CABDEA4D20C9CF1900DC0A1C /* SkinCancerClassifier2.mlmodel */,
 				CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */,
 				CAC36C261EF999E50083F6DC /* Main.storyboard */,
-				CAB18CD420C72DB400849F3A /* Inceptionv3.mlmodel */,
 				CAC36C291EF999E50083F6DC /* Assets.xcassets */,
 				CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */,
 				CAC36C2E1EF999E50083F6DC /* Info.plist */,
@@ -314,12 +314,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */,
+				CABDEA4B20C9CEFB00DC0A1C /* SkinCancerClassifier1.mlmodel in Sources */,
 				CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */,
 				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
 				CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */,
+				CABDEA4E20C9CF1900DC0A1C /* SkinCancerClassifier2.mlmodel in Sources */,
 				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,
-				CA091C651FC4AFC8002F1F85 /* DetailsViewController.swift in Sources */,
-				CAB18CD520C72DB800849F3A /* Inceptionv3.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

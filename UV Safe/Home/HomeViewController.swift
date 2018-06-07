@@ -77,7 +77,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         getCurrentLocation()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
         
@@ -85,7 +87,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.isTranslucent = false
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         movedToForeground()
     }
     
@@ -95,9 +99,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
             if let checkStartStop = UserDefaults.standard.object(forKey: "savedStartStop") as? Bool {
                 self.startStop = checkStartStop
                 if self.startStop == false {
-                    self.startStopButton.setTitle("Start Timer", for: .normal)
+                    self.startStopButton.setTitle("Remind Me!", for: .normal)
                 } else if self.startStop == true {
-                    self.startStopButton.setTitle("Stop Timer", for: .normal)
+                    self.startStopButton.setTitle("Cancel", for: .normal)
                     self.seconds = UserDefaults.standard.integer(forKey: "savedSeconds")
                     let newTimestamp = Int(Date().timeIntervalSince1970)
                     if let savedTimestamp = UserDefaults.standard.object(forKey: "savedTimestamp") as? Int {
@@ -341,7 +345,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         self.timer.invalidate()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         self.startStop = false
-        self.startStopButton.setTitle("Start Timer", for: .normal)
+        self.startStopButton.setTitle("Remind Me!", for: .normal)
         UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
         self.seconds = 5400
         UserDefaults.standard.set(self.seconds, forKey: "savedSeconds")
@@ -350,7 +354,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     
     func startTimer() {
         startStop = true
-        startStopButton.setTitle("Stop Timer", for: .normal)
+        startStopButton.setTitle("Cancel", for: .normal)
         runTimer()
         UserDefaults.standard.set(startStop, forKey: "savedStartStop")
     }

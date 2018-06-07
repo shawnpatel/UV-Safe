@@ -81,7 +81,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         if GADRewardBasedVideoAd.sharedInstance().isReady {
             GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
         } else {
-            let alertController = UIAlertController(title: "Ad Loading...", message: "Please wait while an ad loads so you can redeem your reward!", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Ad Loading", message: "Please wait while an ad loads so you can redeem your reward!", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
@@ -166,8 +166,8 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
             }
             
-            guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
-                fatalError("Can't load Inception ML model")
+            guard let model = try? VNCoreMLModel(for: SkinCancerClassifier1().model) else {
+                fatalError("Can't load ML Model")
             }
             
             let request = VNCoreMLRequest(model: model) { [weak self] request, error in
@@ -180,10 +180,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                     UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
                     UserDefaults.standard.set(topResult.identifier, forKey: "tag")
                     
-                    self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% " + topResult.identifier + "*", for: .normal)
+                    self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% Malignant" + "*", for: .normal)
                     
                     if topResult.confidence <= 0.25 {
-                        self?.riskLevel.text = "Minimal Risk!*"
+                        self?.riskLevel.text = "Low Risk!*"
                     } else if topResult.confidence <= 0.50 {
                         self?.riskLevel.text = "Medium Risk!*"
                     } else if topResult.confidence <= 0.75 {
@@ -344,11 +344,22 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func skinCancerButton(_ sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "percentage") as? Float) != nil {
-            self.performSegue(withIdentifier: "UVVisiontoDetails", sender: self)
+            let alertController = UIAlertController(title: "Continue to Cancer.org?", message: "Learn about skin cancer along with diagnosis and treatment options.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.open(url: "https://www.cancer.org/cancer/skin-cancer.html")
+            }))
+            self.present(alertController, animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(title: "Scan your skin!", message: "You have to scan your skin to access the analysis.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func open(url: String) {
+        if let url = NSURL(string: url) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         }
     }
     

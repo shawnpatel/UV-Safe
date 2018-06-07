@@ -142,7 +142,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgO-pi-OHc">
                                                 <rect key="frame" x="0.0" y="0.0" width="199" height="91.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <state key="normal" title="Start Timer">
+                                                <state key="normal" title="Remind Me!">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -520,7 +520,7 @@
                                         <rect key="frame" x="0.0" y="12" width="398" height="15.333333333333336"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-nw-eHm">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a city!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-nw-eHm">
                                         <rect key="frame" x="0.0" y="37.333333333333329" width="398" height="45.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="textColor"/>
@@ -576,7 +576,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="71" height="256"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UVLogo" translatesAutoresizingMaskIntoConstraints="NO" id="0nH-f2-pJU">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0nH-f2-pJU">
                                                 <rect key="frame" x="71" y="0.0" width="256" height="256"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZl-KA-xZd">
@@ -762,6 +762,7 @@
         <!--Details-->
         <scene sceneID="Am4-S9-AbF">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrL-mg-kM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Details" id="fMG-3b-nqU" customClass="DetailsViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IKP-vp-vD9"/>
@@ -867,7 +868,6 @@
                         <outlet property="skinCancer" destination="Axf-RV-kI2" id="MdH-WS-lgt"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrL-mg-kM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2248" y="677"/>
         </scene>
