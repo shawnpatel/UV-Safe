@@ -166,9 +166,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
             }
             
-            guard let model = try? VNCoreMLModel(for: SkinCancerClassifier1().model) else {
-                fatalError("Can't load ML Model")
+            guard let model = try? VNCoreMLModel(for: SkinCancerClassifier().model) else {
+                fatalError("Can't load SkinCancerClassifier1")
             }
+            
             
             let request = VNCoreMLRequest(model: model) { [weak self] request, error in
                 guard let results = request.results as? [VNClassificationObservation],
@@ -179,6 +180,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                 DispatchQueue.main.async { [weak self] in
                     UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
                     UserDefaults.standard.set(topResult.identifier, forKey: "tag")
+                    print(topResult.confidence)
                     
                     self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% Malignant" + "*", for: .normal)
                     
