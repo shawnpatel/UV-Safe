@@ -29,13 +29,18 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     var randomNumber = 0
     let version = "2017-11-19"*/
     
-    
     var request: VNCoreMLRequest!
-    
+    let adID = "ca-app-pub-5075997087510380/2027562116"
     var credits = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        riskLevel.isHidden = true
+        
+        skinCancer.layer.cornerRadius = 10
+        skinCancer.layer.borderWidth = 2
+        skinCancer.backgroundColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
         
         activityView.center = self.imageView.center
         activityView.isHidden = true
@@ -48,7 +53,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         UserDefaults.standard.set(100, forKey: "credits")
         
         GADRewardBasedVideoAd.sharedInstance().delegate = self
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-5075997087510380/2027562116")
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
         
         if let savedCredits = UserDefaults.standard.object(forKey: "credits") as? Int {
             credits = savedCredits
@@ -94,21 +99,32 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
         }
         
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-5075997087510380/2027562116")
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
     }
     
     func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
         GADRewardBasedVideoAd.sharedInstance().delegate = self
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-5075997087510380/2027562116")
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
+    }
+    
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didFailToLoadWithError error: Error) {
+        print(error)
     }
     
     @IBAction func takePhoto(_ sender: UIBarButtonItem) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
+        if credits >= 1 {
+            credits -= 1
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+                imagePicker.allowsEditing = false
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        } else {
+            let alertController = UIAlertController(title: "Not Enough Credits!", message: "Please get more credits in order to scan your skin!", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -158,58 +174,59 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func detect(image: CIImage) {
-        if credits >= 1 {
-            credits -= 1
-            UserDefaults.standard.set(credits, forKey: "credits")
-            
-            DispatchQueue.main.async {
-                self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+        UserDefaults.standard.set(credits, forKey: "credits")
+        
+        DispatchQueue.main.async {
+            self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+        }
+        
+        guard let model = try? VNCoreMLModel(for: SkinCancerClassifier().model) else {
+            fatalError("Can't load SkinCancerClassifier model.")
+        }
+        
+        
+        let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+            guard let results = request.results as? [VNClassificationObservation],
+                let topResult = results.first else {
+                    fatalError("Unexpected result type from VNCoreMLRequest.")
             }
             
-            guard let model = try? VNCoreMLModel(for: SkinCancerClassifier().model) else {
-                fatalError("Can't load SkinCancerClassifier1")
-            }
-            
-            
-            let request = VNCoreMLRequest(model: model) { [weak self] request, error in
-                guard let results = request.results as? [VNClassificationObservation],
-                    let topResult = results.first else {
-                        fatalError("Unexpected result type from VNCoreMLRequest")
+            DispatchQueue.main.async { [weak self] in
+                UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
+                UserDefaults.standard.set(topResult.identifier, forKey: "tag")
+                
+                //self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% Malignant" + "*", for: .normal)
+                //print(topResult.confidence)
+                
+                if topResult.confidence <= 0.20 {
+                    self?.skinCancer.setTitle("Benign - " + String(100 - Int(topResult.confidence * 100)) + "%", for: .normal)
+                } else if topResult.confidence >= 0.90 {
+                    self?.skinCancer.setTitle("Malignant - " + String(Int(topResult.confidence * 100)) + "%", for: .normal)
+                } else {
+                    self?.skinCancer.setTitle("Unkown", for: .normal)
                 }
                 
-                DispatchQueue.main.async { [weak self] in
-                    UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
-                    UserDefaults.standard.set(topResult.identifier, forKey: "tag")
-                    print(topResult.confidence)
-                    
-                    self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% Malignant" + "*", for: .normal)
-                    
-                    if topResult.confidence <= 0.25 {
-                        self?.riskLevel.text = "Low Risk!*"
-                    } else if topResult.confidence <= 0.50 {
-                        self?.riskLevel.text = "Medium Risk!*"
-                    } else if topResult.confidence <= 0.75 {
-                        self?.riskLevel.text = "High Risk!*"
-                    } else {
-                        self?.riskLevel.text = "Very High Risk!*"
-                    }
-                    
-                    self?.activityView.stopAnimating()
-                }
+                /*if topResult.confidence <= 0.25 {
+                    self?.riskLevel.text = "Low Risk!*"
+                } else if topResult.confidence <= 0.50 {
+                    self?.riskLevel.text = "Medium Risk!*"
+                } else if topResult.confidence <= 0.75 {
+                    self?.riskLevel.text = "High Risk!*"
+                } else {
+                    self?.riskLevel.text = "Very High Risk!*"
+                }*/
+                
+                self?.activityView.stopAnimating()
             }
-            
-            let handler = VNImageRequestHandler(ciImage: image)
-            DispatchQueue.global(qos: .userInteractive).async {
-                do {
-                    try handler.perform([request])
-                } catch {
-                    print(error)
-                }
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: image)
+        DispatchQueue.global(qos: .userInteractive).async {
+            do {
+                try handler.perform([request])
+            } catch {
+                print(error)
             }
-        } else {
-            let alertController = UIAlertController(title: "Not Enough Credits!", message: "Please get more credits in order to scan your skin!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -345,7 +362,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     }*/
     
     @IBAction func skinCancerButton(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "percentage") as? Float) != nil {
+        if skinCancer.currentTitle != "Match*" {
             let alertController = UIAlertController(title: "Continue to Cancer.org?", message: "Learn about skin cancer along with diagnosis and treatment options.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
             alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in

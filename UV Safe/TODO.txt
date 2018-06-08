@@ -6,10 +6,14 @@ override func viewWillTransition(to size: CGSize, with coordinator: UIViewContro
     Mysteries of AutoLayout
 }
 
-Microsoft Skin Cancer Model: https://github.com/Azure/ai-toolkit-iot-edge/tree/master/Skin%20cancer%20detection
-
-- Implement new skin cancer model with Core ML and Vision.
-    - Remove Microsoft in UI.
+Version 1.2
+- Fix LaunchScreen storyboard image not appearing.
+- Fix reward ad for additional scans.
 - New screenshots for tutorial.
+
+Version 2.0
 - Add in-app purchase to remove ads.
-- Redesign
+- Redesign (WWDC18 - Business Marketing & UI Labs)
+
+Version 2.1
+- Train more accurate model.

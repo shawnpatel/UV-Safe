@@ -442,7 +442,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-8G-zOJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="183"/>
-                                                <string key="text">Use the power of artificial intelligence to detect different types of skin cancer by pressing the camera icon. Press the scans button to get more scans. Once a cancer is determined, press the match button to learn more.</string>
+                                                <string key="text">Use the power of artificial intelligence to detect whether a mole/lesion is malignant by pressing the camera icon. Press the scans button to get more scans. Once a result is determined, press the match button to learn more.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -687,7 +687,7 @@
                                 <rect key="frame" x="8" y="72" width="398" height="607"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8b-1F-7fS">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="30.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="36.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Scans: 3">
                                             <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -697,13 +697,13 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UV Vision 2.0" translatesAutoresizingMaskIntoConstraints="NO" id="M3t-CF-hv3">
-                                        <rect key="frame" x="0.0" y="35.333333333333314" width="398" height="536.33333333333348"/>
+                                        <rect key="frame" x="0.0" y="41.333333333333314" width="398" height="524.33333333333348"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-RW-hyj">
-                                        <rect key="frame" x="0.0" y="576.66666666666663" width="398" height="30.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="570.66666666666663" width="398" height="36.333333333333371"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elg-1r-W10">
-                                                <rect key="frame" x="0.0" y="0.0" width="199" height="30.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="199" height="36.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                                 <state key="normal" title="Match*">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -713,21 +713,20 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Risk Level*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="68i-rh-tJ5">
-                                                <rect key="frame" x="199" y="0.0" width="199" height="30.333333333333332"/>
+                                                <rect key="frame" x="199" y="0.0" width="199" height="36.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="elg-1r-W10" firstAttribute="width" secondItem="I7g-RW-hyj" secondAttribute="width" multiplier="0.5" id="1mx-kA-MhJ"/>
                                             <constraint firstItem="68i-rh-tJ5" firstAttribute="width" secondItem="I7g-RW-hyj" secondAttribute="width" multiplier="0.5" id="iI6-Zf-7t9"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="u8b-1F-7fS" firstAttribute="height" secondItem="IN8-4m-PP3" secondAttribute="height" multiplier="0.05" id="KKN-cS-4LN"/>
-                                    <constraint firstItem="I7g-RW-hyj" firstAttribute="height" secondItem="IN8-4m-PP3" secondAttribute="height" multiplier="0.05" id="xTq-6B-0fV"/>
+                                    <constraint firstItem="u8b-1F-7fS" firstAttribute="height" secondItem="IN8-4m-PP3" secondAttribute="height" multiplier="0.06" id="KKN-cS-4LN"/>
+                                    <constraint firstItem="I7g-RW-hyj" firstAttribute="height" secondItem="IN8-4m-PP3" secondAttribute="height" multiplier="0.06" id="xTq-6B-0fV"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -762,7 +761,6 @@
         <!--Details-->
         <scene sceneID="Am4-S9-AbF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrL-mg-kM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Details" id="fMG-3b-nqU" customClass="DetailsViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IKP-vp-vD9"/>
@@ -868,6 +866,7 @@
                         <outlet property="skinCancer" destination="Axf-RV-kI2" id="MdH-WS-lgt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZrL-mg-kM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2248" y="677"/>
         </scene>
@@ -939,7 +938,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-P5-hRY">
                                 <rect key="frame" x="8" y="72" width="398" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">UV Vision is powered by Apple's Core ML and Vision frameworks. UV Vision uses machine learning and computer vision to compare the similarities between the photo of your skin and pre-classified photos of different types of skin cancer. Based on the similarities between the photo of your skin and the pre-classified photos, the most closely matching skin cancer is determined with a confidence level. The higher the confidence level, the more likely the identified area on your skin is cancerous.  UV Vision is continually improving as more pre-classified images are trained. I, along with Apple, do not guarantee the accuracy of the UV Vision service; use at your own discretion. UV Vision should not be used to diagnose skin cancer. If you believe you may have skin cancer, contact your doctor or a dermatologist immediately for a proper diagnosis.</string>
+                                <string key="text">UV Vision is powered by Apple's Core ML and Vision frameworks. UV Vision uses machine learning and computer vision to compare the similarities between the photo of your mole/lesion and pre-classified photos of different types of benign and malignant moles/lesions. Based on the similarities between your photo and the pre-classified photos, a prediction is made with a confidence level. The higher the confidence level, the more likely the identified area on your skin is malignant.  UV Vision is continually improving as more pre-classified images are trained. I, along with Apple, do not guarantee the accuracy of the UV Vision service; use at your own discretion. UV Vision should not be used to diagnose skin cancer. If you believe you may have skin cancer, contact your doctor or a dermatologist immediately for a proper diagnosis.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
