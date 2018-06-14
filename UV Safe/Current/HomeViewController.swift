@@ -222,6 +222,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                     do {
                         let myJSON = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                         
+                        print(myJSON)
+                        
                         if let currentObservation = myJSON["current_observation"] as? NSDictionary {
                             if let displayLocation = currentObservation["display_location"] as? NSDictionary {
                                 if let cityName = displayLocation["full"] as? String {
@@ -286,6 +288,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                             if let iconString = currentObservation["icon"] as? String {
                                 UserDefaults.standard.set(iconString, forKey: "savedIconString")
                                 DispatchQueue.main.async {
+                                    self.conditionsText.text = iconString.capitalized
+                                    
                                     self.conditionsImage.image = UIImage(named: iconString)
                                     self.progressBar.progress = 1
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false

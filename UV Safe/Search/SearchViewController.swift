@@ -197,6 +197,8 @@ class SearchViewController: UIViewController {
                             if let iconString = currentObservation["icon"] as? String {
                                 UserDefaults.standard.set(iconString, forKey: "savedSearchIconString")
                                 DispatchQueue.main.async {
+                                    self.conditionsText.text = iconString.capitalized
+                                    
                                     self.conditionsImage.image = UIImage(named: iconString)
                                     if distanceJSON {
                                         self.distanceToCityJSON()
