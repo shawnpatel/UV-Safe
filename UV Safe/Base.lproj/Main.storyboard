@@ -295,7 +295,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="433"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSC" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-Tj-OPX">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CurrentSC" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-Tj-OPX">
                                                 <rect key="frame" x="67.333333333333343" y="0.0" width="263.33333333333326" height="433"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6E-NK-U9C">
@@ -1132,8 +1132,8 @@
     </scenes>
     <resources>
         <image name="App Logo" width="2000" height="2000"/>
+        <image name="CurrentSC" width="1242" height="2208"/>
         <image name="Help" width="24" height="24"/>
-        <image name="HomeSC" width="1242" height="2208"/>
         <image name="Information" width="24" height="24"/>
         <image name="Location" width="24" height="24"/>
         <image name="Search" width="24" height="24"/>
