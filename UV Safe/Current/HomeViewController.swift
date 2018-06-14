@@ -222,8 +222,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                     do {
                         let myJSON = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                         
-                        print(myJSON)
-                        
                         if let currentObservation = myJSON["current_observation"] as? NSDictionary {
                             if let displayLocation = currentObservation["display_location"] as? NSDictionary {
                                 if let cityName = displayLocation["full"] as? String {
@@ -245,6 +243,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                     UserDefaults.standard.set(UVIndexStringInt + " UV", forKey: "savedUVIndex")
                                     DispatchQueue.main.async {
                                         self.UVIndexButton.setTitle(UVIndexStringInt + " UV", for: .normal)
+                                        
+                                        if UVIndexInt >= 0 && UVIndexInt <= 2{
+                                            self.UVIndexButton.setTitleColor(.green, for: .normal)
+                                        } else if UVIndexInt >= 3 && UVIndexInt <= 5 {
+                                            self.UVIndexButton.setTitleColor(.yellow, for: .normal)
+                                        } else if UVIndexInt >= 6 && UVIndexInt <= 7 {
+                                            self.UVIndexButton.setTitleColor(.orange, for: .normal)
+                                        } else if UVIndexInt >= 8 && UVIndexInt <= 10 {
+                                            self.UVIndexButton.setTitleColor(.red, for: .normal)
+                                        } else if UVIndexInt >= 11 {
+                                            self.UVIndexButton.setTitleColor(.purple, for: .normal)
+                                        }
                                     }
                                 }
                             }
