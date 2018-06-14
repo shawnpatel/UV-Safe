@@ -32,7 +32,7 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Home-->
+        <!--UV Safe-->
         <scene sceneID="TpW-Q5-F6D">
             <objects>
                 <viewController id="zhO-tL-Dpt" customClass="HomeViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN5-YU-vBB">
                                                 <rect key="frame" x="0.0" y="0.0" width="199" height="60.666666666666664"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="°F">
+                                                <state key="normal" title="Temp">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -91,7 +91,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnM-6S-K7P">
                                                 <rect key="frame" x="199" y="0.0" width="199" height="60.666666666666664"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="MPH">
+                                                <state key="normal" title="Wind">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -115,7 +115,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="71" height="255.66666666666666"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UVLogo" translatesAutoresizingMaskIntoConstraints="NO" id="sIv-pG-0XY">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Logo" translatesAutoresizingMaskIntoConstraints="NO" id="sIv-pG-0XY">
                                                 <rect key="frame" x="71" y="0.0" width="256" height="255.66666666666666"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qd8-cp-yOG">
@@ -136,11 +136,17 @@
                                             <constraint firstAttribute="bottom" secondItem="6XA-0L-53e" secondAttribute="bottom" id="phv-N5-vcb"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conditions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzR-gP-qsf">
+                                        <rect key="frame" x="0.0" y="515.66666666666663" width="398" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zy-p0-MMP">
-                                        <rect key="frame" x="0.0" y="515.66666666666663" width="398" height="91.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="547.66666666666663" width="398" height="59.333333333333371"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgO-pi-OHc">
-                                                <rect key="frame" x="0.0" y="0.0" width="199" height="91.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="199" height="59.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="Remind Me!">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -150,7 +156,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90 mins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtA-GG-2aX">
-                                                <rect key="frame" x="199" y="0.0" width="199" height="91.333333333333329"/>
+                                                <rect key="frame" x="199" y="0.0" width="199" height="59.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -183,15 +189,24 @@
                         <constraints>
                             <constraint firstItem="Io5-ab-LTO" firstAttribute="top" secondItem="Vn0-8U-AJg" secondAttribute="bottom" constant="8" id="AHp-ej-Be8"/>
                             <constraint firstItem="3Up-ye-HU8" firstAttribute="top" secondItem="Io5-ab-LTO" secondAttribute="bottom" constant="8" id="IgT-Qa-hEt"/>
+                            <constraint firstItem="EzR-gP-qsf" firstAttribute="height" secondItem="ast-u6-3EM" secondAttribute="height" multiplier="0.03" id="Ksv-G6-vdm"/>
                             <constraint firstAttribute="trailing" secondItem="Io5-ab-LTO" secondAttribute="trailing" constant="8" id="PgY-Oc-1Mk"/>
                             <constraint firstItem="Io5-ab-LTO" firstAttribute="leading" secondItem="ast-u6-3EM" secondAttribute="leading" constant="8" id="vPV-Bl-o4H"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="ndb-bt-aII"/>
+                    <navigationItem key="navigationItem" title="UV Safe" id="ndb-bt-aII">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="fFI-Jf-8OG"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" id="FYE-jW-c7x">
+                            <connections>
+                                <segue destination="nf9-yN-H10" kind="show" id="3ma-Ke-DW3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="UVIndexButton" destination="vf6-Ud-mfR" id="FI6-be-c8R"/>
                         <outlet property="cityLabel" destination="mYl-P8-Kds" id="fD2-Ml-VEL"/>
                         <outlet property="conditionsImage" destination="sIv-pG-0XY" id="G4m-DO-CcU"/>
+                        <outlet property="conditionsText" destination="EzR-gP-qsf" id="aWv-XK-wIO"/>
                         <outlet property="progressBar" destination="KyG-9e-Y5q" id="4Ts-HR-ILa"/>
                         <outlet property="startStopButton" destination="PgO-pi-OHc" id="dbL-Pv-JOo"/>
                         <outlet property="tempButton" destination="WN5-YU-vBB" id="rVa-0k-XgH"/>
@@ -202,6 +217,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3cl-Da-bW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1510.144927536232" y="-672.554347826087"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="jwX-1w-pmT">
+            <objects>
+                <viewController id="nf9-yN-H10" customClass="SettingsViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Adp-SK-43a"/>
+                        <viewControllerLayoutGuide type="bottom" id="5mT-Lh-roT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I3L-N2-l9d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="puq-NS-4L1">
+                                <rect key="frame" x="5" y="69" width="404" height="613"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH0-pB-Hfy">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rq0-Fa-KYM">
+                                        <rect key="frame" x="0.0" y="25.333333333333329" width="404" height="29"/>
+                                        <segments>
+                                            <segment title="Imperial"/>
+                                            <segment title="Metric"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="unitControllerValueChanged:" destination="nf9-yN-H10" eventType="valueChanged" id="V61-KT-4FV"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ma-5Z-oID">
+                                        <rect key="frame" x="0.0" y="58.333333333333314" width="404" height="554.66666666666674"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="puq-NS-4L1" firstAttribute="leading" secondItem="I3L-N2-l9d" secondAttribute="leading" constant="5" id="1Dx-bH-7Qb"/>
+                            <constraint firstItem="5mT-Lh-roT" firstAttribute="top" secondItem="puq-NS-4L1" secondAttribute="bottom" constant="5" id="A1x-KZ-M1P"/>
+                            <constraint firstAttribute="trailing" secondItem="puq-NS-4L1" secondAttribute="trailing" constant="5" id="TNm-0M-qqw"/>
+                            <constraint firstItem="puq-NS-4L1" firstAttribute="top" secondItem="Adp-SK-43a" secondAttribute="bottom" constant="5" id="ZkU-pT-x4H"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="0UD-VN-6uU"/>
+                    <connections>
+                        <outlet property="unitController" destination="rq0-Fa-KYM" id="mXI-ma-tUH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0yg-k1-yiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2248" y="-672"/>
         </scene>
         <!--Tutorial-->
         <scene sceneID="ouJ-cB-Dyu">
@@ -252,7 +322,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="esM-cA-dL1">
                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="183"/>
-                                                <string key="text">Press the UV button to refresh the data. Press the temperature and wind speed buttons to change units. Press the start timer button to initiate a notification to put on sunscreen after 90 minutes.</string>
+                                                <string key="text">Press the UV button to refresh the data. Press the "Remind Me!" button to initiate a notification to put on sunscreen after 90 minutes.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -352,7 +422,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="UzU-4t-pQK">
                                                 <rect key="frame" x="0.0" y="0.0" width="358" height="183"/>
-                                                <string key="text">Search for a city using the search tool. Press the UV button to refresh the data. Press the temperature, wind, and distance buttons to change units. Press the time button to set up directions to the selected city.</string>
+                                                <string key="text">Search for a city using the search tool. Press the UV button to refresh the data. Press the time button to set up directions to the selected city.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -542,7 +612,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSe-6T-mDR">
                                                 <rect key="frame" x="0.0" y="0.0" width="199" height="60.666666666666664"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="°F">
+                                                <state key="normal" title="Temp">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -552,7 +622,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-LT-7Up">
                                                 <rect key="frame" x="199" y="0.0" width="199" height="60.666666666666664"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="MPH">
+                                                <state key="normal" title="Wind">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -597,11 +667,17 @@
                                             <constraint firstAttribute="trailing" secondItem="WZl-KA-xZd" secondAttribute="trailing" id="zaT-YZ-nPj"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conditions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPM-Mf-rnZ">
+                                        <rect key="frame" x="0.0" y="515.66666666666663" width="398" height="20.333333333333371"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwf-Oo-fSM">
-                                        <rect key="frame" x="0.0" y="515.66666666666663" width="398" height="91.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="546" width="398" height="61"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5m-ak-q4u">
-                                                <rect key="frame" x="0.0" y="0.0" width="199" height="91.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="199" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="Mi">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -611,7 +687,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIi-QG-EOj">
-                                                <rect key="frame" x="199" y="0.0" width="199" height="91.333333333333329"/>
+                                                <rect key="frame" x="199" y="0.0" width="199" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="Time">
                                                     <color key="titleColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -650,7 +726,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="9zp-jR-gIs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="vWc-vu-Xbh">
+                        <barButtonItem key="rightBarButtonItem" image="Search" id="vWc-vu-Xbh">
                             <connections>
                                 <action selector="searchButton:" destination="S3e-SN-QFJ" id="xs8-wQ-1ov"/>
                             </connections>
@@ -660,6 +736,7 @@
                         <outlet property="UVIndexButton" destination="Q3O-Xk-S1c" id="JOV-Sq-dH3"/>
                         <outlet property="cityLabel" destination="zu5-nw-eHm" id="JrC-RO-xat"/>
                         <outlet property="conditionsImage" destination="0nH-f2-pJU" id="rC2-Xh-dnG"/>
+                        <outlet property="conditionsText" destination="GPM-Mf-rnZ" id="UiZ-dR-5DY"/>
                         <outlet property="distanceButton" destination="Z5m-ak-q4u" id="7zB-3C-GXE"/>
                         <outlet property="progressBar" destination="izC-ju-kNs" id="tiN-jq-Rp7"/>
                         <outlet property="tempButton" destination="OSe-6T-mDR" id="VO1-DJ-iIE"/>
@@ -870,7 +947,7 @@
             </objects>
             <point key="canvasLocation" x="2248" y="677"/>
         </scene>
-        <!--Tips-->
+        <!--Info-->
         <scene sceneID="XvY-oT-9UW">
             <objects>
                 <tableViewController id="WRu-vD-1sw" customClass="InformationTableViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
@@ -907,7 +984,7 @@
                             <outlet property="delegate" destination="WRu-vD-1sw" id="fja-9H-oCK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tips" id="lg6-tB-9f2">
+                    <navigationItem key="navigationItem" title="Info" id="lg6-tB-9f2">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9co-Po-g35"/>
                         <barButtonItem key="rightBarButtonItem" image="Help" largeContentSizeImage="Help" id="8Ac-84-6RG">
                             <connections>
@@ -957,11 +1034,11 @@
             </objects>
             <point key="canvasLocation" x="2248" y="1365"/>
         </scene>
-        <!--Home-->
+        <!--Current-->
         <scene sceneID="8Y6-1j-fIY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NsN-L0-1Q2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="MVt-GE-CAd"/>
+                    <tabBarItem key="tabBarItem" title="Current" image="Location" id="MVt-GE-CAd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="STd-aX-Rka">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -995,11 +1072,11 @@
             </objects>
             <point key="canvasLocation" x="761" y="0.0"/>
         </scene>
-        <!--Tips-->
+        <!--Info-->
         <scene sceneID="XzV-Pb-O2l">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EgC-wl-mAR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tips" image="Information" id="cFH-hF-nFB"/>
+                    <tabBarItem key="tabBarItem" title="Info" image="Information" id="cFH-hF-nFB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IXZ-er-MfT">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -1053,15 +1130,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="App Logo" width="2000" height="2000"/>
         <image name="Help" width="24" height="24"/>
-        <image name="Home" width="24" height="24"/>
         <image name="HomeSC" width="1242" height="2208"/>
         <image name="Information" width="24" height="24"/>
+        <image name="Location" width="24" height="24"/>
         <image name="Search" width="24" height="24"/>
         <image name="SearchSC" width="1242" height="2208"/>
+        <image name="Settings" width="24" height="24"/>
         <image name="Sun" width="24" height="24"/>
         <image name="UV Vision 2.0" width="1658" height="2159"/>
         <image name="UV VisionSC" width="1242" height="2208"/>
-        <image name="UVLogo" width="2000" height="2000"/>
     </resources>
 </document>

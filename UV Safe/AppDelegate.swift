@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if firstLaunch {
+            UserDefaults.standard.set(0, forKey: "units")
+            
             let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstLaunch") as UIViewController
             rootVC.view.frame = UIScreen.main.bounds
             UIView.transition(with: self.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {

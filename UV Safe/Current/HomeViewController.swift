@@ -19,13 +19,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     @IBOutlet weak var tempButton: UIButton!
     @IBOutlet weak var windButton: UIButton!
     @IBOutlet weak var conditionsImage: UIImageView!
+    @IBOutlet weak var conditionsText: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     
     var interstitial: GADInterstitial!
     
-    var tempUnit = false
-    var windUnit = false
+    var units: Int!
     
     var startStop = false
     var seconds = 5400
@@ -55,13 +55,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
             }
         }
         
-        if let checkTempUnit = UserDefaults.standard.object(forKey: "savedTempUnit") as? Bool {
-            tempUnit = checkTempUnit
-        }
-        if let checkWindUnit = UserDefaults.standard.object(forKey: "savedWindUnit") as? Bool {
-            windUnit = checkWindUnit
-        }
-        
         self.UVIndexButton.titleLabel?.numberOfLines = 1
         self.UVIndexButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.UVIndexButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
@@ -69,10 +62,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         self.tempButton.titleLabel?.numberOfLines = 1
         self.tempButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.tempButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.tempButton.isEnabled = false
         
         self.windButton.titleLabel?.numberOfLines = 1
         self.windButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.windButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.windButton.isEnabled = false
+        
+        self.startStopButton.titleLabel?.numberOfLines = 1
+        self.startStopButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.startStopButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
         
         getCurrentLocation()
     }
@@ -87,10 +86,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.isTranslucent = false
+        
+        units = UserDefaults.standard.integer(forKey: "units")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         movedToForeground()
+        
+        if let contains = self.tempButton.currentTitle?.contains("F") {
+            if contains && self.units == 1 {
+                self.WeatherUndergroundJSON()
+            }
+        }
+        
+        if let contains = self.tempButton.currentTitle?.contains("C") {
+            if contains && self.units == 0 {
+                self.WeatherUndergroundJSON()
+            }
+        }
     }
     
     @objc func movedToForeground() {
@@ -195,6 +208,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     func WeatherUndergroundJSON() {
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let APIKey = ["8578e6219f5a0317", "9b13cd2abe7021ac", "e0b3dccaac724dcf", "5aacfe2a581db8d9", "c01a9d84445503bb"]
         let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))
         let url = URL(string: "https://api.wunderground.com/api/" + APIKey[randomAPIKey] + "/conditions/q/" + latitude + "," + longitude + ".json")
@@ -233,7 +247,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                 }
                             }
                             
-                            if self.tempUnit == false {
+                            if self.units == 0 {
                                 if let tempF = currentObservation["temp_f"] {
                                     let tempFString = String(format: "%.0f", Double(String(describing: tempF))!)
                                     UserDefaults.standard.set(tempFString + "°F", forKey: "savedTemp")
@@ -241,7 +255,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                         self.tempButton.setTitle(String(tempFString) + "°F", for: .normal)
                                     }
                                 }
-                            } else if self.tempUnit == true {
+                            } else if self.units == 1 {
                                 if let tempC = currentObservation["temp_c"] {
                                     let tempCString = String(format: "%.0f", Double(String(describing: tempC))!)
                                     UserDefaults.standard.set(tempCString + "°C", forKey: "savedTemp")
@@ -251,7 +265,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                 }
                             }
                             
-                            if self.windUnit == false {
+                            if self.units == 0 {
                                 if let windMPH = currentObservation["wind_mph"] {
                                     let windMPHString = String(format: "%.0f", Double(String(describing: windMPH))!)
                                     UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedWind")
@@ -259,7 +273,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                         self.windButton.setTitle(windMPHString + " MPH", for: .normal)
                                     }
                                 }
-                            } else if self.windUnit == true {
+                            } else if self.units == 1 {
                                 if let windKPH = currentObservation["wind_kph"] {
                                     let windKPHString = String(format: "%.0f", Double(String(describing: windKPH))!)
                                     UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedWind")
@@ -275,6 +289,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                     self.conditionsImage.image = UIImage(named: iconString)
                                     self.progressBar.progress = 1
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                    
+                                    if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                                        self.WeatherUndergroundJSON()
+                                    } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                                        self.WeatherUndergroundJSON()
+                                    }
                                 }
                             }
                         }
@@ -293,27 +313,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     }
     
     @IBAction func tempButton(_ sender: UIButton) {
-        if tempUnit == true {
-            // C -> F
-            tempUnit = false
-        } else if tempUnit == false {
-            // F -> C
-            tempUnit = true
-        }
-        UserDefaults.standard.set(tempUnit, forKey: "savedTempUnit")
-        WeatherUndergroundJSON()
+        
     }
     
     @IBAction func windButton(_ sender: UIButton) {
-        if windUnit == true {
-            // KPH -> MPH
-            windUnit = false
-        } else if windUnit == false {
-            // MPH -> KPH
-            windUnit = true
-        }
-        UserDefaults.standard.set(windUnit, forKey: "savedWindUnit")
-        WeatherUndergroundJSON()
+        
     }
     
     @objc func updateTimer() {

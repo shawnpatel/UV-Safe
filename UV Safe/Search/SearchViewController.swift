@@ -18,12 +18,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tempButton: UIButton!
     @IBOutlet weak var windButton: UIButton!
     @IBOutlet weak var conditionsImage: UIImageView!
+    @IBOutlet weak var conditionsText: UILabel!
     @IBOutlet weak var distanceButton: UIButton!
     @IBOutlet weak var timeButton: UIButton!
     
-    var tempUnit = false
-    var windUnit = false
-    var distanceUnit = false
+    var units: Int!
     
     var latitude = ""
     var longitude = ""
@@ -62,16 +61,6 @@ class SearchViewController: UIViewController {
             }
         }
         
-        if let checkTempUnit = UserDefaults.standard.object(forKey: "savedSearchTempUnit") as? Bool {
-            tempUnit = checkTempUnit
-        }
-        if let checkWindUnit = UserDefaults.standard.object(forKey: "savedSearchWindUnit") as? Bool {
-            windUnit = checkWindUnit
-        }
-        if let checkDistanceUnit = UserDefaults.standard.object(forKey: "savedDistanceUnit") as? Bool {
-            distanceUnit = checkDistanceUnit
-        }
-        
         self.UVIndexButton.titleLabel?.numberOfLines = 1
         self.UVIndexButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.UVIndexButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
@@ -79,14 +68,17 @@ class SearchViewController: UIViewController {
         self.tempButton.titleLabel?.numberOfLines = 1
         self.tempButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.tempButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.tempButton.isEnabled = false
         
         self.windButton.titleLabel?.numberOfLines = 1
         self.windButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.windButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.windButton.isEnabled = false
         
         self.distanceButton.titleLabel?.numberOfLines = 1
         self.distanceButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.distanceButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.distanceButton.isEnabled = false
         
         self.timeButton.titleLabel?.numberOfLines = 1
         self.timeButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -101,6 +93,24 @@ class SearchViewController: UIViewController {
         self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.isTranslucent = false
+        
+        if let contains = self.tempButton.currentTitle?.contains("F") {
+            if contains && self.units == 1 {
+                self.WeatherUndergroundJSON(distanceJSON: true)
+            }
+        }
+        
+        if let contains = self.tempButton.currentTitle?.contains("C") {
+            if contains && self.units == 0 {
+                self.WeatherUndergroundJSON(distanceJSON: true)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        units = UserDefaults.standard.integer(forKey: "units")
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,7 +158,7 @@ class SearchViewController: UIViewController {
                                 }
                             }
                             
-                            if self.tempUnit == false {
+                            if self.units == 0 {
                                 if let tempF = currentObservation["temp_f"] {
                                     let tempFString = String(format: "%.0f", Double(String(describing: tempF))!)
                                     UserDefaults.standard.set(tempFString + "°F", forKey: "savedTemp")
@@ -156,7 +166,7 @@ class SearchViewController: UIViewController {
                                         self.tempButton.setTitle(String(tempFString) + "°F", for: .normal)
                                     }
                                 }
-                            } else if self.tempUnit == true {
+                            } else if self.units == 1 {
                                 if let tempC = currentObservation["temp_c"] {
                                     let tempCString = String(format: "%.0f", Double(String(describing: tempC))!)
                                     UserDefaults.standard.set(tempCString + "°C", forKey: "savedTemp")
@@ -166,7 +176,7 @@ class SearchViewController: UIViewController {
                                 }
                             }
                             
-                            if self.windUnit == false {
+                            if self.units == 0 {
                                 if let windMPH = currentObservation["wind_mph"] {
                                     let windMPHString = String(format: "%.0f", Double(String(describing: windMPH))!)
                                     UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedWind")
@@ -174,7 +184,7 @@ class SearchViewController: UIViewController {
                                         self.windButton.setTitle(windMPHString + " MPH", for: .normal)
                                     }
                                 }
-                            } else if self.windUnit == true {
+                            } else if self.units == 1 {
                                 if let windKPH = currentObservation["wind_kph"] {
                                     let windKPHString = String(format: "%.0f", Double(String(describing: windKPH))!)
                                     UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedWind")
@@ -194,6 +204,12 @@ class SearchViewController: UIViewController {
                                         self.progressBar.progress = 1
                                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                     }
+                                    
+                                    if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                                        self.WeatherUndergroundJSON(distanceJSON: true)
+                                    } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                                        self.WeatherUndergroundJSON(distanceJSON: true)
+                                    }
                                 }
                             }
                         }
@@ -208,9 +224,9 @@ class SearchViewController: UIViewController {
     
     func distanceToCityJSON() {
         var url: URL!
-        if distanceUnit == false {
+        if units == 0 {
             url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + searchLatitude + "," + searchLongitude + "&key=AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
-        } else if distanceUnit == true {
+        } else if units == 1 {
             url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + latitude + "," + longitude + "&destinations=" + searchLatitude + "," + searchLongitude + "&key=AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
         }
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -286,39 +302,15 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func tempButton(_ sender: UIButton) {
-        if tempUnit == true {
-            // C -> F
-            tempUnit = false
-        } else if tempUnit == false {
-            // F -> C
-            tempUnit = true
-        }
-        UserDefaults.standard.set(tempUnit, forKey: "savedSearchTempUnit")
-        WeatherUndergroundJSON(distanceJSON: false)
+        
     }
     
     @IBAction func windButton(_ sender: UIButton) {
-        if windUnit == true {
-            // KPH -> MPH
-            windUnit = false
-        } else if windUnit == false {
-            // MPH -> KPH
-            windUnit = true
-        }
-        UserDefaults.standard.set(windUnit, forKey: "savedSearchWindUnit")
-        WeatherUndergroundJSON(distanceJSON: false)
+        
     }
     
     @IBAction func distanceButton(_ sender: UIButton) {
-        if distanceUnit == true {
-            // KM -> MI
-            distanceUnit = false
-        } else if distanceUnit == false {
-            // MI -> KM
-            distanceUnit = true
-        }
-        UserDefaults.standard.set(distanceUnit, forKey: "savedDistanceUnit")
-        distanceToCityJSON()
+        
     }
     
     

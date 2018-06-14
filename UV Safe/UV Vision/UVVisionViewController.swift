@@ -50,7 +50,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         self.view.addSubview(activityView)
         
         // *************************************** DELETE ***************************************
-        UserDefaults.standard.set(100, forKey: "credits")
+        //UserDefaults.standard.set(100, forKey: "credits")
         
         GADRewardBasedVideoAd.sharedInstance().delegate = self
         GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
