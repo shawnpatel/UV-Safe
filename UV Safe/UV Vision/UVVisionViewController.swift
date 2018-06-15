@@ -58,7 +58,11 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         if let savedCredits = UserDefaults.standard.object(forKey: "credits") as? Int {
             credits = savedCredits
             DispatchQueue.main.async {
-                self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+                if self.credits == 0 {
+                    self.scans.setTitle("Get More Scans!", for: .normal)
+                } else {
+                    self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+                }
             }
         }
         
@@ -114,6 +118,16 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func takePhoto(_ sender: UIBarButtonItem) {
         if credits >= 1 {
             credits -= 1
+            UserDefaults.standard.set(credits, forKey: "credits")
+            
+            DispatchQueue.main.async {
+                if self.credits == 0 {
+                    self.scans.setTitle("Get More Scans!", for: .normal)
+                } else {
+                    self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+                }
+            }
+            
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
@@ -174,12 +188,6 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func detect(image: CIImage) {
-        UserDefaults.standard.set(credits, forKey: "credits")
-        
-        DispatchQueue.main.async {
-            self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
-        }
-        
         guard let model = try? VNCoreMLModel(for: SkinCancerClassifier().model) else {
             fatalError("Can't load SkinCancerClassifier model.")
         }

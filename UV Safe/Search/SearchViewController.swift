@@ -41,6 +41,7 @@ class SearchViewController: UIViewController {
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchUVIndex") as? String, for: .normal)
             self.tempButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchTemp") as? String, for: .normal)
             self.windButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchWind") as? String, for: .normal)
+            self.conditionsText.text = UserDefaults.standard.object(forKey: "savedSearchWeather") as? String
             self.distanceButton.setTitle(UserDefaults.standard.object(forKey: "savedDistance") as? String, for: .normal)
             self.timeButton.setTitle(UserDefaults.standard.object(forKey: "savedDuration") as? String, for: .normal)
             if let iconString = UserDefaults.standard.object(forKey: "savedSearchIconString") as? String {
@@ -173,7 +174,7 @@ class SearchViewController: UIViewController {
                             if self.units == 0 {
                                 if let tempF = currentObservation["temp_f"] {
                                     let tempFString = String(format: "%.0f", Double(String(describing: tempF))!)
-                                    UserDefaults.standard.set(tempFString + "°F", forKey: "savedTemp")
+                                    UserDefaults.standard.set(tempFString + "°F", forKey: "savedSearchTemp")
                                     DispatchQueue.main.async {
                                         self.tempButton.setTitle(String(tempFString) + "°F", for: .normal)
                                     }
@@ -181,7 +182,7 @@ class SearchViewController: UIViewController {
                             } else if self.units == 1 {
                                 if let tempC = currentObservation["temp_c"] {
                                     let tempCString = String(format: "%.0f", Double(String(describing: tempC))!)
-                                    UserDefaults.standard.set(tempCString + "°C", forKey: "savedTemp")
+                                    UserDefaults.standard.set(tempCString + "°C", forKey: "savedSearchTemp")
                                     DispatchQueue.main.async {
                                         self.tempButton.setTitle(tempCString + "°C", for: .normal)
                                     }
@@ -191,7 +192,7 @@ class SearchViewController: UIViewController {
                             if self.units == 0 {
                                 if let windMPH = currentObservation["wind_mph"] {
                                     let windMPHString = String(format: "%.0f", Double(String(describing: windMPH))!)
-                                    UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedWind")
+                                    UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedSearchWind")
                                     DispatchQueue.main.async {
                                         self.windButton.setTitle(windMPHString + " MPH", for: .normal)
                                     }
@@ -199,18 +200,23 @@ class SearchViewController: UIViewController {
                             } else if self.units == 1 {
                                 if let windKPH = currentObservation["wind_kph"] {
                                     let windKPHString = String(format: "%.0f", Double(String(describing: windKPH))!)
-                                    UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedWind")
+                                    UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedSearchWind")
                                     DispatchQueue.main.async {
                                         self.windButton.setTitle(windKPHString + " KPH", for: .normal)
                                     }
                                 }
                             }
                             
+                            if let weather = currentObservation["weather"] as? String {
+                                UserDefaults.standard.set(weather, forKey: "savedSearchWeather")
+                                DispatchQueue.main.async {
+                                    self.conditionsText.text = weather
+                                }
+                            }
+                            
                             if let iconString = currentObservation["icon"] as? String {
                                 UserDefaults.standard.set(iconString, forKey: "savedSearchIconString")
                                 DispatchQueue.main.async {
-                                    self.conditionsText.text = iconString.capitalized
-                                    
                                     self.conditionsImage.image = UIImage(named: iconString)
                                     if distanceJSON {
                                         self.distanceToCityJSON()

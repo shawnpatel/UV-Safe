@@ -50,6 +50,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedUVIndex") as? String, for: .normal)
             self.tempButton.setTitle(UserDefaults.standard.object(forKey: "savedTemp") as? String, for: .normal)
             self.windButton.setTitle(UserDefaults.standard.object(forKey: "savedWind") as? String, for: .normal)
+            self.conditionsText.text = UserDefaults.standard.object(forKey: "savedWeather") as? String
             if let iconString = UserDefaults.standard.object(forKey: "savedIconString") as? String {
                 self.conditionsImage.image = UIImage(named: iconString)
             }
@@ -295,11 +296,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                 }
                             }
                             
+                            if let weather = currentObservation["weather"] as? String {
+                                UserDefaults.standard.set(weather, forKey: "savedWeather")
+                                DispatchQueue.main.async {
+                                    self.conditionsText.text = weather
+                                }
+                            }
+                            
                             if let iconString = currentObservation["icon"] as? String {
                                 UserDefaults.standard.set(iconString, forKey: "savedIconString")
                                 DispatchQueue.main.async {
-                                    self.conditionsText.text = iconString.capitalized
-                                    
                                     self.conditionsImage.image = UIImage(named: iconString)
                                     self.progressBar.progress = 1
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
