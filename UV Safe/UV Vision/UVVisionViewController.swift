@@ -60,8 +60,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             DispatchQueue.main.async {
                 if self.credits == 0 {
                     self.scans.setTitle("Get More Scans!", for: .normal)
+                    self.scans.titleLabel?.font = UIFont.italicSystemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
                 } else {
                     self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+                    self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
                 }
             }
         }
@@ -101,6 +103,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         UserDefaults.standard.set(credits, forKey: "credits")
         DispatchQueue.main.async {
             self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+            self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
         }
         
         GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
@@ -123,8 +126,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             DispatchQueue.main.async {
                 if self.credits == 0 {
                     self.scans.setTitle("Get More Scans!", for: .normal)
+                    self.scans.titleLabel?.font = UIFont.italicSystemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
                 } else {
                     self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+                    self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
                 }
             }
             
@@ -211,7 +216,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                 } else if topResult.confidence >= 0.90 {
                     self?.skinCancer.setTitle("Malignant - " + String(Int(topResult.confidence * 100)) + "%", for: .normal)
                 } else {
-                    self?.skinCancer.setTitle("Unkown", for: .normal)
+                    self?.skinCancer.setTitle("Unknown", for: .normal)
                 }
                 
                 /*if topResult.confidence <= 0.25 {
