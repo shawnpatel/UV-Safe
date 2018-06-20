@@ -147,6 +147,18 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        credits += 1
+        UserDefaults.standard.set(credits, forKey: "credits")
+        
+        DispatchQueue.main.async {
+            self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
+            self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         activityView.isHidden = false
         activityView.startAnimating()
