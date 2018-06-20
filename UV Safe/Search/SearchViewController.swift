@@ -39,6 +39,9 @@ class SearchViewController: UIViewController {
                 self.searchCity()
             }
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchUVIndex") as? String, for: .normal)
+            if let UVIndex = UserDefaults.standard.object(forKey: "savedSearchUVIndexInt") as? Int {
+                self.updateUVIndexColor(index: UVIndex)
+            }
             self.tempButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchTemp") as? String, for: .normal)
             self.windButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchWind") as? String, for: .normal)
             self.conditionsText.text = UserDefaults.standard.object(forKey: "savedSearchWeather") as? String
@@ -152,21 +155,11 @@ class SearchViewController: UIViewController {
                                     if UVIndexInt < 0 {
                                         UVIndexStringInt = "N/A"
                                     }
+                                    UserDefaults.standard.set(UVIndexInt, forKey: "savedSearchUVIndexInt")
                                     UserDefaults.standard.set(UVIndexStringInt + " UV", forKey: "savedSearchUVIndex")
                                     DispatchQueue.main.async {
                                         self.UVIndexButton.setTitle(UVIndexStringInt + " UV", for: .normal)
-                                        
-                                        if UVIndexInt >= 0 && UVIndexInt <= 2{
-                                            self.UVIndexButton.setTitleColor(.green, for: .normal)
-                                        } else if UVIndexInt >= 3 && UVIndexInt <= 5 {
-                                            self.UVIndexButton.setTitleColor(.yellow, for: .normal)
-                                        } else if UVIndexInt >= 6 && UVIndexInt <= 7 {
-                                            self.UVIndexButton.setTitleColor(.orange, for: .normal)
-                                        } else if UVIndexInt >= 8 && UVIndexInt <= 10 {
-                                            self.UVIndexButton.setTitleColor(.red, for: .normal)
-                                        } else if UVIndexInt >= 11 {
-                                            self.UVIndexButton.setTitleColor(.purple, for: .normal)
-                                        }
+                                        self.updateUVIndexColor(index: UVIndexInt)
                                     }
                                 }
                             }
@@ -305,6 +298,20 @@ class SearchViewController: UIViewController {
             }
         }
         task.resume()
+    }
+    
+    func updateUVIndexColor(index: Int) {
+        if index >= 0 && index <= 2{
+            UVIndexButton.setTitleColor(.green, for: .normal)
+        } else if index >= 3 && index <= 5 {
+            UVIndexButton.setTitleColor(.yellow, for: .normal)
+        } else if index >= 6 && index <= 7 {
+            UVIndexButton.setTitleColor(.orange, for: .normal)
+        } else if index >= 8 && index <= 10 {
+            UVIndexButton.setTitleColor(.red, for: .normal)
+        } else if index >= 11 {
+            UVIndexButton.setTitleColor(.purple, for: .normal)
+        }
     }
     
     func searchCity() {

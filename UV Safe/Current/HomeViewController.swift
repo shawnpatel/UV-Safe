@@ -48,6 +48,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         DispatchQueue.main.async {
             self.cityLabel.text = UserDefaults.standard.object(forKey: "savedCityName") as? String
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedUVIndex") as? String, for: .normal)
+            if let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int {
+                self.updateUVIndexColor(index: UVIndex)
+            }
             self.tempButton.setTitle(UserDefaults.standard.object(forKey: "savedTemp") as? String, for: .normal)
             self.windButton.setTitle(UserDefaults.standard.object(forKey: "savedWind") as? String, for: .normal)
             self.conditionsText.text = UserDefaults.standard.object(forKey: "savedWeather") as? String
@@ -244,18 +247,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                     UserDefaults.standard.set(UVIndexStringInt + " UV", forKey: "savedUVIndex")
                                     DispatchQueue.main.async {
                                         self.UVIndexButton.setTitle(UVIndexStringInt + " UV", for: .normal)
-                                        
-                                        if UVIndexInt >= 0 && UVIndexInt <= 2{
-                                            self.UVIndexButton.setTitleColor(.green, for: .normal)
-                                        } else if UVIndexInt >= 3 && UVIndexInt <= 5 {
-                                            self.UVIndexButton.setTitleColor(.yellow, for: .normal)
-                                        } else if UVIndexInt >= 6 && UVIndexInt <= 7 {
-                                            self.UVIndexButton.setTitleColor(.orange, for: .normal)
-                                        } else if UVIndexInt >= 8 && UVIndexInt <= 10 {
-                                            self.UVIndexButton.setTitleColor(.red, for: .normal)
-                                        } else if UVIndexInt >= 11 {
-                                            self.UVIndexButton.setTitleColor(.purple, for: .normal)
-                                        }
+                                        self.updateUVIndexColor(index: UVIndexInt)
                                     }
                                 }
                             }
@@ -325,6 +317,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
             }
         }
         task.resume()
+    }
+    
+    func updateUVIndexColor(index: Int) {
+        if index >= 0 && index <= 2{
+            UVIndexButton.setTitleColor(.green, for: .normal)
+        } else if index >= 3 && index <= 5 {
+            UVIndexButton.setTitleColor(.yellow, for: .normal)
+        } else if index >= 6 && index <= 7 {
+            UVIndexButton.setTitleColor(.orange, for: .normal)
+        } else if index >= 8 && index <= 10 {
+            UVIndexButton.setTitleColor(.red, for: .normal)
+        } else if index >= 11 {
+            UVIndexButton.setTitleColor(.purple, for: .normal)
+        }
     }
     
     @IBAction func UVIndexButton(_ sender: UIButton) {
