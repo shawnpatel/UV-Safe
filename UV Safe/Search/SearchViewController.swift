@@ -156,9 +156,9 @@ class SearchViewController: UIViewController {
                                         UVIndexStringInt = "N/A"
                                     }
                                     UserDefaults.standard.set(UVIndexInt, forKey: "savedSearchUVIndexInt")
-                                    UserDefaults.standard.set(UVIndexStringInt + " UV", forKey: "savedSearchUVIndex")
+                                    UserDefaults.standard.set(UVIndexStringInt + " UVI", forKey: "savedSearchUVIndex")
                                     DispatchQueue.main.async {
-                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UV", for: .normal)
+                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UVI", for: .normal)
                                         self.updateUVIndexColor(index: UVIndexInt)
                                     }
                                 }

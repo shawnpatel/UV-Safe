@@ -167,7 +167,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             imageView.contentMode = .scaleToFill
             imageView.image = pickedImage
             
-            detect(image: CIImage(image: pickedImage)!)
+            detect2(image: CIImage(image: pickedImage)!)
             
             /*let fileManager = FileManager.default
             let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -216,30 +216,60 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                     fatalError("Unexpected result type from VNCoreMLRequest.")
             }
             
+            print(results)
+            
             DispatchQueue.main.async { [weak self] in
                 UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
                 UserDefaults.standard.set(topResult.identifier, forKey: "tag")
                 
-                //self?.skinCancer.setTitle(String(Int(topResult.confidence * 100)) + "% Malignant" + "*", for: .normal)
-                //print(topResult.confidence)
-                
-                if topResult.confidence <= 0.20 {
-                    self?.skinCancer.setTitle("Benign - " + String(100 - Int(topResult.confidence * 100)) + "%", for: .normal)
+                if topResult.confidence <= 0.33 {
+                    self?.skinCancer.setTitle("Low Risk", for: .normal)
                 } else if topResult.confidence >= 0.90 {
-                    self?.skinCancer.setTitle("Malignant - " + String(Int(topResult.confidence * 100)) + "%", for: .normal)
+                    self?.skinCancer.setTitle("High Risk", for: .normal)
                 } else {
-                    self?.skinCancer.setTitle("Unknown", for: .normal)
+                    self?.skinCancer.setTitle("Medium Risk", for: .normal)
                 }
                 
-                /*if topResult.confidence <= 0.25 {
-                    self?.riskLevel.text = "Low Risk!*"
-                } else if topResult.confidence <= 0.50 {
-                    self?.riskLevel.text = "Medium Risk!*"
-                } else if topResult.confidence <= 0.75 {
-                    self?.riskLevel.text = "High Risk!*"
-                } else {
-                    self?.riskLevel.text = "Very High Risk!*"
-                }*/
+                self?.activityView.stopAnimating()
+            }
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: image)
+        DispatchQueue.global(qos: .userInteractive).async {
+            do {
+                try handler.perform([request])
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func detect2(image: CIImage) {
+        guard let model = try? VNCoreMLModel(for: SkinCancerClassifier2().model) else {
+            fatalError("Can't load SkinCancerClassifier2 model.")
+        }
+        
+        let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+            guard let results = request.results as? [VNClassificationObservation],
+                let topResult = results.first else {
+                    fatalError("Unexpected result type from VNCoreMLRequest.")
+            }
+            
+            print(results)
+            
+            DispatchQueue.main.async { [weak self] in
+                UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
+                UserDefaults.standard.set(topResult.identifier, forKey: "tag")
+                
+                if topResult.identifier == "Benign" {
+                    self?.skinCancer.setTitle("Low Risk", for: .normal)
+                } else if topResult.identifier == "Malignant" {
+                    if topResult.confidence >= 0.85 {
+                        self?.skinCancer.setTitle("High Risk", for: .normal)
+                    } else if topResult.confidence >= 0.50 {
+                        self?.skinCancer.setTitle("Medium Risk", for: .normal)
+                    }
+                }
                 
                 self?.activityView.stopAnimating()
             }

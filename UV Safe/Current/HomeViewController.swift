@@ -244,9 +244,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                         UVIndexStringInt = "N/A"
                                     }
                                     UserDefaults.standard.set(UVIndexInt, forKey: "savedUVIndexInt")
-                                    UserDefaults.standard.set(UVIndexStringInt + " UV", forKey: "savedUVIndex")
+                                    UserDefaults.standard.set(UVIndexStringInt + " UVI", forKey: "savedUVIndex")
                                     DispatchQueue.main.async {
-                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UV", for: .normal)
+                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UVI", for: .normal)
                                         self.updateUVIndexColor(index: UVIndexInt)
                                     }
                                 }

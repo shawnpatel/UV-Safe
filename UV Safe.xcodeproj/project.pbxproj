@@ -11,6 +11,7 @@
 		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
 		CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */; };
 		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
+		CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */; };
 		CAB18CD320C6F63100849F3A /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = CAB18CD220C6F63100849F3A /* TODO.txt */; };
 		CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */; };
 		CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C201EF999E40083F6DC /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
 		CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = "UV Safe/Current/SettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
+		CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier2.mlmodel; sourceTree = "<group>"; };
 		CAB18CD220C6F63100849F3A /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier.mlmodel; sourceTree = "<group>"; };
 		CAC36C1D1EF999E40083F6DC /* UV Safe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UV Safe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 				CA091C601FC4AF55002F1F85 /* UV Vision */,
 				CA091C631FC4AFAA002F1F85 /* Info */,
 				CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */,
+				CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */,
 				CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */,
 				CAC36C261EF999E50083F6DC /* Main.storyboard */,
 				CAC36C291EF999E50083F6DC /* Assets.xcassets */,
@@ -318,6 +321,7 @@
 				CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */,
 				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
 				CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */,
+				CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */,
 				CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */,
 				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,
 			);
