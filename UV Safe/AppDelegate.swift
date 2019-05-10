@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UserDefaults.standard.removeObject(forKey: "percentage")
         UserDefaults.standard.removeObject(forKey: "tag")
@@ -44,7 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Initialize the Google Mobile Ads SDK.
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-5075997087510380~7038623326")
+        //GADMobileAds.configure(withApplicationID: "ca-app-pub-5075997087510380~7038623326")
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         GMSPlacesClient.provideAPIKey("AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
         

@@ -22,7 +22,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var skinCancer: UIButton!
     @IBOutlet weak var riskLevel: UILabel!
     
-    let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    let activityView = UIActivityIndicatorView(style: .whiteLarge)
     
     /*let apiKey = "a61a7f7d9b2fef66fda503e39b384a9a267dcafb"
     var downloadPath = URL(string: "")
@@ -133,10 +133,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                 }
             }
             
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+                imagePicker.sourceType = UIImagePickerController.SourceType.camera
                 imagePicker.allowsEditing = false
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -159,11 +159,14 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         activityView.isHidden = false
         activityView.startAnimating()
         
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             imageView.contentMode = .scaleToFill
             imageView.image = pickedImage
             
@@ -433,7 +436,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func open(url: String) {
         if let url = NSURL(string: url) {
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url as URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     
@@ -447,4 +450,19 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
     }*/
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

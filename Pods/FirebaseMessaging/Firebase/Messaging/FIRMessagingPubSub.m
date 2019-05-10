@@ -16,6 +16,8 @@
 
 #import "FIRMessagingPubSub.h"
 
+#import <GoogleUtilities/GULUserDefaults.h>
+
 #import "FIRMessaging.h"
 #import "FIRMessagingClient.h"
 #import "FIRMessagingDefines.h"
@@ -186,14 +188,14 @@ static NSString *const kPendingSubscriptionsListKey =
 #pragma mark - Storing Pending Topics
 
 - (void)archivePendingTopicsList:(FIRMessagingPendingTopicsList *)topicsList {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  GULUserDefaults *defaults = [GULUserDefaults standardUserDefaults];
   NSData *pendingData = [NSKeyedArchiver archivedDataWithRootObject:topicsList];
   [defaults setObject:pendingData forKey:kPendingSubscriptionsListKey];
   [defaults synchronize];
 }
 
 - (void)restorePendingTopicsList {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  GULUserDefaults *defaults = [GULUserDefaults standardUserDefaults];
   NSData *pendingData = [defaults objectForKey:kPendingSubscriptionsListKey];
   FIRMessagingPendingTopicsList *subscriptions;
   @try {
@@ -226,6 +228,14 @@ static NSString *const kTopicRegexPattern = @"/topics/([a-zA-Z0-9-_.~%]+)";
 + (NSString *)addPrefixToTopic:(NSString *)topic {
   if (![self hasTopicsPrefix:topic]) {
     return [NSString stringWithFormat:@"%@%@", kTopicsPrefix, topic];
+  } else {
+    return [topic copy];
+  }
+}
+
++ (NSString *)removePrefixFromTopic:(NSString *)topic {
+  if ([self hasTopicsPrefix:topic]) {
+    return [topic substringFromIndex:kTopicsPrefix.length];
   } else {
     return [topic copy];
   }

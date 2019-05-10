@@ -2,13 +2,16 @@
 //  HomeViewController.swift
 //  UV Safe
 //
-//  Created by Sapna Patel on 6/20/17.
-//  Copyright © 2017 Sapna Patel. All rights reserved.
+//  Created by Shawn Patel on 6/20/17.
+//  Copyright © 2017 Shawn Patel. All rights reserved.
 //
 
 import UIKit
 import CoreLocation
 import UserNotifications
+
+import Alamofire
+import SwiftyJSON
 import GoogleMobileAds
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInterstitialDelegate {
@@ -42,8 +45,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         interstitial = createAndLoadInterstitial()
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: .UIApplicationWillResignActive, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: .UIApplicationDidBecomeActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         DispatchQueue.main.async {
             self.cityLabel.text = UserDefaults.standard.object(forKey: "savedCityName") as? String
@@ -99,13 +102,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         
         if let contains = self.tempButton.currentTitle?.contains("F") {
             if contains && self.units == 1 {
-                self.WeatherUndergroundJSON()
+                self.updateWeatherInfo()
             }
         }
         
         if let contains = self.tempButton.currentTitle?.contains("C") {
             if contains && self.units == 0 {
-                self.WeatherUndergroundJSON()
+                self.updateWeatherInfo()
             }
         }
     }
@@ -189,13 +192,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         UserDefaults.standard.set(latitude, forKey: "savedLatitude")
         UserDefaults.standard.set(longitude, forKey: "savedLongitude")
         manager.stopUpdatingLocation()
-        callWeatherUndergroundJSON()
+        getWeatherInfo()
     }
     
-    func callWeatherUndergroundJSON() {
+    func getWeatherInfo() {
         if canCall {
             canCall = false
-            WeatherUndergroundJSON()
+            updateWeatherInfo()
         }
     }
     
@@ -209,14 +212,97 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func WeatherUndergroundJSON() {
+    func updateWeatherInfo() {
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        let APIKey = ["8578e6219f5a0317", "9b13cd2abe7021ac", "e0b3dccaac724dcf", "5aacfe2a581db8d9", "c01a9d84445503bb"]
-        let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))
-        let url = URL(string: "https://api.wunderground.com/api/" + APIKey[randomAPIKey] + "/conditions/q/" + latitude + "," + longitude + ".json")
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        /*let APIKeys = ["8578e6219f5a0317", "9b13cd2abe7021ac", "e0b3dccaac724dcf", "5aacfe2a581db8d9", "c01a9d84445503bb"]
+        let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))*/
+        
+        let apiKey = "6a58932e63b48033343af20d04c41dc4"
+        
+        let UVIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
+        let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
+        
+        // UV Index
+        Alamofire.request(UVIndexURL).responseJSON { response in
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                let UVIndexInt = Int(json["value"].doubleValue.rounded())
+                let UVIndexString = String(UVIndexInt)
+                
+                UserDefaults.standard.set(UVIndexInt, forKey: "savedUVIndexInt")
+                UserDefaults.standard.set(UVIndexString + " UVI", forKey: "savedUVIndex")
+                
+                DispatchQueue.main.async {
+                    self.UVIndexButton.setTitle(UVIndexString + " UVI", for: .normal)
+                    self.updateUVIndexColor(index: UVIndexInt)
+                }
+            }
+        }
+        
+        // City, Temperature, Wind Speed, Conditions
+        Alamofire.request(weatherURL).responseJSON { response in
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                let city = json["name"].stringValue
+                UserDefaults.standard.set(city, forKey: "savedCityName")
+                
+                var temp = json["main"]["temp"].doubleValue
+                if self.units == 0 {
+                    temp = ((temp - 273.15) * 9/5 + 32).rounded()
+                    UserDefaults.standard.set(String(Int(temp)) + "°F", forKey: "savedTemp")
+                } else if self.units == 1 {
+                    temp = (temp - 273.15).rounded()
+                    UserDefaults.standard.set(String(Int(temp)) + "°C", forKey: "savedTemp")
+                }
+                
+                var wind = json["wind"]["speed"].doubleValue
+                if self.units == 0 {
+                    wind = (wind * 2.237).rounded()
+                    UserDefaults.standard.set(String(Int(wind)) + " MPH", forKey: "savedWind")
+                } else if self.units == 1 {
+                    wind = (wind * 3.6).rounded()
+                    UserDefaults.standard.set(String(Int(wind)) + " KPH", forKey: "savedWind")
+                }
+                
+                let conditions = json["weather"].arrayObject![0] as! [String : Any]
+                
+                let description = (conditions["description"] as! String).capitalized
+                UserDefaults.standard.set(description, forKey: "savedWeather")
+                
+                let icon = (conditions["icon"] as! String).filter("0123456789".contains)
+                UserDefaults.standard.set(icon, forKey: "savedIconString")
+                
+                DispatchQueue.main.async {
+                    self.cityLabel.text = city
+                    
+                    if self.units == 0 {
+                        self.tempButton.setTitle(String(Int(temp)) + "°F", for: .normal)
+                        self.windButton.setTitle(String(Int(wind)) + " MPH", for: .normal)
+                    } else if self.units == 1 {
+                        self.tempButton.setTitle(String(Int(temp)) + "°C", for: .normal)
+                        self.windButton.setTitle(String(Int(wind)) + " KPH", for: .normal)
+                    }
+                    
+                    self.conditionsText.text = description
+                    self.conditionsImage.image = UIImage(named: icon)
+                }
+                
+                self.progressBar.progress = 1
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
+                if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                    self.updateWeatherInfo()
+                } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                    self.updateWeatherInfo()
+                }
+            }
+        }
+        
+        /*let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 DispatchQueue.main.async {
                     self.cityLabel.text = "Check internet connection!"
@@ -303,9 +389,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                     
                                     if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
-                                        self.WeatherUndergroundJSON()
+                                        self.updateWeatherInfo()
                                     } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
-                                        self.WeatherUndergroundJSON()
+                                        self.updateWeatherInfo()
                                     }
                                 }
                             }
@@ -316,7 +402,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                 }
             }
         }
-        task.resume()
+        task.resume()*/
     }
     
     func updateUVIndexColor(index: Int) {
@@ -394,7 +480,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         content.title = "Apply Sunscreen!"
         content.body = "It has been 90 minutes since you last applied suncreen. Apply another coating of sunscreen then set another reminder by opening UV Safe."
         content.badge = 1
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(whenToSend), repeats: false)
         let request = UNNotificationRequest(identifier: "Reminder", content: content, trigger: trigger)
