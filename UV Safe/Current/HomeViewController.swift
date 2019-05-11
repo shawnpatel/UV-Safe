@@ -216,79 +216,41 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        /*let APIKeys = ["8578e6219f5a0317", "9b13cd2abe7021ac", "e0b3dccaac724dcf", "5aacfe2a581db8d9", "c01a9d84445503bb"]
-        let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))*/
-        
-        let apiKey = "6a58932e63b48033343af20d04c41dc4"
-        
-        let UVIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
-        let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)"
-        
-        // UV Index
-        Alamofire.request(UVIndexURL).responseJSON { response in
-            if let value = response.result.value {
-                let json = JSON(value)
-                
-                let UVIndexInt = Int(json["value"].doubleValue.rounded())
-                let UVIndexString = String(UVIndexInt)
-                
-                UserDefaults.standard.set(UVIndexInt, forKey: "savedUVIndexInt")
-                UserDefaults.standard.set(UVIndexString + " UVI", forKey: "savedUVIndex")
+        NetworkCalls.getUVIndex(latitude, longitude) { response in
+            if let UVIndex = response.value {
+                UserDefaults.standard.set(UVIndex, forKey: "savedUVIndexInt")
+                UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedUVIndex")
                 
                 DispatchQueue.main.async {
-                    self.UVIndexButton.setTitle(UVIndexString + " UVI", for: .normal)
-                    self.updateUVIndexColor(index: UVIndexInt)
+                    self.UVIndexButton.setTitle(String(UVIndex) + " UVI", for: .normal)
+                    self.updateUVIndexColor(index: UVIndex)
                 }
             }
         }
         
-        // City, Temperature, Wind Speed, Conditions
-        Alamofire.request(weatherURL).responseJSON { response in
-            if let value = response.result.value {
-                let json = JSON(value)
+        NetworkCalls.getWeather(latitude, longitude, units) { response in
+            if let weatherData = response.value {
+                UserDefaults.standard.set(weatherData["city"] as! String, forKey: "savedCityName")
                 
-                let city = json["name"].stringValue
-                UserDefaults.standard.set(city, forKey: "savedCityName")
-                
-                var temp = json["main"]["temp"].doubleValue
                 if self.units == 0 {
-                    temp = ((temp - 273.15) * 9/5 + 32).rounded()
-                    UserDefaults.standard.set(String(Int(temp)) + "°F", forKey: "savedTemp")
-                } else if self.units == 1 {
-                    temp = (temp - 273.15).rounded()
-                    UserDefaults.standard.set(String(Int(temp)) + "°C", forKey: "savedTemp")
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°F", forKey: "savedTemp")
+                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " MPH", forKey: "savedWind")
+                } else if self.units == 1{
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°C", forKey: "savedTemp")
+                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " KPH", forKey: "savedWind")
                 }
                 
-                var wind = json["wind"]["speed"].doubleValue
-                if self.units == 0 {
-                    wind = (wind * 2.237).rounded()
-                    UserDefaults.standard.set(String(Int(wind)) + " MPH", forKey: "savedWind")
-                } else if self.units == 1 {
-                    wind = (wind * 3.6).rounded()
-                    UserDefaults.standard.set(String(Int(wind)) + " KPH", forKey: "savedWind")
-                }
-                
-                let conditions = json["weather"].arrayObject![0] as! [String : Any]
-                
-                let description = (conditions["description"] as! String).capitalized
-                UserDefaults.standard.set(description, forKey: "savedWeather")
-                
-                let icon = (conditions["icon"] as! String).filter("0123456789".contains)
-                UserDefaults.standard.set(icon, forKey: "savedIconString")
+                UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedWeather")
+                UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedIconString")
                 
                 DispatchQueue.main.async {
-                    self.cityLabel.text = city
+                    self.cityLabel.text = weatherData["city"] as? String
                     
-                    if self.units == 0 {
-                        self.tempButton.setTitle(String(Int(temp)) + "°F", for: .normal)
-                        self.windButton.setTitle(String(Int(wind)) + " MPH", for: .normal)
-                    } else if self.units == 1 {
-                        self.tempButton.setTitle(String(Int(temp)) + "°C", for: .normal)
-                        self.windButton.setTitle(String(Int(wind)) + " KPH", for: .normal)
-                    }
+                    self.tempButton.setTitle(UserDefaults.standard.string(forKey: "savedTemp"), for: .normal)
+                    self.windButton.setTitle(UserDefaults.standard.string(forKey: "savedWind"), for: .normal)
                     
-                    self.conditionsText.text = description
-                    self.conditionsImage.image = UIImage(named: icon)
+                    self.conditionsText.text = weatherData["conditions"] as? String
+                    self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
                 }
                 
                 self.progressBar.progress = 1
@@ -300,109 +262,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                     self.updateWeatherInfo()
                 }
             }
-        }
-        
-        /*let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.cityLabel.text = "Check internet connection!"
-                }
-            } else {
-                if let content = data {
-                    do {
-                        let myJSON = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-                        
-                        if let currentObservation = myJSON["current_observation"] as? NSDictionary {
-                            if let displayLocation = currentObservation["display_location"] as? NSDictionary {
-                                if let cityName = displayLocation["full"] as? String {
-                                    UserDefaults.standard.set(cityName, forKey: "savedCityName")
-                                    DispatchQueue.main.async {
-                                        self.cityLabel.text = cityName
-                                    }
-                                }
-                            }
-                            
-                            if let UVIndexString = currentObservation["UV"] as? String {
-                                if let UVIndexDouble = Double(UVIndexString) {
-                                    let UVIndexInt = Int(UVIndexDouble)
-                                    var UVIndexStringInt = String(UVIndexInt)
-                                    if UVIndexStringInt == "-1" {
-                                        UVIndexStringInt = "N/A"
-                                    }
-                                    UserDefaults.standard.set(UVIndexInt, forKey: "savedUVIndexInt")
-                                    UserDefaults.standard.set(UVIndexStringInt + " UVI", forKey: "savedUVIndex")
-                                    DispatchQueue.main.async {
-                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UVI", for: .normal)
-                                        self.updateUVIndexColor(index: UVIndexInt)
-                                    }
-                                }
-                            }
-                            
-                            if self.units == 0 {
-                                if let tempF = currentObservation["temp_f"] {
-                                    let tempFString = String(format: "%.0f", Double(String(describing: tempF))!)
-                                    UserDefaults.standard.set(tempFString + "°F", forKey: "savedTemp")
-                                    DispatchQueue.main.async {
-                                        self.tempButton.setTitle(String(tempFString) + "°F", for: .normal)
-                                    }
-                                }
-                            } else if self.units == 1 {
-                                if let tempC = currentObservation["temp_c"] {
-                                    let tempCString = String(format: "%.0f", Double(String(describing: tempC))!)
-                                    UserDefaults.standard.set(tempCString + "°C", forKey: "savedTemp")
-                                    DispatchQueue.main.async {
-                                        self.tempButton.setTitle(tempCString + "°C", for: .normal)
-                                    }
-                                }
-                            }
-                            
-                            if self.units == 0 {
-                                if let windMPH = currentObservation["wind_mph"] {
-                                    let windMPHString = String(format: "%.0f", Double(String(describing: windMPH))!)
-                                    UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedWind")
-                                    DispatchQueue.main.async {
-                                        self.windButton.setTitle(windMPHString + " MPH", for: .normal)
-                                    }
-                                }
-                            } else if self.units == 1 {
-                                if let windKPH = currentObservation["wind_kph"] {
-                                    let windKPHString = String(format: "%.0f", Double(String(describing: windKPH))!)
-                                    UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedWind")
-                                    DispatchQueue.main.async {
-                                        self.windButton.setTitle(windKPHString + " KPH", for: .normal)
-                                    }
-                                }
-                            }
-                            
-                            if let weather = currentObservation["weather"] as? String {
-                                UserDefaults.standard.set(weather, forKey: "savedWeather")
-                                DispatchQueue.main.async {
-                                    self.conditionsText.text = weather
-                                }
-                            }
-                            
-                            if let iconString = currentObservation["icon"] as? String {
-                                UserDefaults.standard.set(iconString, forKey: "savedIconString")
-                                DispatchQueue.main.async {
-                                    self.conditionsImage.image = UIImage(named: iconString)
-                                    self.progressBar.progress = 1
-                                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                    
-                                    if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
-                                        self.updateWeatherInfo()
-                                    } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
-                                        self.updateWeatherInfo()
-                                    }
-                                }
-                            }
-                        }
-                    } catch {
-                        return
-                    }
-                }
+            
+            self.progressBar.progress = 1
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                self.updateWeatherInfo()
+            } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                self.updateWeatherInfo()
             }
         }
-        task.resume()*/
     }
     
     func updateUVIndexColor(index: Int) {
@@ -422,14 +291,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     @IBAction func UVIndexButton(_ sender: UIButton) {
         canCall = true
         getCurrentLocation()
-    }
-    
-    @IBAction func tempButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func windButton(_ sender: UIButton) {
-        
     }
     
     @objc func updateTimer() {

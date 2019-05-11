@@ -328,19 +328,6 @@ class SearchViewController: UIViewController {
         WeatherUndergroundJSON(distanceJSON: true)
     }
     
-    @IBAction func tempButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func windButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func distanceButton(_ sender: UIButton) {
-        
-    }
-    
-    
     @IBAction func timeButton(_ sender: UIButton) {
         let regionDistance: CLLocationDistance = 10000
         let coordinates = CLLocationCoordinate2DMake(Double(searchLatitude)!, Double(searchLongitude)!)
