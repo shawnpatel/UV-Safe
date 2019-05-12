@@ -22,6 +22,7 @@
 		CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C341EF99B960083F6DC /* HomeViewController.swift */; };
 		CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C361EF99E990083F6DC /* SearchViewController.swift */; };
 		CACF17982288A0F700D2E0B8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17972288A0F700D2E0B8 /* AlertService.swift */; };
+		CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17992288ABEC00D2E0B8 /* NetworkError.swift */; };
 		F5ABA762C9D37DB12C200229 /* Pods_UV_Safe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		CAC36C341EF99B960083F6DC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CAC36C361EF99E990083F6DC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CACF17972288A0F700D2E0B8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		CACF17992288ABEC00D2E0B8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UV_Safe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 			children = (
 				CA70C80522873CBF0061B13D /* NetworkCalls.swift */,
 				CACF17972288A0F700D2E0B8 /* AlertService.swift */,
+				CACF17992288ABEC00D2E0B8 /* NetworkError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */,
 				CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */,
 				CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */,
+				CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */,
 				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

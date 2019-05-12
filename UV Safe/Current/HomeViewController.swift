@@ -216,7 +216,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        NetworkCalls.getUVIndex(latitude, longitude) { response in
+        NetworkCalls.getWeatherbitUVIndex(latitude, longitude) { response in
             
             if response.isFailure {
                 let alert = AlertService.alert(message: response.error!.localizedDescription)

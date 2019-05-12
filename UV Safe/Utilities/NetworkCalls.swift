@@ -1,5 +1,5 @@
 //
-//  Utilities.swift
+//  NetworkCalls.swift
 //  UV Safe
 //
 //  Created by Shawn Patel on 5/11/19.
@@ -17,24 +17,46 @@ class NetworkCalls {
      let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))*/
     
     static let openWeatherMapAPIKey = "6a58932e63b48033343af20d04c41dc4"
+    static let weatherbitAPIKey = "d7759dee72f8462a8e67b4bb4d699947"
     static let googlePlaceAPIKey = "AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog"
     
-    static func getUVIndex(_ latitude: String,_ longitude: String, completion: @escaping (Result<Int>) -> Void) {
+    static func getOpenWeatherMapUVIndex(_ latitude: String,_ longitude: String, completion: @escaping (Result<Int>) -> Void) {
         
         let url = "https://api.openweathermap.org/data/2.5/uvi?appid=\(openWeatherMapAPIKey)&lat=\(latitude)&lon=\(longitude)"
         
         Alamofire.request(url).responseJSON { response in
             
             if response.error != nil {
-                completion(.failure(response.error!))
+                completion(.failure(NetworkError.noInternetConnection))
             }
             
             if let value = response.result.value {
                 let json = JSON(value)
                 
-                let UVIndexInt = Int(json["value"].doubleValue.rounded())
+                let UVIndex = Int(json["value"].doubleValue.rounded())
                 
-                completion(.success(UVIndexInt))
+                completion(.success(UVIndex))
+            }
+        }
+    }
+    
+    static func getWeatherbitUVIndex(_ latitude: String,_ longitude: String, completion: @escaping (Result<Int>) -> Void) {
+        
+        let url = "https://api.weatherbit.io/v2.0/current?lat=\(latitude)&lon=\(longitude)&key=\(weatherbitAPIKey)"
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            if response.error != nil {
+                completion(.failure(NetworkError.noInternetConnection))
+            }
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+                let data = JSON(json["data"].arrayObject![0])
+                
+                let UVIndex = Int(data["uv"].doubleValue.rounded())
+                
+                completion(.success(UVIndex))
             }
         }
     }
@@ -46,7 +68,7 @@ class NetworkCalls {
         Alamofire.request(url).responseJSON { response in
             
             if response.error != nil {
-                completion(.failure(response.error!))
+                completion(.failure(NetworkError.noInternetConnection))
             }
             
             if let value = response.result.value {
@@ -99,7 +121,7 @@ class NetworkCalls {
         Alamofire.request(url).responseJSON { response in
             
             if response.error != nil {
-                completion(.failure(response.error!))
+                completion(.failure(NetworkError.noInternetConnection))
             }
             
             if let value = response.result.value {
@@ -108,7 +130,7 @@ class NetworkCalls {
                 let elements = JSON(rows["elements"].arrayObject![0])
                 
                 if elements["status"].stringValue != "OK" {
-                    completion(.failure(NSLocalizedString(elements["status"].stringValue, comment: "") as! Error))
+                    completion(.failure(NetworkError.cannotProvideTravelInfo))
                 }
                 
                 let distance = elements["distance"]["text"].stringValue

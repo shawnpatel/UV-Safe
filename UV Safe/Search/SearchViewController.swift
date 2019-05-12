@@ -126,7 +126,7 @@ class SearchViewController: UIViewController {
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        NetworkCalls.getUVIndex(searchLatitude, searchLongitude) { response in
+        NetworkCalls.getWeatherbitUVIndex(searchLatitude, searchLongitude) { response in
             
             if response.isFailure {
                 let alert = AlertService.alert(message: response.error!.localizedDescription)
