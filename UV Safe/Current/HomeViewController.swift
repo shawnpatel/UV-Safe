@@ -264,23 +264,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                     self.conditionsText.text = weatherData["conditions"] as? String
                     self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
                 }
-                
-                self.progressBar.progress = 1
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                
-                if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
-                    self.updateWeatherInfo()
-                } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
-                    self.updateWeatherInfo()
-                }
             }
             
             self.progressBar.progress = 1
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
-            if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+            if self.tempButton.currentTitle?.contains("F") ?? false && self.units == 1 {
                 self.updateWeatherInfo()
-            } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+            } else if self.tempButton.currentTitle?.contains("C") ?? false && self.units == 0 {
                 self.updateWeatherInfo()
             }
         }

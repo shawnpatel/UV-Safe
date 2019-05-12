@@ -35,8 +35,6 @@ class SearchViewController: UIViewController {
         DispatchQueue.main.async {
             if let city = UserDefaults.standard.object(forKey: "savedSearchCityName") as? String {
                 self.cityLabel.text = city
-            } else {
-                self.searchCity()
             }
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedSearchUVIndex") as? String, for: .normal)
             if let UVIndex = UserDefaults.standard.object(forKey: "savedSearchUVIndexInt") as? Int {
@@ -52,17 +50,22 @@ class SearchViewController: UIViewController {
             }
             if let lat = UserDefaults.standard.object(forKey: "savedSearchLatitude") as? String {
                 self.searchLatitude = lat
+            } else {
+                self.searchLatitude = "37.338207"
             }
             if let long = UserDefaults.standard.object(forKey: "savedSearchLongitude") as? String {
                 self.searchLongitude = long
+            } else {
+                self.searchLongitude = "-121.886330"
             }
             if let lat = UserDefaults.standard.object(forKey: "savedLatitude") as? String {
                 self.latitude = lat
             }
             if let long = UserDefaults.standard.object(forKey: "savedLongitude") as? String {
                 self.longitude = long
-                self.updateWeatherInfo()
             }
+            
+            self.updateWeatherInfo()
         }
         
         self.UVIndexButton.titleLabel?.numberOfLines = 1
@@ -174,23 +177,14 @@ class SearchViewController: UIViewController {
                     self.conditionsText.text = weatherData["conditions"] as? String
                     self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
                 }
-                
-                self.progressBar.progress = 1
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                
-                if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
-                    self.updateWeatherInfo()
-                } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
-                    self.updateWeatherInfo()
-                }
             }
             
-            self.updateTravelInfo()
-            
-            if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+            if self.tempButton.currentTitle?.contains("F") ?? false && self.units == 1 {
                 self.updateWeatherInfo()
-            } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+            } else if self.tempButton.currentTitle?.contains("C") ?? false && self.units == 0 {
                 self.updateWeatherInfo()
+            } else {
+                self.updateTravelInfo()
             }
         }
     }

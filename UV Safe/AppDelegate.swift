@@ -27,22 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        if let checkFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool {
-            firstLaunch = checkFirstLaunch
-        }
-        
-        if firstLaunch {
-            UserDefaults.standard.set(0, forKey: "units")
-            
-            let rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstLaunch") as UIViewController
-            rootVC.view.frame = UIScreen.main.bounds
-            UIView.transition(with: self.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                self.window?.rootViewController = rootVC
-            }, completion: nil)
-            firstLaunch = false
-            UserDefaults.standard.set(firstLaunch, forKey: "isFirstLaunch")
-        }
-        
         // Initialize the Google Mobile Ads SDK.
         //GADMobileAds.configure(withApplicationID: "ca-app-pub-5075997087510380~7038623326")
         GADMobileAds.sharedInstance().start(completionHandler: nil)

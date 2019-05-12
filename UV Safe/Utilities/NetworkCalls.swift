@@ -52,7 +52,7 @@ class NetworkCalls {
             
             if let value = response.result.value {
                 let json = JSON(value)
-                let data = JSON(json["data"].arrayObject![0])
+                let data = JSON(json["data"].arrayObject?[0] as Any)
                 
                 let UVIndex = Int(data["uv"].doubleValue.rounded())
                 
@@ -91,10 +91,10 @@ class NetworkCalls {
                     wind = (wind * 3.6).rounded()
                 }
                 
-                let conditions = json["weather"].arrayObject![0] as! [String : Any]
+                let conditions = JSON(json["weather"].arrayObject?[0] as Any)
                 
-                let description = (conditions["description"] as! String).capitalized
-                let icon = (conditions["icon"] as! String).filter("0123456789".contains)
+                let description = conditions["description"].stringValue.capitalized
+                let icon = conditions["icon"].stringValue.filter("0123456789".contains)
                 
                 let weatherData: NSDictionary = [
                     "city" : "\(city), \(country)",
@@ -126,8 +126,8 @@ class NetworkCalls {
             
             if let value = response.result.value {
                 let json = JSON(value)
-                let rows = JSON(json["rows"].arrayObject![0])
-                let elements = JSON(rows["elements"].arrayObject![0])
+                let rows = JSON(json["rows"].arrayObject?[0] as Any)
+                let elements = JSON(rows["elements"].arrayObject?[0] as Any)
                 
                 if elements["status"].stringValue != "OK" {
                     completion(.failure(NetworkError.cannotProvideTravelInfo))
