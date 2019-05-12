@@ -127,6 +127,12 @@ class SearchViewController: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         NetworkCalls.getUVIndex(searchLatitude, searchLongitude) { response in
+            
+            if response.isFailure {
+                let alert = AlertService.alert(message: response.error!.localizedDescription)
+                self.present(alert, animated: true)
+            }
+            
             if let UVIndex = response.value {
                 UserDefaults.standard.set(UVIndex, forKey: "savedSearchUVIndexInt")
                 UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedSearchUVIndex")
@@ -139,6 +145,12 @@ class SearchViewController: UIViewController {
         }
         
         NetworkCalls.getWeather(searchLatitude, searchLongitude, units) { response in
+            
+            if response.isFailure {
+                let alert = AlertService.alert(message: response.error!.localizedDescription)
+                self.present(alert, animated: true)
+            }
+            
             if let weatherData = response.value {
                 UserDefaults.standard.set(weatherData["city"] as! String, forKey: "savedSearchCityName")
                 
@@ -185,192 +197,26 @@ class SearchViewController: UIViewController {
     
     func updateTravelInfo() {
         NetworkCalls.getTravelStatus(latitude, longitude, searchLatitude, searchLongitude, units) { response in
+            
+            if response.isFailure {
+                let alert = AlertService.alert(message: response.error!.localizedDescription)
+                self.present(alert, animated: true)
+            }
+            
             if let travelData = response.value {
+                UserDefaults.standard.set(travelData["distance"] as! String, forKey: "savedDistance")
+                UserDefaults.standard.set(travelData["duration"] as! String, forKey: "savedDuration")
                 
-            }
-        }
-        
-        self.progressBar.progress = 1
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
-    /*func WeatherUndergroundJSON(distanceJSON: Bool) {
-        progressBar.progress = 0
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let APIKey = ["05820e2fb2b22bb5", "93388dd4a6741555", "fda9d0342637a7c4", "a7dc316b7726b81f", "5ab2d695e1ee1d89"]
-        let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))
-        let url = URL(string: "https://api.wunderground.com/api/" + APIKey[randomAPIKey] + "/conditions/q/" + searchLatitude + "," + searchLongitude + ".json")
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil {
                 DispatchQueue.main.async {
-                    self.cityLabel.text = "Check internet connection!"
-                }
-            } else {
-                if let content = data {
-                    do {
-                        let myJSON = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-
-                        if let currentObservation = myJSON["current_observation"] as? NSDictionary {
-                            if let displayLocation = currentObservation["display_location"] as? NSDictionary {
-                                if let cityName = displayLocation["full"] as? String {
-                                    UserDefaults.standard.set(cityName, forKey: "savedSearchCityName")
-                                    DispatchQueue.main.async {
-                                        self.cityLabel.text = cityName
-                                    }
-                                }
-                            }
-                            
-                            if let UVIndexString = currentObservation["UV"] as? String {
-                                if let UVIndexDouble = Double(UVIndexString) {
-                                    let UVIndexInt = Int(UVIndexDouble)
-                                    var UVIndexStringInt = String(UVIndexInt)
-                                    if UVIndexInt < 0 {
-                                        UVIndexStringInt = "N/A"
-                                    }
-                                    UserDefaults.standard.set(UVIndexInt, forKey: "savedSearchUVIndexInt")
-                                    UserDefaults.standard.set(UVIndexStringInt + " UVI", forKey: "savedSearchUVIndex")
-                                    DispatchQueue.main.async {
-                                        self.UVIndexButton.setTitle(UVIndexStringInt + " UVI", for: .normal)
-                                        self.updateUVIndexColor(index: UVIndexInt)
-                                    }
-                                }
-                            }
-                            
-                            if self.units == 0 {
-                                if let tempF = currentObservation["temp_f"] {
-                                    let tempFString = String(format: "%.0f", Double(String(describing: tempF))!)
-                                    UserDefaults.standard.set(tempFString + "°F", forKey: "savedSearchTemp")
-                                    DispatchQueue.main.async {
-                                        self.tempButton.setTitle(String(tempFString) + "°F", for: .normal)
-                                    }
-                                }
-                            } else if self.units == 1 {
-                                if let tempC = currentObservation["temp_c"] {
-                                    let tempCString = String(format: "%.0f", Double(String(describing: tempC))!)
-                                    UserDefaults.standard.set(tempCString + "°C", forKey: "savedSearchTemp")
-                                    DispatchQueue.main.async {
-                                        self.tempButton.setTitle(tempCString + "°C", for: .normal)
-                                    }
-                                }
-                            }
-                            
-                            if self.units == 0 {
-                                if let windMPH = currentObservation["wind_mph"] {
-                                    let windMPHString = String(format: "%.0f", Double(String(describing: windMPH))!)
-                                    UserDefaults.standard.set(windMPHString + " MPH", forKey: "savedSearchWind")
-                                    DispatchQueue.main.async {
-                                        self.windButton.setTitle(windMPHString + " MPH", for: .normal)
-                                    }
-                                }
-                            } else if self.units == 1 {
-                                if let windKPH = currentObservation["wind_kph"] {
-                                    let windKPHString = String(format: "%.0f", Double(String(describing: windKPH))!)
-                                    UserDefaults.standard.set(windKPHString + " KPH", forKey: "savedSearchWind")
-                                    DispatchQueue.main.async {
-                                        self.windButton.setTitle(windKPHString + " KPH", for: .normal)
-                                    }
-                                }
-                            }
-                            
-                            if let weather = currentObservation["weather"] as? String {
-                                UserDefaults.standard.set(weather, forKey: "savedSearchWeather")
-                                DispatchQueue.main.async {
-                                    self.conditionsText.text = weather
-                                }
-                            }
-                            
-                            if let iconString = currentObservation["icon"] as? String {
-                                UserDefaults.standard.set(iconString, forKey: "savedSearchIconString")
-                                DispatchQueue.main.async {
-                                    self.conditionsImage.image = UIImage(named: iconString)
-                                    if distanceJSON {
-                                        self.distanceToCityJSON()
-                                    } else {
-                                        self.progressBar.progress = 1
-                                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                    }
-                                    
-                                    if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
-                                        self.WeatherUndergroundJSON(distanceJSON: true)
-                                    } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
-                                        self.WeatherUndergroundJSON(distanceJSON: true)
-                                    }
-                                }
-                            }
-                        }
-                    } catch {
-                        return
-                    }
+                    self.distanceButton.setTitle(travelData["distance"] as? String, for: .normal)
+                    self.timeButton.setTitle(travelData["duration"] as? String, for: .normal)
                 }
             }
+            
+            self.progressBar.progress = 1
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
-        task.resume()
-    }*/
-    
-    /*func distanceToCityJSON() {
-        var url: URL!
-        if units == 0 {
-            url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + searchLatitude + "," + searchLongitude + "&key=AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
-        } else if units == 1 {
-            url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + latitude + "," + longitude + "&destinations=" + searchLatitude + "," + searchLongitude + "&key=AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
-        }
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil {
-                // WIFI Error
-            } else {
-                if let content = data {
-                    do {
-                        let myJSON = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-                        
-                        if let rows = myJSON["rows"] as? NSArray {
-                            if let inRows = rows[0] as? NSDictionary {
-                                if let elements = inRows["elements"] as? NSArray {
-                                    if let inElements = elements[0] as? NSDictionary {
-                                        if let distance = inElements["distance"] as? NSDictionary {
-                                            if let distanceText = distance["text"] as? String {
-                                                UserDefaults.standard.set(distanceText, forKey: "savedDistance")
-                                                DispatchQueue.main.async {
-                                                    self.distanceButton.setTitle(distanceText, for: .normal)
-                                                }
-                                            }
-                                        }
-                                        
-                                        if let duration = inElements["duration"] as? NSDictionary {
-                                            if let durationText = duration["text"] as? String {
-                                                let formatedDurationText = durationText.replacingOccurrences(of: "hours", with: "hrs")
-                                                UserDefaults.standard.set(formatedDurationText, forKey: "savedDuration")
-                                                DispatchQueue.main.async {
-                                                    self.timeButton.setTitle(formatedDurationText, for: .normal)
-                                                    self.progressBar.progress = 1
-                                                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                                }
-                                            }
-                                        }
-                                        
-                                        if let status = inElements["status"] as? String {
-                                            if status == "ZERO_RESULTS" {
-                                                UserDefaults.standard.set("", forKey: "savedDistance")
-                                                UserDefaults.standard.set("", forKey: "savedDuration")
-                                                DispatchQueue.main.async {
-                                                    self.distanceButton.setTitle("", for: .normal)
-                                                    self.timeButton.setTitle("", for: .normal)
-                                                    self.progressBar.progress = 1
-                                                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } catch {
-                        return
-                    }
-                }
-            }
-        }
-        task.resume()
-    }*/
+    }
     
     func updateUVIndexColor(index: Int) {
         if index >= 0 && index <= 2{

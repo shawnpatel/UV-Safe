@@ -217,6 +217,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         NetworkCalls.getUVIndex(latitude, longitude) { response in
+            
+            if response.isFailure {
+                let alert = AlertService.alert(message: response.error!.localizedDescription)
+                self.present(alert, animated: true)
+            }
+            
             if let UVIndex = response.value {
                 UserDefaults.standard.set(UVIndex, forKey: "savedUVIndexInt")
                 UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedUVIndex")
@@ -229,6 +235,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
         }
         
         NetworkCalls.getWeather(latitude, longitude, units) { response in
+            
+            if response.isFailure {
+                let alert = AlertService.alert(message: response.error!.localizedDescription)
+                self.present(alert, animated: true)
+            }
+            
             if let weatherData = response.value {
                 UserDefaults.standard.set(weatherData["city"] as! String, forKey: "savedCityName")
                 
