@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
             }
             if let long = UserDefaults.standard.object(forKey: "savedLongitude") as? String {
                 self.longitude = long
-                self.WeatherUndergroundJSON(distanceJSON: true)
+                self.updateWeatherInfo()
             }
         }
         
@@ -100,13 +100,13 @@ class SearchViewController: UIViewController {
         
         if let contains = self.tempButton.currentTitle?.contains("F") {
             if contains && self.units == 1 {
-                self.WeatherUndergroundJSON(distanceJSON: true)
+                self.updateWeatherInfo()
             }
         }
         
         if let contains = self.tempButton.currentTitle?.contains("C") {
             if contains && self.units == 0 {
-                self.WeatherUndergroundJSON(distanceJSON: true)
+                self.updateWeatherInfo()
             }
         }
     }
@@ -122,7 +122,79 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func WeatherUndergroundJSON(distanceJSON: Bool) {
+    func updateWeatherInfo() {
+        progressBar.progress = 0
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        NetworkCalls.getUVIndex(searchLatitude, searchLongitude) { response in
+            if let UVIndex = response.value {
+                UserDefaults.standard.set(UVIndex, forKey: "savedSearchUVIndexInt")
+                UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedSearchUVIndex")
+                
+                DispatchQueue.main.async {
+                    self.UVIndexButton.setTitle(String(UVIndex) + " UVI", for: .normal)
+                    self.updateUVIndexColor(index: UVIndex)
+                }
+            }
+        }
+        
+        NetworkCalls.getWeather(searchLatitude, searchLongitude, units) { response in
+            if let weatherData = response.value {
+                UserDefaults.standard.set(weatherData["city"] as! String, forKey: "savedSearchCityName")
+                
+                if self.units == 0 {
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°F", forKey: "savedSearchTemp")
+                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " MPH", forKey: "savedSearchWind")
+                } else if self.units == 1{
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°C", forKey: "savedSearchTemp")
+                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " KPH", forKey: "savedSearchWind")
+                }
+                
+                UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedSearchWeather")
+                UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedSearchIconString")
+                
+                DispatchQueue.main.async {
+                    self.cityLabel.text = weatherData["city"] as? String
+                    
+                    self.tempButton.setTitle(UserDefaults.standard.string(forKey: "savedSearchTemp"), for: .normal)
+                    self.windButton.setTitle(UserDefaults.standard.string(forKey: "savedSearchWind"), for: .normal)
+                    
+                    self.conditionsText.text = weatherData["conditions"] as? String
+                    self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
+                }
+                
+                self.progressBar.progress = 1
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
+                if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                    self.updateWeatherInfo()
+                } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                    self.updateWeatherInfo()
+                }
+            }
+            
+            self.updateTravelInfo()
+            
+            if self.tempButton.currentTitle!.contains("F") && self.units == 1 {
+                self.updateWeatherInfo()
+            } else if self.tempButton.currentTitle!.contains("C") && self.units == 0 {
+                self.updateWeatherInfo()
+            }
+        }
+    }
+    
+    func updateTravelInfo() {
+        NetworkCalls.getTravelStatus(latitude, longitude, searchLatitude, searchLongitude, units) { response in
+            if let travelData = response.value {
+                
+            }
+        }
+        
+        self.progressBar.progress = 1
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    /*func WeatherUndergroundJSON(distanceJSON: Bool) {
         progressBar.progress = 0
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let APIKey = ["05820e2fb2b22bb5", "93388dd4a6741555", "fda9d0342637a7c4", "a7dc316b7726b81f", "5ab2d695e1ee1d89"]
@@ -233,9 +305,9 @@ class SearchViewController: UIViewController {
             }
         }
         task.resume()
-    }
+    }*/
     
-    func distanceToCityJSON() {
+    /*func distanceToCityJSON() {
         var url: URL!
         if units == 0 {
             url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + searchLatitude + "," + searchLongitude + "&key=AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
@@ -298,7 +370,7 @@ class SearchViewController: UIViewController {
             }
         }
         task.resume()
-    }
+    }*/
     
     func updateUVIndexColor(index: Int) {
         if index >= 0 && index <= 2{
@@ -325,7 +397,7 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func UVIndexButton(_ sender: UIButton) {
-        WeatherUndergroundJSON(distanceJSON: true)
+        self.updateWeatherInfo()
     }
     
     @IBAction func timeButton(_ sender: UIButton) {
@@ -351,7 +423,7 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
         UserDefaults.standard.set(searchLatitude, forKey: "savedSearchLatitude")
         UserDefaults.standard.set(searchLongitude, forKey: "savedSearchLongitude")
         dismiss(animated: true, completion: nil)
-        WeatherUndergroundJSON(distanceJSON: true)
+        self.updateWeatherInfo()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
