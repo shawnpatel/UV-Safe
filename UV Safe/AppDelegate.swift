@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GADMobileAds.configure(withApplicationID: "ca-app-pub-5075997087510380~7038623326")
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
-        GMSPlacesClient.provideAPIKey("AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog")
+        GMSPlacesClient.provideAPIKey(APIKey().GooglePlaces)
         
         let navBar = UINavigationBar.appearance()
         navBar.tintColor = UIColor.black

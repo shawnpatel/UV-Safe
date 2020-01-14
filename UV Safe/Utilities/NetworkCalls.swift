@@ -16,9 +16,9 @@ class NetworkCalls {
     /*let APIKeys = ["8578e6219f5a0317", "9b13cd2abe7021ac", "e0b3dccaac724dcf", "5aacfe2a581db8d9", "c01a9d84445503bb"]
      let randomAPIKey = Int(arc4random_uniform(UInt32(APIKey.count)))*/
     
-    static let openWeatherMapAPIKey = "6a58932e63b48033343af20d04c41dc4"
-    static let weatherbitAPIKey = "d7759dee72f8462a8e67b4bb4d699947"
-    static let googlePlaceAPIKey = "AIzaSyC0AbgywK_k1ODP1kheexnBPaa12d-Qkog"
+    static let openWeatherMapAPIKey = APIKeys().OpenWeatherMap
+    static let weatherbitAPIKey = APIKeys().WeatherBit
+    static let googlePlaceAPIKey = APIKeys().GooglePlaces
     
     static func getOpenWeatherMapUVIndex(_ latitude: String,_ longitude: String, completion: @escaping (Result<Int>) -> Void) {
         
