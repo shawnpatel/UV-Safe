@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA209A411F2C1AA200BF2AA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */; };
 		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
 		CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */; };
 		CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA70C80522873CBF0061B13D /* NetworkCalls.swift */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		20A7B90002CE9E59208FBD59 /* Pods-UV Safe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.debug.xcconfig"; sourceTree = "<group>"; };
 		B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.release.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.release.xcconfig"; sourceTree = "<group>"; };
-		CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
 		CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = "UV Safe/Current/SettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -162,7 +160,6 @@
 				CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */,
 				CAC36C261EF999E50083F6DC /* Main.storyboard */,
 				CAC36C291EF999E50083F6DC /* Assets.xcassets */,
-				CA209A401F2C1AA200BF2AA3 /* GoogleService-Info.plist */,
 				CAC36C2E1EF999E50083F6DC /* Info.plist */,
 			);
 			path = "UV Safe";
@@ -254,7 +251,6 @@
 			files = (
 				CAB18CD320C6F63100849F3A /* TODO.txt in Resources */,
 				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
-				CA209A411F2C1AA200BF2AA3 /* GoogleService-Info.plist in Resources */,
 				CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */,
 				CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */,
 			);
