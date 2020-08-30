@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        GMSPlacesClient.provideAPIKey(APIKeys().GooglePlaces)
+        GMSPlacesClient.provideAPIKey(APIKeys.GooglePlaces)
         
         let navBar = UINavigationBar.appearance()
         navBar.tintColor = UIColor.black
