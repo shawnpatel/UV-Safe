@@ -23,6 +23,7 @@
 		CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C361EF99E990083F6DC /* SearchViewController.swift */; };
 		CACF17982288A0F700D2E0B8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17972288A0F700D2E0B8 /* AlertService.swift */; };
 		CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17992288ABEC00D2E0B8 /* NetworkError.swift */; };
+		CAE2D74D23CD94E4007808DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAE2D74C23CD94E4007808DE /* GoogleService-Info.plist */; };
 		F5ABA762C9D37DB12C200229 /* Pods_UV_Safe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		CAC36C361EF99E990083F6DC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CACF17972288A0F700D2E0B8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		CACF17992288ABEC00D2E0B8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		CAE2D74C23CD94E4007808DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB069123DF9FEEE76C8465C2 /* Pods_UV_Safe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UV_Safe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 				CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */,
 				CAC36C261EF999E50083F6DC /* Main.storyboard */,
 				CAC36C291EF999E50083F6DC /* Assets.xcassets */,
+				CAE2D74C23CD94E4007808DE /* GoogleService-Info.plist */,
 				CAC36C2E1EF999E50083F6DC /* Info.plist */,
 			);
 			path = "UV Safe";
@@ -251,6 +254,7 @@
 			files = (
 				CAB18CD320C6F63100849F3A /* TODO.txt in Resources */,
 				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
+				CAE2D74D23CD94E4007808DE /* GoogleService-Info.plist in Resources */,
 				CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */,
 				CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */,
 			);
@@ -283,7 +287,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -292,7 +296,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UV Safe/Pods-UV Safe-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A57955B9164A19C32DE21C74 /* [CP] Embed Pods Frameworks */ = {
@@ -301,10 +305,11 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -315,6 +320,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -322,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UV Safe/Pods-UV Safe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

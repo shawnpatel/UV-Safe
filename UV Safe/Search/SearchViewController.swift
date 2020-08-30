@@ -229,6 +229,11 @@ class SearchViewController: UIViewController {
     func searchCity() {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
+        
+        if #available(iOS 13.0, *) {
+            autocompleteController.overrideUserInterfaceStyle = .light
+        }
+        
         present(autocompleteController, animated: true, completion: nil)
     }
     

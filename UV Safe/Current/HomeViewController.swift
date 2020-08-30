@@ -12,9 +12,8 @@ import UserNotifications
 
 import Alamofire
 import SwiftyJSON
-import GoogleMobileAds
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInterstitialDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var cityLabel: UILabel!
@@ -25,8 +24,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     @IBOutlet weak var conditionsText: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    
-    var interstitial: GADInterstitial!
     
     var units: Int!
     
@@ -41,8 +38,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        interstitial = createAndLoadInterstitial()
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
@@ -361,18 +356,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                 alertController.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
                     self.startStop = false
                     UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
-                    
-                    // Load Ad
-                    self.showAd()
                 }))
                 alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                     self.startStop = true
                     UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
                     self.startTimer()
                     self.triggerNotification(whenToSend: 5400)
-                    
-                    // Load Ad
-                    self.showAd()
                 }))
                 self.present(alertController, animated: true, completion: nil)
             } else {
@@ -380,9 +369,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
                 UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
                 startTimer()
                 triggerNotification(whenToSend: 5400)
-                
-                // Load Ad
-                showAd()
             }
         } else if startStop == true {
             // Start -> Stop
@@ -395,24 +381,5 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, GADInters
             }))
             self.present(alertController, animated: true, completion: nil)
         }
-    }
-    
-    func createAndLoadInterstitial() -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-5075997087510380/2496743086")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-    
-    func showAd() {
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        } else {
-            print("Ad wasn't ready!")
-        }
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadInterstitial()
     }
 }

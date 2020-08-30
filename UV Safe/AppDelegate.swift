@@ -27,11 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        // Initialize the Google Mobile Ads SDK.
-        //GADMobileAds.configure(withApplicationID: "ca-app-pub-5075997087510380~7038623326")
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
-        GMSPlacesClient.provideAPIKey(APIKey().GooglePlaces)
+        GMSPlacesClient.provideAPIKey(APIKeys().GooglePlaces)
         
         let navBar = UINavigationBar.appearance()
         navBar.tintColor = UIColor.black
@@ -153,18 +149,3 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
 }
 // [END ios_10_message_handling]
-
-/*extension AppDelegate : MessagingDelegate {
-    // [START refresh_token]
-    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
-    }
-    // [END refresh_token]
-    // [START ios_10_data_message]
-    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
-    // [END ios_10_data_message]
-}*/

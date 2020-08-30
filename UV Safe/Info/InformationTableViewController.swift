@@ -57,4 +57,10 @@ class InformationTableViewController: UITableViewController {
         cell.customImageView.image = UIImage(named: imageArray[indexPath.row])
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if #available(iOS 13.0, *) {
+            segue.destination.overrideUserInterfaceStyle = .light
+        }
+    }
 }

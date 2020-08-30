@@ -9,13 +9,8 @@
 import UIKit
 import CoreML
 import Vision
-import GoogleMobileAds
 
-//import Firebase
-//import Alamofire
-//import SwiftyJSON
-
-class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GADRewardBasedVideoAdDelegate {
+class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var scans: UIButton!
     @IBOutlet weak var imageView: UIImageView!
@@ -24,14 +19,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     
     let activityView = UIActivityIndicatorView(style: .whiteLarge)
     
-    /*let apiKey = "a61a7f7d9b2fef66fda503e39b384a9a267dcafb"
-    var downloadPath = URL(string: "")
-    var randomNumber = 0
-    let version = "2017-11-19"*/
-    
     var request: VNCoreMLRequest!
-    let adID = "ca-app-pub-5075997087510380/2027562116"
-    var credits = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,25 +36,6 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         activityView.backgroundColor = UIColor.black
         activityView.layer.cornerRadius = 20
         self.view.addSubview(activityView)
-        
-        // *************************************** DELETE ***************************************
-        //UserDefaults.standard.set(100, forKey: "credits")
-        
-        GADRewardBasedVideoAd.sharedInstance().delegate = self
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
-        
-        if let savedCredits = UserDefaults.standard.object(forKey: "credits") as? Int {
-            credits = savedCredits
-            DispatchQueue.main.async {
-                if self.credits == 0 {
-                    self.scans.setTitle("Get More Scans!", for: .normal)
-                    self.scans.titleLabel?.font = UIFont.italicSystemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-                } else {
-                    self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
-                    self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-                }
-            }
-        }
         
         self.skinCancer.titleLabel?.numberOfLines = 1
         self.skinCancer.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -88,85 +57,25 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func scans(_ sender: UIButton) {
-        if GADRewardBasedVideoAd.sharedInstance().isReady {
-            GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
-        } else {
-            let alertController = UIAlertController(title: "Ad Loading", message: "Please wait while an ad loads so you can redeem your reward!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
-        credits += Int(truncating: reward.amount)
-        UserDefaults.standard.set(credits, forKey: "credits")
-        DispatchQueue.main.async {
-            self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
-            self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-        }
-        
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
-    }
-    
-    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
-        GADRewardBasedVideoAd.sharedInstance().delegate = self
-        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: adID)
-    }
-    
-    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didFailToLoadWithError error: Error) {
-        print(error)
-    }
-    
     @IBAction func takePhoto(_ sender: UIBarButtonItem) {
-        if credits >= 1 {
-            credits -= 1
-            UserDefaults.standard.set(credits, forKey: "credits")
-            
-            DispatchQueue.main.async {
-                if self.credits == 0 {
-                    self.scans.setTitle("Get More Scans!", for: .normal)
-                    self.scans.titleLabel?.font = UIFont.italicSystemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-                } else {
-                    self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
-                    self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-                }
-            }
-            
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerController.SourceType.camera
-                imagePicker.allowsEditing = false
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-        } else {
-            let alertController = UIAlertController(title: "Not Enough Credits!", message: "Please get more credits in order to scan your skin!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        credits += 1
-        UserDefaults.standard.set(credits, forKey: "credits")
-        
-        DispatchQueue.main.async {
-            self.scans.setTitle("Scans: " + String(self.credits), for: .normal)
-            self.scans.titleLabel?.font = UIFont.systemFont(ofSize: (self.scans.titleLabel?.font.pointSize)!)
-        }
-        
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
         activityView.isHidden = false
         activityView.startAnimating()
         
-        if let pickedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.contentMode = .scaleToFill
             imageView.image = pickedImage
             

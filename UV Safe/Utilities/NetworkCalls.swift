@@ -126,6 +126,7 @@ class NetworkCalls {
             
             if let value = response.result.value {
                 let json = JSON(value)
+                
                 let rows = JSON(json["rows"].arrayObject?[0] as Any)
                 let elements = JSON(rows["elements"].arrayObject?[0] as Any)
                 

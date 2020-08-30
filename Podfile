@@ -10,9 +10,8 @@ target 'UV Safe' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Firebase/Messaging'
-  pod 'Firebase/AdMob'
   pod 'GooglePlaces'
-  pod 'Alamofire', '~> 4.5'
+  pod 'Alamofire'
   pod 'SwiftyJSON'
 
 end

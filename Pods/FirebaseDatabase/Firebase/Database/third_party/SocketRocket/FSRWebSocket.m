@@ -18,7 +18,7 @@
 
 #import "FSRWebSocket.h"
 
-#if TARGET_OS_IOS || TARGET_OS_TV
+#if __has_include(<unicode/utf8.h>)
 #define HAS_ICU
 #endif
 
@@ -28,9 +28,9 @@
 #import <unicode/utf8.h>
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_TV
+#if __has_include(<Endian.h>)
 #import <Endian.h>
-#elif TARGET_OS_OSX
+#else
 #import <CoreServices/CoreServices.h>
 #endif
 
@@ -262,6 +262,7 @@ typedef void (^data_callback)(FSRWebSocket *webSocket,  NSData *data);
     BOOL _secure;
     NSURLRequest *_urlRequest;
     NSString *_userAgent;
+    NSString *_googleAppID;
 
     CFHTTPMessageRef _receivedHTTPHeaders;
 
@@ -293,7 +294,8 @@ static __strong NSData *CRLFCRLF;
     CRLFCRLF = [[NSData alloc] initWithBytes:"\r\n\r\n" length:4];
 }
 
-- (id)initWithURLRequest:(NSURLRequest *)request protocols:(NSArray *)protocols queue:(dispatch_queue_t)queue andUserAgent:(NSString *)userAgent;
+- (id)initWithURLRequest:(NSURLRequest *)request protocols:(NSArray *)protocols queue:(dispatch_queue_t)queue
+             googleAppID:(NSString *)googleAppID andUserAgent:(NSString *)userAgent;
 {
     self = [super init];
     if (self) {
@@ -302,6 +304,7 @@ static __strong NSData *CRLFCRLF;
         NSString *scheme = [_url scheme];
 
         _requestedProtocols = [protocols copy];
+        _googleAppID = googleAppID;
         _userAgent = userAgent;
 
         assert([scheme isEqualToString:@"ws"] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"wss"] || [scheme isEqualToString:@"https"]);
@@ -325,12 +328,14 @@ static __strong NSData *CRLFCRLF;
 
 - (id)initWithURLRequest:(NSURLRequest *)request protocols:(NSArray *)protocols;
 {
-    return [self initWithURLRequest:request protocols:nil queue:nil andUserAgent:nil];
+    return [self initWithURLRequest:request protocols:nil queue:nil googleAppID:nil andUserAgent:nil];
 }
 
-- (id)initWithURLRequest:(NSURLRequest *)request queue:(dispatch_queue_t)queue andUserAgent:(NSString *)userAgent;
+- (id)initWithURLRequest:(NSURLRequest *)request queue:(dispatch_queue_t)queue
+             googleAppID:(NSString *)googleAppID andUserAgent:(NSString *)userAgent;
 {
-    return [self initWithURLRequest:request protocols:nil queue:queue andUserAgent:userAgent];
+    return [self initWithURLRequest:request protocols:nil queue:queue googleAppID:googleAppID
+                       andUserAgent:userAgent];
 }
 
 - (id)initWithURLRequest:(NSURLRequest *)request;
@@ -546,6 +551,10 @@ static __strong NSData *CRLFCRLF;
     CFHTTPMessageSetHeaderFieldValue(request, CFSTR("Connection"), CFSTR("Upgrade"));
     if (_userAgent) {
         CFHTTPMessageSetHeaderFieldValue(request, CFSTR("User-Agent"), (__bridge CFStringRef)_userAgent);
+    }
+
+    if (_googleAppID) {
+        CFHTTPMessageSetHeaderFieldValue(request, CFSTR("X-Firebase-GMPID"), (__bridge CFStringRef)_googleAppID);
     }
 
     CFHTTPMessageSetHeaderFieldValue(request, CFSTR("Sec-WebSocket-Key"), (__bridge CFStringRef)_secKey);
@@ -1510,7 +1519,9 @@ static const size_t SRFrameHeaderOverhead = 32;
         }
 
         case NSStreamEventErrorOccurred: {
-            SRFastLog(@"NSStreamEventErrorOccurred %@ %@", aStream, [[aStream streamError] copy]);
+            // Note: The upstream code for SocketRocket logs the error message, but this causes
+            // crashes on iOS 13 (https://github.com/firebase/firebase-ios-sdk/issues/3950)
+            SRFastLog(@"NSStreamEventErrorOccurred %@", aStream);
             /// TODO specify error better!
                     [self _failWithError:aStream.streamError];
             _readBufferOffset = 0;
