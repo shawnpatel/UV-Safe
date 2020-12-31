@@ -15,15 +15,24 @@ import SwiftyJSON
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
+    enum Section: Int, CaseIterable {
+        case location
+        
+        enum NibName: String, CaseIterable {
+            case LocationCell
+        }
+        
+        enum Identifier: String, CaseIterable {
+            case location
+        }
+        
+        enum Location: Int, CaseIterable {
+            case cell
+        }
+    }
+    
     @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var UVIndexButton: UIButton!
-    @IBOutlet weak var tempButton: UIButton!
-    @IBOutlet weak var windButton: UIButton!
-    @IBOutlet weak var conditionsImage: UIImageView!
-    @IBOutlet weak var conditionsText: UILabel!
-    @IBOutlet weak var startStopButton: UIButton!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var units: Int!
     
@@ -36,14 +45,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var longitude = ""
     var canCall = true
     
+    var CELL_WIDTH: CGFloat {
+        return collectionView.frame.width / 2 - 15
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerNibs()
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
         
-        DispatchQueue.main.async {
+        /*DispatchQueue.main.async {
             self.cityLabel.text = UserDefaults.standard.object(forKey: "savedCityName") as? String
             self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedUVIndex") as? String, for: .normal)
             if let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int {
@@ -73,7 +88,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         self.startStopButton.titleLabel?.numberOfLines = 1
         self.startStopButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.startStopButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        self.startStopButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping*/
         
         getCurrentLocation()
     }
@@ -95,7 +110,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         movedToForeground()
         
-        if let contains = self.tempButton.currentTitle?.contains("F") {
+        /*if let contains = self.tempButton.currentTitle?.contains("F") {
             if contains && self.units == 1 {
                 self.updateWeatherInfo()
             }
@@ -105,7 +120,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if contains && self.units == 0 {
                 self.updateWeatherInfo()
             }
-        }
+        }*/
     }
     
     @objc func movedToForeground() {
@@ -114,9 +129,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if let checkStartStop = UserDefaults.standard.object(forKey: "savedStartStop") as? Bool {
                 self.startStop = checkStartStop
                 if self.startStop == false {
-                    self.startStopButton.setTitle("Remind Me!", for: .normal)
+                    //self.startStopButton.setTitle("Remind Me!", for: .normal)
                 } else if self.startStop == true {
-                    self.startStopButton.setTitle("Cancel", for: .normal)
+                    //self.startStopButton.setTitle("Cancel", for: .normal)
                     self.seconds = UserDefaults.standard.integer(forKey: "savedSeconds")
                     let newTimestamp = Int(Date().timeIntervalSince1970)
                     if let savedTimestamp = UserDefaults.standard.object(forKey: "savedTimestamp") as? Int {
@@ -199,10 +214,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error: \(error)")
-        self.cityLabel.text = "Enable Location Services!"
+        /*self.cityLabel.text = "Enable Location Services!"
         self.tempButton.isEnabled = false
         self.windButton.isEnabled = false
-        self.startStopButton.isEnabled = false
+        self.startStopButton.isEnabled = false*/
         progressBar.progress = 1
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
@@ -223,7 +238,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedUVIndex")
                 
                 DispatchQueue.main.async {
-                    self.UVIndexButton.setTitle(String(UVIndex) + " UVI", for: .normal)
+                    //self.UVIndexButton.setTitle(String(UVIndex) + " UVI", for: .normal)
                     self.updateUVIndexColor(index: UVIndex)
                 }
             }
@@ -250,7 +265,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedWeather")
                 UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedIconString")
                 
-                DispatchQueue.main.async {
+                /*DispatchQueue.main.async {
                     self.cityLabel.text = weatherData["city"] as? String
                     
                     self.tempButton.setTitle(UserDefaults.standard.string(forKey: "savedTemp"), for: .normal)
@@ -258,22 +273,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     
                     self.conditionsText.text = weatherData["conditions"] as? String
                     self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
-                }
+                }*/
             }
             
             self.progressBar.progress = 1
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
-            if self.tempButton.currentTitle?.contains("F") ?? false && self.units == 1 {
+            /*if self.tempButton.currentTitle?.contains("F") ?? false && self.units == 1 {
                 self.updateWeatherInfo()
             } else if self.tempButton.currentTitle?.contains("C") ?? false && self.units == 0 {
                 self.updateWeatherInfo()
-            }
+            }*/
         }
     }
     
     func updateUVIndexColor(index: Int) {
-        if index >= 0 && index <= 2{
+        /*if index >= 0 && index <= 2{
             UVIndexButton.setTitleColor(.green, for: .normal)
         } else if index >= 3 && index <= 5 {
             UVIndexButton.setTitleColor(.yellow, for: .normal)
@@ -283,7 +298,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             UVIndexButton.setTitleColor(.red, for: .normal)
         } else if index >= 11 {
             UVIndexButton.setTitleColor(.purple, for: .normal)
-        }
+        }*/
     }
     
     @IBAction func UVIndexButton(_ sender: UIButton) {
@@ -308,7 +323,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
         let minutes = seconds/60
-        timeLabel.text = String(minutes) + " mins"
+        //timeLabel.text = String(minutes) + " mins"
         UserDefaults.standard.set(seconds, forKey: "savedSeconds")
     }
     
@@ -320,16 +335,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.timer.invalidate()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         self.startStop = false
-        self.startStopButton.setTitle("Remind Me!", for: .normal)
+        //self.startStopButton.setTitle("Remind Me!", for: .normal)
         UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
         self.seconds = 5400
         UserDefaults.standard.set(self.seconds, forKey: "savedSeconds")
-        self.timeLabel.text = "90 mins"
+        //self.timeLabel.text = "90 mins"
     }
     
     func startTimer() {
         startStop = true
-        startStopButton.setTitle("Cancel", for: .normal)
+        //startStopButton.setTitle("Cancel", for: .normal)
         runTimer()
         UserDefaults.standard.set(startStop, forKey: "savedStartStop")
     }
@@ -380,6 +395,60 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 self.resetTimer()
             }))
             self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    private func registerNibs() {
+        for i in 0 ..< Section.NibName.allCases.count {
+            let nib = UINib(nibName: Section.NibName.allCases[i].rawValue, bundle: nil)
+            collectionView.register(nib, forCellWithReuseIdentifier: Section.Identifier.allCases[i].rawValue)
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return Section.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let sectionType = Section(rawValue: section) else {
+            print("Cannot find section at index \(section).")
+            return 0
+        }
+        
+        switch sectionType {
+            case .location:
+                return Section.Location.allCases.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let section = Section(rawValue: indexPath.section) else {
+            print("Cannot find section at index \(indexPath.section).")
+            return UICollectionViewCell()
+        }
+        
+        switch section {
+            case .location:
+                return cellForLocationSection(indexPath: indexPath)
+        }
+    }
+    
+    private func cellForLocationSection(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let locationType = Section.Location(rawValue: indexPath.row) else {
+            print("Cannot find row in location section with index \(indexPath.row).")
+            return UICollectionViewCell()
+        }
+        
+        switch  locationType {
+            case .cell:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
+                                                              for: indexPath) as! LocationCell
+                cell.setWidth(to: CELL_WIDTH)
+                cell.setHeight(to: CELL_WIDTH)
+                
+                return cell
         }
     }
 }

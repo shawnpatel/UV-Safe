@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
 		CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */; };
+		CA5D8414259E5C450090ADBA /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8412259E5C450090ADBA /* LocationCell.swift */; };
+		CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5D8413259E5C450090ADBA /* LocationCell.xib */; };
+		CA5D8417259E5CAA0090ADBA /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */; };
+		CA5D8430259E63DE0090ADBA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D842F259E63DE0090ADBA /* Constants.swift */; };
 		CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA70C80522873CBF0061B13D /* NetworkCalls.swift */; };
 		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
 		CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */; };
@@ -46,6 +50,10 @@
 		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
 		CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = "UV Safe/Current/SettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
+		CA5D8412259E5C450090ADBA /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		CA5D8413259E5C450090ADBA /* LocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingCell.swift; sourceTree = "<group>"; };
+		CA5D842F259E63DE0090ADBA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA70C80522873CBF0061B13D /* NetworkCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
 		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
 		CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier2.mlmodel; sourceTree = "<group>"; };
@@ -108,6 +116,7 @@
 			children = (
 				CAC36C341EF99B960083F6DC /* HomeViewController.swift */,
 				CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */,
+				CA5D8411259E5BE80090ADBA /* Cells */,
 			);
 			path = Current;
 			sourceTree = "<group>";
@@ -126,6 +135,15 @@
 				CA22BA301F26C34B00413405 /* InformationTableViewController.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		CA5D8411259E5BE80090ADBA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CA5D8412259E5C450090ADBA /* LocationCell.swift */,
+				CA5D8413259E5C450090ADBA /* LocationCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		CAC36C141EF999E40083F6DC = {
@@ -171,6 +189,8 @@
 		CACF17962288A0E000D2E0B8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */,
+				CA5D842F259E63DE0090ADBA /* Constants.swift */,
 				CA70C80522873CBF0061B13D /* NetworkCalls.swift */,
 				CACF17972288A0F700D2E0B8 /* AlertService.swift */,
 				CACF17992288ABEC00D2E0B8 /* NetworkError.swift */,
@@ -210,7 +230,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Shawn Patel";
 				TargetAttributes = {
 					CAC36C1C1EF999E40083F6DC = {
@@ -252,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */,
 				CAB18CD320C6F63100849F3A /* TODO.txt in Resources */,
 				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
 				CAE2D74D23CD94E4007808DE /* GoogleService-Info.plist in Resources */,
@@ -339,10 +360,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */,
+				CA5D8417259E5CAA0090ADBA /* SelfSizingCell.swift in Sources */,
 				CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */,
 				CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */,
 				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
+				CA5D8430259E63DE0090ADBA /* Constants.swift in Sources */,
 				CACF17982288A0F700D2E0B8 /* AlertService.swift in Sources */,
+				CA5D8414259E5C450090ADBA /* LocationCell.swift in Sources */,
 				CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */,
 				CABB7FE523CD8FB6006AFFCC /* APIKeys.swift in Sources */,
 				CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */,
@@ -400,6 +424,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -424,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -458,6 +483,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -476,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -493,7 +519,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YBJ2RY5U57;
 				INFOPLIST_FILE = "UV Safe/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sapnapatel.UV-Safe";
@@ -513,7 +539,7 @@
 				DEVELOPMENT_TEAM = YBJ2RY5U57;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "UV Safe/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sapnapatel.UV-Safe";

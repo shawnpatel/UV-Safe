@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LocationCell" customModule="UV_Safe" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuR-au-6At">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    </mapView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DoA-VJ-ULa">
+                        <rect key="frame" x="62.5" y="66.5" width="75" height="67.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJP-fL-8RQ">
+                                <rect key="frame" x="0.0" y="0.0" width="75" height="41"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8I1-rx-Jpd">
+                                <rect key="frame" x="0.0" y="41" width="75" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="zuR-au-6At" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0i1-P0-C9L"/>
+                <constraint firstItem="DoA-VJ-ULa" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="6vg-nc-zOX"/>
+                <constraint firstItem="zuR-au-6At" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="C16-Ko-ydo"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-VJ-ULa" secondAttribute="trailing" constant="16" id="CoT-YW-SbY"/>
+                <constraint firstItem="DoA-VJ-ULa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="SrH-x8-2q4"/>
+                <constraint firstItem="DoA-VJ-ULa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="clp-Nn-AmT"/>
+                <constraint firstAttribute="bottom" secondItem="zuR-au-6At" secondAttribute="bottom" id="gjC-z2-QJb"/>
+                <constraint firstAttribute="trailing" secondItem="zuR-au-6At" secondAttribute="trailing" id="jFh-Yt-RvZ"/>
+                <constraint firstItem="DoA-VJ-ULa" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="nOB-am-78b"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DoA-VJ-ULa" secondAttribute="bottom" constant="16" id="vV4-iQ-xOd"/>
+            </constraints>
+            <connections>
+                <outlet property="mapView" destination="zuR-au-6At" id="yEn-lK-gvI"/>
+            </connections>
+            <point key="canvasLocation" x="117" y="125"/>
+        </collectionViewCell>
+    </objects>
+</document>
