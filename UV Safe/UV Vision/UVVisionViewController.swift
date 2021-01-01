@@ -41,16 +41,6 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         self.skinCancer.titleLabel?.adjustsFontSizeToFitWidth = true
         self.skinCancer.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        self.tabBarController?.tabBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.isTranslucent = false
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

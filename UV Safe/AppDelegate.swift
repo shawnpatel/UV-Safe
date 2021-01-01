@@ -30,8 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(APIKeys.GooglePlaces)
         
         let navBar = UINavigationBar.appearance()
-        navBar.tintColor = UIColor.black
-        navBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
+        navBar.isTranslucent = false
+        navBar.tintColor = .black
+        navBar.titleTextAttributes = [
+            .foregroundColor: UIColor.lightGray
+        ]
+        navBar.barTintColor = Constants.UV_SAFE_RED
+        
+        let tabBar = UITabBar.appearance()
+        tabBar.isTranslucent = false
+        tabBar.tintColor = .lightGray
+        tabBar.unselectedItemTintColor = .black
+        tabBar.barTintColor = Constants.UV_SAFE_RED
         
         // [START set_messaging_delegate]
         //Messaging.messaging().delegate = self as? MessagingDelegate

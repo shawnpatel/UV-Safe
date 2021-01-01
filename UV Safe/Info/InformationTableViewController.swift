@@ -19,14 +19,6 @@ class InformationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        self.tabBarController?.tabBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.isTranslucent = false
         
         informationTableView.delegate = self
         informationTableView.dataSource = self

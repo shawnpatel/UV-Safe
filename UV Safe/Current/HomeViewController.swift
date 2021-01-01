@@ -16,18 +16,31 @@ import SwiftyJSON
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     enum Section: Int, CaseIterable {
-        case location
+        
+        case cells
         
         enum NibName: String, CaseIterable {
             case LocationCell
+            case UVIndexCell
+            case TemperatureCell
+            case WeatherDescriptionCell
+            case ReminderCell
         }
         
         enum Identifier: String, CaseIterable {
             case location
+            case uvIndex
+            case temperature
+            case weatherDescription
+            case reminder
         }
         
-        enum Location: Int, CaseIterable {
-            case cell
+        enum Cells: Int, CaseIterable {
+            case location
+            case uvIndex
+            case temperature
+            case weatherDescription
+            case reminder
         }
     }
     
@@ -46,6 +59,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var canCall = true
     
     var CELL_WIDTH: CGFloat {
+        return collectionView.frame.width - 20
+    }
+    
+    var CELL_BOX_SIZE: CGFloat {
         return collectionView.frame.width / 2 - 15
     }
     
@@ -53,6 +70,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         registerNibs()
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
@@ -70,39 +89,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if let iconString = UserDefaults.standard.object(forKey: "savedIconString") as? String {
                 self.conditionsImage.image = UIImage(named: iconString)
             }
-        }
-        
-        self.UVIndexButton.titleLabel?.numberOfLines = 1
-        self.UVIndexButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.UVIndexButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-        
-        self.tempButton.titleLabel?.numberOfLines = 1
-        self.tempButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.tempButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-        self.tempButton.isEnabled = false
-        
-        self.windButton.titleLabel?.numberOfLines = 1
-        self.windButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.windButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-        self.windButton.isEnabled = false
-        
-        self.startStopButton.titleLabel?.numberOfLines = 1
-        self.startStopButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.startStopButton.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping*/
+        }*/
         
         getCurrentLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        self.tabBarController?.tabBar.barTintColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.black
-        self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.isTranslucent = false
         
         units = UserDefaults.standard.integer(forKey: "units")
     }
@@ -199,8 +192,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0] as CLLocation
         latitude = "\(userLocation.coordinate.latitude)"
         longitude = "\(userLocation.coordinate.longitude)"
+        
         UserDefaults.standard.set(latitude, forKey: "savedLatitude")
         UserDefaults.standard.set(longitude, forKey: "savedLongitude")
+        
         manager.stopUpdatingLocation()
         getWeatherInfo()
     }
@@ -418,37 +413,100 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         switch sectionType {
-            case .location:
-                return Section.Location.allCases.count
+            case .cells:
+                return Section.Cells.allCases.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let section = Section(rawValue: indexPath.section) else {
+        guard let row = Section.Cells(rawValue: indexPath.row) else {
             print("Cannot find section at index \(indexPath.section).")
             return UICollectionViewCell()
         }
         
-        switch section {
+        switch row {
             case .location:
                 return cellForLocationSection(indexPath: indexPath)
+                
+            case .uvIndex:
+                return cellForUVIndexSection(indexPath: indexPath)
+                
+            case .temperature:
+                return cellForTemperatureSection(indexPath: indexPath)
+                
+            case .weatherDescription:
+                return cellForWeatherDescriptionSection(indexPath: indexPath)
+                
+            case .reminder:
+                return cellForReminderSection(indexPath: indexPath)
         }
     }
     
     private func cellForLocationSection(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let locationType = Section.Location(rawValue: indexPath.row) else {
-            print("Cannot find row in location section with index \(indexPath.row).")
-            return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
+                                                      for: indexPath) as! LocationCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        if let latitude = Double(UserDefaults.standard.string(forKey: "savedLatitude") ?? ""),
+           let longitude = Double(UserDefaults.standard.string(forKey: "savedLongitude") ?? "") {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            cell.setLocation(to: coordinate)
         }
         
-        switch  locationType {
-            case .cell:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
-                                                              for: indexPath) as! LocationCell
-                cell.setWidth(to: CELL_WIDTH)
-                cell.setHeight(to: CELL_WIDTH)
-                
-                return cell
+        if let cityAndCountry = UserDefaults.standard.string(forKey: "savedCityName") {
+            let split = cityAndCountry.split(separator: ",")
+            let city = String(split[0])
+            let country = String(split[1])
+            
+            cell.city.text = city
+            cell.country.text = country
         }
+        
+        return cell
+    }
+    
+    private func cellForUVIndexSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
+                                                      for: indexPath) as! UVIndexCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        
+        
+        return cell
+    }
+    
+    private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
+                                                      for: indexPath) as! UVIndexCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        
+        
+        return cell
+    }
+    
+    private func cellForWeatherDescriptionSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
+                                                      for: indexPath) as! UVIndexCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        
+        
+        return cell
+    }
+    
+    private func cellForReminderSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
+                                                      for: indexPath) as! UVIndexCell
+        cell.setWidth(to: CELL_WIDTH)
+        cell.setHeight(to: 150)
+        
+        
+        
+        return cell
     }
 }

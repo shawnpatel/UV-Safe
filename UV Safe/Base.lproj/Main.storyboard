@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +15,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="NsN-L0-1Q2" kind="relationship" relationship="viewControllers" id="UIV-fI-thn"/>
@@ -42,35 +40,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Io5-ab-LTO">
-                                <rect key="frame" x="8" y="96" width="412" height="739"/>
+                                <rect key="frame" x="0.0" y="96" width="428" height="739"/>
                                 <subviews>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KyG-9e-Y5q">
-                                        <rect key="frame" x="0.0" y="0.0" width="412" height="2"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uq-UT-Kij">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="2"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7CG-Bh-Ova">
+                                                <rect key="frame" x="0.0" y="0.0" width="8" height="2"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="8" id="TwM-jp-NNt"/>
+                                                </constraints>
+                                            </view>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KyG-9e-Y5q">
+                                                <rect key="frame" x="8" y="0.0" width="412" height="2"/>
+                                                <color key="progressTintColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="trackTintColor" red="0.97028595210000002" green="0.74557125570000005" blue="0.20946457979999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </progressView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYG-WP-Iu4">
+                                                <rect key="frame" x="420" y="0.0" width="8" height="2"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="8" id="yGA-Xo-M68"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="tv8-ZT-JIf"/>
+                                            <constraint firstAttribute="height" constant="2" id="q7l-Ls-iUZ"/>
+                                            <constraint firstItem="KyG-9e-Y5q" firstAttribute="centerX" secondItem="9uq-UT-Kij" secondAttribute="centerX" id="rhe-7g-cq8"/>
                                         </constraints>
-                                        <color key="progressTintColor" red="0.74878925090000004" green="0.27921122310000002" blue="0.22284018990000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="trackTintColor" red="0.97028595210000002" green="0.74557125570000005" blue="0.20946457979999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </progressView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pBk-XZ-p4s">
-                                        <rect key="frame" x="0.0" y="12" width="412" height="727"/>
+                                    </stackView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pBk-XZ-p4s">
+                                        <rect key="frame" x="0.0" y="12" width="428" height="727"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X1a-xj-LSa">
-                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="itemSize" width="0.0" height="0.0"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="10" maxY="10"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="toQ-I1-baE">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dwS-Rn-uIn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                         <connections>
                                             <outlet property="dataSource" destination="zhO-tL-Dpt" id="jqV-dY-Kgi"/>
                                             <outlet property="delegate" destination="zhO-tL-Dpt" id="79d-fA-Cum"/>
@@ -83,13 +90,13 @@
                         <constraints>
                             <constraint firstItem="Io5-ab-LTO" firstAttribute="top" secondItem="Vn0-8U-AJg" secondAttribute="bottom" constant="8" id="AHp-ej-Be8"/>
                             <constraint firstItem="3Up-ye-HU8" firstAttribute="top" secondItem="Io5-ab-LTO" secondAttribute="bottom" constant="8" id="IgT-Qa-hEt"/>
-                            <constraint firstAttribute="trailing" secondItem="Io5-ab-LTO" secondAttribute="trailing" constant="8" id="PgY-Oc-1Mk"/>
-                            <constraint firstItem="Io5-ab-LTO" firstAttribute="leading" secondItem="ast-u6-3EM" secondAttribute="leading" constant="8" id="vPV-Bl-o4H"/>
+                            <constraint firstAttribute="trailing" secondItem="Io5-ab-LTO" secondAttribute="trailing" id="PgY-Oc-1Mk"/>
+                            <constraint firstItem="Io5-ab-LTO" firstAttribute="leading" secondItem="ast-u6-3EM" secondAttribute="leading" id="vPV-Bl-o4H"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="UV Safe" id="ndb-bt-aII">
                         <barButtonItem key="backBarButtonItem" title="Back" id="fFI-Jf-8OG"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" id="FYE-jW-c7x">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Search" id="FYE-jW-c7x">
                             <connections>
                                 <segue destination="nf9-yN-H10" kind="show" id="3ma-Ke-DW3"/>
                             </connections>
@@ -705,7 +712,6 @@
         <image name="Information" width="24" height="24"/>
         <image name="Location" width="24" height="24"/>
         <image name="Search" width="24" height="24"/>
-        <image name="Settings" width="24" height="24"/>
         <image name="Sun" width="24" height="24"/>
         <image name="UV Vision 2.0" width="1658" height="2159"/>
     </resources>
