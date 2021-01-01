@@ -10,16 +10,7 @@ import UIKit
 
 class SelfSizingCell: UICollectionViewCell {
 
-    public static var defaultMinimumHeight: CGFloat {
-        switch UIApplication.shared.preferredContentSizeCategory {
-            case .extraSmall:
-                return 44
-            case .small:
-                return 44
-            default:
-                return 50
-        }
-    }
+    public static let defaultMinimumHeight: CGFloat = 50
 
     public var didCalculateHeight: ((_ cell: UICollectionViewCell, _ height: CGFloat) -> Void)?
 

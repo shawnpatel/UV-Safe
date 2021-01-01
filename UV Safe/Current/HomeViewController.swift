@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import UserNotifications
 
+import GooglePlaces
 import Alamofire
 import SwiftyJSON
 
@@ -69,9 +70,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            self.overrideUserInterfaceStyle = .dark
-        }
+        self.overrideUserInterfaceStyle = .dark
         
         registerNibs()
         
@@ -80,12 +79,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
-        /*DispatchQueue.main.async {
-            if let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int {
-                self.updateUVIndexColor(index: UVIndex)
-            }
-        }*/
         
         getCurrentLocation()
     }
@@ -98,18 +91,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         movedToForeground()
-        
-        /*if let contains = self.tempButton.currentTitle?.contains("F") {
-            if contains && self.units == 1 {
-                self.updateWeatherInfo()
-            }
-        }
-        
-        if let contains = self.tempButton.currentTitle?.contains("C") {
-            if contains && self.units == 0 {
-                self.updateWeatherInfo()
-            }
-        }*/
     }
     
     @objc func movedToForeground() {
@@ -210,12 +191,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.windButton.isEnabled = false
         self.startStopButton.isEnabled = false*/
         progressBar.progress = 1
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     func updateWeatherInfo() {
         progressBar.progress = 0
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         NetworkCalls.getWeatherbitUVIndex(latitude, longitude) { response in
             
@@ -227,11 +206,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if let UVIndex = response.value {
                 UserDefaults.standard.set(UVIndex, forKey: "savedUVIndexInt")
                 UserDefaults.standard.set(String(UVIndex) + " UVI", forKey: "savedUVIndex")
-                
-                DispatchQueue.main.async {
-                    //self.UVIndexButton.setTitle(String(UVIndex) + " UVI", for: .normal)
-                    self.updateUVIndexColor(index: UVIndex)
-                }
             }
         }
         
@@ -258,40 +232,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedWeather")
                 UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedIconString")
                 
-                /*DispatchQueue.main.async {
-                    self.cityLabel.text = weatherData["city"] as? String
-                    
-                    self.tempButton.setTitle(UserDefaults.standard.string(forKey: "savedTemp"), for: .normal)
-                    self.windButton.setTitle(UserDefaults.standard.string(forKey: "savedWind"), for: .normal)
-                    
-                    self.conditionsText.text = weatherData["conditions"] as? String
-                    self.conditionsImage.image = UIImage(named: weatherData["icon"] as! String)
-                }*/
+                DispatchQueue.main.async {
+                    self.collectionView.reloadSections(IndexSet(0 ..< Section.allCases.count))
+                }
             }
             
             self.progressBar.progress = 1
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            
-            /*if self.tempButton.currentTitle?.contains("F") ?? false && self.units == 1 {
-                self.updateWeatherInfo()
-            } else if self.tempButton.currentTitle?.contains("C") ?? false && self.units == 0 {
-                self.updateWeatherInfo()
-            }*/
         }
-    }
-    
-    func updateUVIndexColor(index: Int) {
-        /*if index >= 0 && index <= 2{
-            UVIndexButton.setTitleColor(.green, for: .normal)
-        } else if index >= 3 && index <= 5 {
-            UVIndexButton.setTitleColor(.yellow, for: .normal)
-        } else if index >= 6 && index <= 7 {
-            UVIndexButton.setTitleColor(.orange, for: .normal)
-        } else if index >= 8 && index <= 10 {
-            UVIndexButton.setTitleColor(.red, for: .normal)
-        } else if index >= 11 {
-            UVIndexButton.setTitleColor(.purple, for: .normal)
-        }*/
     }
     
     @IBAction func UVIndexButton(_ sender: UIButton) {
@@ -315,7 +262,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             }))
             self.present(alertController, animated: true, completion: nil)
         }
-        let minutes = seconds/60
+        let minutes = seconds / 60
         //timeLabel.text = String(minutes) + " mins"
         UserDefaults.standard.set(seconds, forKey: "savedSeconds")
     }
@@ -380,6 +327,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             }
         } else if startStop == true {
             // Start -> Stop
+            
             let alertController = UIAlertController(title: "Are you sure?", message: "By pressing 'Stop', the sunscreen timer will reset. Are you sure you want to continue?", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
             alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -523,5 +471,43 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         
         return cell
+    }
+}
+
+extension HomeViewController: GMSAutocompleteViewControllerDelegate {
+    
+    @IBAction func searchButton(_ sender: Any) {
+        self.searchCity()
+    }
+    
+    private func searchCity() {
+        let autocompleteController = GMSAutocompleteViewController()
+        
+        autocompleteController.tableCellBackgroundColor = .black
+        autocompleteController.delegate = self
+        
+        autocompleteController.overrideUserInterfaceStyle = .dark
+        
+        self.present(autocompleteController, animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        let searchLatitude = String(place.coordinate.latitude)
+        let searchLongitude = String(place.coordinate.longitude)
+        
+        UserDefaults.standard.set(searchLatitude, forKey: "savedSearchLatitude")
+        UserDefaults.standard.set(searchLongitude, forKey: "savedSearchLongitude")
+        
+        self.dismiss(animated: true) {
+            self.performSegue(withIdentifier: "homeToSearch", sender: nil)
+        }
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("Error: ", error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
