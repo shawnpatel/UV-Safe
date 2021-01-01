@@ -13,7 +13,9 @@ import Vision
 class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var scans: UIButton!
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var infoStack: UIStackView!
     @IBOutlet weak var skinCancer: UIButton!
     @IBOutlet weak var riskLevel: UILabel!
     
@@ -31,7 +33,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         skinCancer.layer.borderColor = UIColor.lightGray.cgColor
         skinCancer.backgroundColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
         
-        activityView.center = self.imageView.center
+        activityView.center = self.infoStack.center
         activityView.isHidden = true
         activityView.hidesWhenStopped = true
         activityView.backgroundColor = UIColor.black
@@ -67,7 +69,11 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         activityView.startAnimating()
         
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imageView.contentMode = .scaleToFill
+            
+            logoImageView.isHidden = true
+            infoStack.isHidden = true
+            imageView.isHidden = false
+            
             imageView.image = pickedImage
             
             detect2(image: CIImage(image: pickedImage)!)
@@ -119,8 +125,6 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                     fatalError("Unexpected result type from VNCoreMLRequest.")
             }
             
-            print(results)
-            
             DispatchQueue.main.async { [weak self] in
                 UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
                 UserDefaults.standard.set(topResult.identifier, forKey: "tag")
@@ -158,8 +162,6 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                     fatalError("Unexpected result type from VNCoreMLRequest.")
             }
             
-            print(results)
-            
             DispatchQueue.main.async { [weak self] in
                 UserDefaults.standard.set(topResult.confidence, forKey: "percentage")
                 UserDefaults.standard.set(topResult.identifier, forKey: "tag")
@@ -171,6 +173,8 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
                         self?.skinCancer.setTitle("High Risk", for: .normal)
                     } else if topResult.confidence >= 0.50 {
                         self?.skinCancer.setTitle("Medium Risk", for: .normal)
+                    } else {
+                        self?.skinCancer.setTitle("Low Risk", for: .normal)
                     }
                 }
                 

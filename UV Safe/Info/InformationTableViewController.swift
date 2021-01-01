@@ -17,7 +17,7 @@ class InformationTableViewController: UITableViewController {
 
     @IBOutlet var informationTableView: UITableView!
     let imageArray = ["UVChart", "SPF", "Water", "Sunglasses", "Clothes"]
-    let detailsArray = ["", "Use SPF 30+ Sunscreen", "Stay Hydrated", "Wear Polarized Sunglasses", "Cover Skin with Clothes"]
+    let detailsArray = [nil, "Use SPF 30+ Sunscreen", "Stay Hydrated", "Wear Polarized Sunglasses", "Cover Skin with Clothes"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class InformationTableViewController: UITableViewController {
         
         cell.customImageView.image = UIImage(named: image)
         
-        if details != "" {
+        if let details = details {
             cell.details.text = details
             cell.details.isHidden = false
         } else {

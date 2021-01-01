@@ -23,6 +23,7 @@
 		CA5D846E259EB2DF0090ADBA /* ReminderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5D846C259EB2DF0090ADBA /* ReminderCell.xib */; };
 		CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA70C80522873CBF0061B13D /* NetworkCalls.swift */; };
 		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
+		CAA0604B259FCD230048E7E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA0604A259FCD230048E7E1 /* Extensions.swift */; };
 		CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */; };
 		CABB7FE523CD8FB6006AFFCC /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABB7FE423CD8FB6006AFFCC /* APIKeys.swift */; };
 		CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */; };
@@ -71,6 +72,7 @@
 		CA5D846C259EB2DF0090ADBA /* ReminderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderCell.xib; sourceTree = "<group>"; };
 		CA70C80522873CBF0061B13D /* NetworkCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
 		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
+		CAA0604A259FCD230048E7E1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier2.mlmodel; sourceTree = "<group>"; };
 		CABB7FE423CD8FB6006AFFCC /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier.mlmodel; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */,
 				CA5D842F259E63DE0090ADBA /* Constants.swift */,
+				CAA0604A259FCD230048E7E1 /* Extensions.swift */,
 				CA70C80522873CBF0061B13D /* NetworkCalls.swift */,
 				CACF17972288A0F700D2E0B8 /* AlertService.swift */,
 				CACF17992288ABEC00D2E0B8 /* NetworkError.swift */,
@@ -398,6 +401,7 @@
 				CA5D8469259EB1660090ADBA /* WeatherDescriptionCell.swift in Sources */,
 				CA5D8465259EB14A0090ADBA /* TemperatureCell.swift in Sources */,
 				CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */,
+				CAA0604B259FCD230048E7E1 /* Extensions.swift in Sources */,
 				CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */,
 				CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */,
 				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,

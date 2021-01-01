@@ -364,9 +364,115 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IN8-4m-PP3">
                                 <rect key="frame" x="8" y="96" width="412" height="739"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UV Vision 2.0" translatesAutoresizingMaskIntoConstraints="NO" id="M3t-CF-hv3">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9J3-JD-urU">
                                         <rect key="frame" x="0.0" y="0.0" width="412" height="689.66666666666663"/>
-                                    </imageView>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rtn-c2-MCd">
+                                                <rect key="frame" x="51.666666666666657" y="-638.33333333333337" width="309" height="2000"/>
+                                            </imageView>
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TLE-LG-fbq">
+                                                <rect key="frame" x="0.0" y="0.0" width="412" height="689.66666666666663"/>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="E7A-Is-Cz4">
+                                                <rect key="frame" x="0.0" y="0.0" width="412" height="689.66666666666663"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQf-Av-pbL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="412" height="86.666666666666671"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="87f-4R-shQ">
+                                                        <rect key="frame" x="0.0" y="86.666666666666657" width="412" height="77"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="7Yx-7E-kYU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="412" height="31.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core ML and Vision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="ups-mw-5Ij">
+                                                                <rect key="frame" x="0.0" y="31.333333333333339" width="412" height="45.666666666666657"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxR-KL-Zv3">
+                                                        <rect key="frame" x="0.0" y="163.66666666666669" width="412" height="87"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xxh-C8-TpD">
+                                                        <rect key="frame" x="0.0" y="250.66666666666669" width="412" height="222.33333333333331"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For best results:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="q1E-Yp-rQp">
+                                                                <rect key="frame" x="0.0" y="0.0" width="412" height="21.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Scan mole/lesion completely, without background artifacts." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uYB-LM-xnP">
+                                                                <rect key="frame" x="0.0" y="21.666666666666632" width="412" height="57.333333333333343"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Ensure sufficient lighting." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mjI-5y-ZzJ">
+                                                                <rect key="frame" x="0.0" y="79" width="412" height="28.666666666666671"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Scan multiple times to confirm results." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mZM-6X-EOP">
+                                                                <rect key="frame" x="0.0" y="107.66666666666661" width="412" height="57.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: Mole/lesion must be visibly different from surrounding skin." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-Nn-CFX">
+                                                                <rect key="frame" x="0.0" y="165" width="412" height="57.333333333333343"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nmj-cl-6YP">
+                                                        <rect key="frame" x="0.0" y="473.00000000000006" width="412" height="86.666666666666686"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qur-aI-PZG">
+                                                        <rect key="frame" x="0.0" y="559.66666666666663" width="412" height="43"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Please read About UV Vision by pressing the help icon above for important details." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="qSc-Al-QPD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="412" height="43"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nma-aN-CIW">
+                                                        <rect key="frame" x="0.0" y="602.66666666666663" width="412" height="87"/>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="QxR-KL-Zv3" firstAttribute="height" secondItem="vQf-Av-pbL" secondAttribute="height" id="MS7-XN-RgH"/>
+                                                    <constraint firstItem="Nmj-cl-6YP" firstAttribute="height" secondItem="vQf-Av-pbL" secondAttribute="height" id="dLO-Mm-AsK"/>
+                                                    <constraint firstItem="nma-aN-CIW" firstAttribute="height" secondItem="vQf-Av-pbL" secondAttribute="height" id="y38-UQ-VCn"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="E7A-Is-Cz4" firstAttribute="leading" secondItem="9J3-JD-urU" secondAttribute="leading" id="2X6-99-pmj"/>
+                                            <constraint firstItem="rtn-c2-MCd" firstAttribute="centerY" secondItem="xxh-C8-TpD" secondAttribute="centerY" id="2i5-zJ-u8Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="E7A-Is-Cz4" secondAttribute="trailing" id="7Zx-bg-qYu"/>
+                                            <constraint firstItem="rtn-c2-MCd" firstAttribute="width" secondItem="9J3-JD-urU" secondAttribute="width" multiplier="0.75" id="WaN-og-y8V"/>
+                                            <constraint firstAttribute="trailing" secondItem="TLE-LG-fbq" secondAttribute="trailing" id="YGC-dA-nEI"/>
+                                            <constraint firstItem="TLE-LG-fbq" firstAttribute="top" secondItem="9J3-JD-urU" secondAttribute="top" id="Z0p-jF-R6F"/>
+                                            <constraint firstAttribute="bottom" secondItem="E7A-Is-Cz4" secondAttribute="bottom" id="eHy-Kh-9s0"/>
+                                            <constraint firstItem="TLE-LG-fbq" firstAttribute="leading" secondItem="9J3-JD-urU" secondAttribute="leading" id="ePt-mw-Q1n"/>
+                                            <constraint firstItem="rtn-c2-MCd" firstAttribute="centerX" secondItem="9J3-JD-urU" secondAttribute="centerX" id="h08-Mw-UKj"/>
+                                            <constraint firstItem="E7A-Is-Cz4" firstAttribute="top" secondItem="9J3-JD-urU" secondAttribute="top" id="hdJ-YK-zaZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="TLE-LG-fbq" secondAttribute="bottom" id="lOZ-om-Abv"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-RW-hyj">
                                         <rect key="frame" x="0.0" y="694.66666666666663" width="412" height="44.333333333333371"/>
                                         <subviews>
@@ -419,7 +525,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageView" destination="M3t-CF-hv3" id="inX-xZ-c0k"/>
+                        <outlet property="imageView" destination="TLE-LG-fbq" id="mNg-EC-fAk"/>
+                        <outlet property="infoStack" destination="E7A-Is-Cz4" id="S5Y-pR-jDP"/>
+                        <outlet property="logoImageView" destination="rtn-c2-MCd" id="o3B-fE-1Cp"/>
                         <outlet property="riskLevel" destination="68i-rh-tJ5" id="vAD-TD-ySO"/>
                         <outlet property="skinCancer" destination="elg-1r-W10" id="McQ-at-HtP"/>
                     </connections>
@@ -717,11 +825,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="App Logo" width="2000" height="2000"/>
         <image name="Help" width="24" height="24"/>
         <image name="Information" width="24" height="24"/>
         <image name="Location" width="24" height="24"/>
         <image name="Search" width="24" height="24"/>
         <image name="Sun" width="24" height="24"/>
-        <image name="UV Vision 2.0" width="1658" height="2159"/>
     </resources>
 </document>
