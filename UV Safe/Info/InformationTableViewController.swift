@@ -10,12 +10,14 @@ import UIKit
 
 class InformationTableViewCellController: UITableViewCell {
     @IBOutlet weak var customImageView: UIImageView!
+    @IBOutlet weak var details: UILabel!
 }
 
 class InformationTableViewController: UITableViewController {
 
     @IBOutlet var informationTableView: UITableView!
     let imageArray = ["UVChart", "SPF", "Water", "Sunglasses", "Clothes"]
+    let detailsArray = ["", "Use SPF 30+ Sunscreen", "Stay Hydrated", "Wear Polarized Sunglasses", "Cover Skin with Clothes"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +48,19 @@ class InformationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCustomCell", for: indexPath) as! InformationTableViewCellController
-        cell.customImageView.image = UIImage(named: imageArray[indexPath.row])
-        return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if #available(iOS 13.0, *) {
-            segue.destination.overrideUserInterfaceStyle = .light
+        
+        let image = imageArray[indexPath.row]
+        let details = detailsArray[indexPath.row]
+        
+        cell.customImageView.image = UIImage(named: image)
+        
+        if details != "" {
+            cell.details.text = details
+            cell.details.isHidden = false
+        } else {
+            cell.details.isHidden = true
         }
+        
+        return cell
     }
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class WeatherDescriptionCell: SelfSizingCell {
 
+    @IBOutlet weak var details: UILabel!
+    @IBOutlet weak var icon: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

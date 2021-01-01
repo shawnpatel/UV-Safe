@@ -24,7 +24,6 @@
 		CA70C80622873CBF0061B13D /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA70C80522873CBF0061B13D /* NetworkCalls.swift */; };
 		CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */; };
 		CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */; };
-		CAB18CD320C6F63100849F3A /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = CAB18CD220C6F63100849F3A /* TODO.txt */; };
 		CABB7FE523CD8FB6006AFFCC /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABB7FE423CD8FB6006AFFCC /* APIKeys.swift */; };
 		CABDEA5020C9FA1900DC0A1C /* SkinCancerClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */; };
 		CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C201EF999E40083F6DC /* AppDelegate.swift */; };
@@ -73,7 +72,6 @@
 		CA70C80522873CBF0061B13D /* NetworkCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
 		CA721AA91FC0F2770014FBFC /* UVVisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVVisionViewController.swift; sourceTree = "<group>"; };
 		CAA79F8E21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier2.mlmodel; sourceTree = "<group>"; };
-		CAB18CD220C6F63100849F3A /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		CABB7FE423CD8FB6006AFFCC /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		CABDEA4F20C9FA1800DC0A1C /* SkinCancerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SkinCancerClassifier.mlmodel; sourceTree = "<group>"; };
 		CAC36C1D1EF999E40083F6DC /* UV Safe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UV Safe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +189,6 @@
 		CAC36C1F1EF999E40083F6DC /* UV Safe */ = {
 			isa = PBXGroup;
 			children = (
-				CAB18CD220C6F63100849F3A /* TODO.txt */,
 				CA4085611F245A4200BD4696 /* UV Safe.entitlements */,
 				CAC36C201EF999E40083F6DC /* AppDelegate.swift */,
 				CA091C611FC4AF83002F1F85 /* Current */,
@@ -298,7 +295,6 @@
 			files = (
 				CA5D846A259EB1660090ADBA /* WeatherDescriptionCell.xib in Resources */,
 				CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */,
-				CAB18CD320C6F63100849F3A /* TODO.txt in Resources */,
 				CA5D8466259EB14A0090ADBA /* TemperatureCell.xib in Resources */,
 				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
 				CAE2D74D23CD94E4007808DE /* GoogleService-Info.plist in Resources */,

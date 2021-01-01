@@ -75,17 +75,17 @@ class NetworkCalls {
                 let country = json["sys"]["country"].stringValue
                 
                 var temp = json["main"]["temp"].doubleValue
+                var minTemp = json["main"]["temp_min"].doubleValue
+                var maxTemp = json["main"]["temp_max"].doubleValue
+                
                 if units == 0 {
                     temp = ((temp - 273.15) * 9/5 + 32).rounded()
+                    minTemp = ((minTemp - 273.15) * 9/5 + 32).rounded()
+                    maxTemp = ((maxTemp - 273.15) * 9/5 + 32).rounded()
                 } else if units == 1 {
                     temp = (temp - 273.15).rounded()
-                }
-                
-                var wind = json["wind"]["speed"].doubleValue
-                if units == 0 {
-                    wind = (wind * 2.237).rounded()
-                } else if units == 1 {
-                    wind = (wind * 3.6).rounded()
+                    minTemp = (minTemp - 273.15).rounded()
+                    maxTemp = (maxTemp - 273.15).rounded()
                 }
                 
                 let conditions = JSON(json["weather"].arrayObject?[0] as Any)
@@ -96,7 +96,8 @@ class NetworkCalls {
                 let weatherData: NSDictionary = [
                     "city" : "\(city), \(country)",
                     "temp" : Int(temp),
-                    "wind" : Int(wind),
+                    "minTemp" : Int(minTemp),
+                    "maxTemp" : Int(maxTemp),
                     "conditions" : description,
                     "icon" : icon
                 ]

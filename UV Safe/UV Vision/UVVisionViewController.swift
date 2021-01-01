@@ -28,6 +28,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         
         skinCancer.layer.cornerRadius = 10
         skinCancer.layer.borderWidth = 2
+        skinCancer.layer.borderColor = UIColor.lightGray.cgColor
         skinCancer.backgroundColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
         
         activityView.center = self.imageView.center

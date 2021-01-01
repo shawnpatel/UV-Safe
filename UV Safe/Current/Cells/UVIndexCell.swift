@@ -9,7 +9,9 @@
 import UIKit
 
 class UVIndexCell: SelfSizingCell {
-
+    
+    @IBOutlet weak var uvIndex: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

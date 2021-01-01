@@ -11,6 +11,6 @@ import UIKit
 struct Constants {
     static let CELL_RADIUS: CGFloat = 16
     
-    static let UV_SAFE_RED: UIColor = UIColor(red: 171/255, green: 45/255, blue: 36/255, alpha: 1)
+    static let UV_SAFE_RED: UIColor = UIColor(red: 163/255, green: 38/255, blue: 38/255, alpha: 1)
     static let CELL_BACKGROUND: UIColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
 }

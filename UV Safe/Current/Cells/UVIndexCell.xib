@@ -16,9 +16,48 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3e-DH-hO1">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vfc-eh-P8c">
+                                <rect key="frame" x="46.5" y="46" width="107.5" height="108"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UVI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfH-F5-AP5">
+                                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="79"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="66"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UV Index" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iba-SU-KwG">
+                                        <rect key="frame" x="0.0" y="79" width="107.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Vfc-eh-P8c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="k3e-DH-hO1" secondAttribute="leading" constant="16" id="0oJ-cE-oTM"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vfc-eh-P8c" secondAttribute="trailing" constant="16" id="5YR-XB-tZx"/>
+                            <constraint firstItem="Vfc-eh-P8c" firstAttribute="centerY" secondItem="k3e-DH-hO1" secondAttribute="centerY" id="Fcd-7V-mw0"/>
+                            <constraint firstItem="Vfc-eh-P8c" firstAttribute="centerX" secondItem="k3e-DH-hO1" secondAttribute="centerX" id="p3l-Uc-d4l"/>
+                        </constraints>
+                    </view>
+                </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <point key="canvasLocation" x="139" y="102"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="k3e-DH-hO1" secondAttribute="bottom" id="4WC-XD-E8Y"/>
+                <constraint firstAttribute="trailing" secondItem="k3e-DH-hO1" secondAttribute="trailing" id="9k0-R6-Pwh"/>
+                <constraint firstItem="k3e-DH-hO1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EQr-IJ-FH1"/>
+                <constraint firstItem="k3e-DH-hO1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VSI-Ap-qPd"/>
+            </constraints>
+            <connections>
+                <outlet property="uvIndex" destination="DfH-F5-AP5" id="aqc-2o-gJZ"/>
+            </connections>
+            <point key="canvasLocation" x="-39.130434782608695" y="-40.178571428571423"/>
         </collectionViewCell>
     </objects>
 </document>

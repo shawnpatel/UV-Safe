@@ -16,9 +16,47 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ug-gA-NZa">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YNd-qG-DKI">
+                                <rect key="frame" x="34" y="19.5" width="132" height="161"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kwk-n4-gMm">
+                                        <rect key="frame" x="0.0" y="0.0" width="132" height="132"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mXR-LR-fXd">
+                                        <rect key="frame" x="0.0" y="132" width="132" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="YNd-qG-DKI" firstAttribute="centerX" secondItem="0ug-gA-NZa" secondAttribute="centerX" id="4bL-J2-03s"/>
+                            <constraint firstItem="kwk-n4-gMm" firstAttribute="width" secondItem="0ug-gA-NZa" secondAttribute="width" multiplier="0.66" id="Tv1-AG-HTP"/>
+                            <constraint firstItem="YNd-qG-DKI" firstAttribute="centerY" secondItem="0ug-gA-NZa" secondAttribute="centerY" id="dJH-f8-HBh"/>
+                            <constraint firstItem="kwk-n4-gMm" firstAttribute="height" secondItem="0ug-gA-NZa" secondAttribute="height" multiplier="0.66" id="rOw-5f-Z3a"/>
+                        </constraints>
+                    </view>
+                </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <point key="canvasLocation" x="139" y="102"/>
+            <constraints>
+                <constraint firstAttribute="top" secondItem="0ug-gA-NZa" secondAttribute="top" id="Kgf-Xy-5zt"/>
+                <constraint firstAttribute="trailing" secondItem="0ug-gA-NZa" secondAttribute="trailing" id="lcP-5U-XRC"/>
+                <constraint firstAttribute="bottom" secondItem="0ug-gA-NZa" secondAttribute="bottom" id="noE-f8-ZPJ"/>
+                <constraint firstAttribute="leading" secondItem="0ug-gA-NZa" secondAttribute="leading" id="oFn-j6-Kpm"/>
+            </constraints>
+            <size key="customSize" width="237" height="200"/>
+            <connections>
+                <outlet property="details" destination="mXR-LR-fXd" id="EqZ-ke-I3x"/>
+                <outlet property="icon" destination="kwk-n4-gMm" id="xoO-ul-yUU"/>
+            </connections>
+            <point key="canvasLocation" x="164.49275362318841" y="101.78571428571428"/>
         </collectionViewCell>
     </objects>
 </document>

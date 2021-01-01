@@ -69,6 +69,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .dark
+        }
+        
         registerNibs()
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
@@ -78,16 +82,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         /*DispatchQueue.main.async {
-            self.cityLabel.text = UserDefaults.standard.object(forKey: "savedCityName") as? String
-            self.UVIndexButton.setTitle(UserDefaults.standard.object(forKey: "savedUVIndex") as? String, for: .normal)
             if let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int {
                 self.updateUVIndexColor(index: UVIndex)
-            }
-            self.tempButton.setTitle(UserDefaults.standard.object(forKey: "savedTemp") as? String, for: .normal)
-            self.windButton.setTitle(UserDefaults.standard.object(forKey: "savedWind") as? String, for: .normal)
-            self.conditionsText.text = UserDefaults.standard.object(forKey: "savedWeather") as? String
-            if let iconString = UserDefaults.standard.object(forKey: "savedIconString") as? String {
-                self.conditionsImage.image = UIImage(named: iconString)
             }
         }*/
         
@@ -250,11 +246,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(weatherData["city"] as! String, forKey: "savedCityName")
                 
                 if self.units == 0 {
-                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°F", forKey: "savedTemp")
-                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " MPH", forKey: "savedWind")
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + " °F", forKey: "savedTemp")
+                    UserDefaults.standard.set(String(weatherData["minTemp"] as! Int) + " °F", forKey: "savedMinTemp")
+                    UserDefaults.standard.set(String(weatherData["maxTemp"] as! Int) + " °F", forKey: "savedMaxTemp")
                 } else if self.units == 1{
-                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + "°C", forKey: "savedTemp")
-                    UserDefaults.standard.set(String(weatherData["wind"] as! Int) + " KPH", forKey: "savedWind")
+                    UserDefaults.standard.set(String(weatherData["temp"] as! Int) + " °C", forKey: "savedTemp")
+                    UserDefaults.standard.set(String(weatherData["minTemp"] as! Int) + " °C", forKey: "savedMinTemp")
+                    UserDefaults.standard.set(String(weatherData["maxTemp"] as! Int) + " °C", forKey: "savedMaxTemp")
                 }
                 
                 UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedWeather")
@@ -472,36 +470,53 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.setWidth(to: CELL_BOX_SIZE)
         cell.setHeight(to: CELL_BOX_SIZE)
         
-        
+        let uvIndex = UserDefaults.standard.integer(forKey: "savedUVIndexInt")
+        cell.uvIndex.text = String(uvIndex)
         
         return cell
     }
     
     private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
-                                                      for: indexPath) as! UVIndexCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.temperature.rawValue,
+                                                      for: indexPath) as! TemperatureCell
         cell.setWidth(to: CELL_BOX_SIZE)
         cell.setHeight(to: CELL_BOX_SIZE)
         
+        if let currentTemp = UserDefaults.standard.string(forKey: "savedTemp") {
+            cell.currentTemp.text = currentTemp
+        }
         
+        if let minTemp = UserDefaults.standard.string(forKey: "savedMinTemp") {
+            cell.lowTemp.text = "L: \(minTemp)"
+        }
+        
+        if let maxTemp = UserDefaults.standard.string(forKey: "savedMaxTemp") {
+            cell.highTemp.text = "H: \(maxTemp)"
+        }
         
         return cell
     }
     
     private func cellForWeatherDescriptionSection(indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
-                                                      for: indexPath) as! UVIndexCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.weatherDescription.rawValue,
+                                                      for: indexPath) as! WeatherDescriptionCell
         cell.setWidth(to: CELL_BOX_SIZE)
         cell.setHeight(to: CELL_BOX_SIZE)
         
+        if let details = UserDefaults.standard.string(forKey: "savedWeather") {
+            cell.details.text = details
+        }
         
+        if let icon = UserDefaults.standard.string(forKey: "savedIconString") {
+            cell.icon.image = UIImage(named: icon)
+        }
         
         return cell
     }
     
     private func cellForReminderSection(indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
-                                                      for: indexPath) as! UVIndexCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.reminder.rawValue,
+                                                      for: indexPath) as! ReminderCell
         cell.setWidth(to: CELL_WIDTH)
         cell.setHeight(to: 150)
         

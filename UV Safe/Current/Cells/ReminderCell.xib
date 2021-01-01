@@ -16,9 +16,58 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beW-92-62A">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FxZ-cs-mCh">
+                                <rect key="frame" x="16" y="16" width="368" height="118"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GUx-Mo-4y3">
+                                        <rect key="frame" x="0.0" y="0.0" width="368" height="54"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="6dP-tP-o4k">
+                                                <rect key="frame" x="0.0" y="0.0" width="368" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chf-fO-TPx">
+                                                <rect key="frame" x="0.0" y="20.5" width="368" height="33.5"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjg-Nq-kzf">
+                                        <rect key="frame" x="0.0" y="64" width="368" height="54"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Htl-Wy-sSp">
+                                                <rect key="frame" x="0.0" y="0.0" width="368" height="54"/>
+                                                <state key="normal" title="Remind Me!">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="FxZ-cs-mCh" firstAttribute="top" secondItem="beW-92-62A" secondAttribute="top" constant="16" id="010-pS-cAV"/>
+                            <constraint firstAttribute="bottom" secondItem="FxZ-cs-mCh" secondAttribute="bottom" constant="16" id="jTU-qK-zDM"/>
+                            <constraint firstItem="FxZ-cs-mCh" firstAttribute="leading" secondItem="beW-92-62A" secondAttribute="leading" constant="16" id="l84-Fi-iIg"/>
+                            <constraint firstAttribute="trailing" secondItem="FxZ-cs-mCh" secondAttribute="trailing" constant="16" id="oFl-9E-1up"/>
+                        </constraints>
+                    </view>
+                </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <point key="canvasLocation" x="139" y="104"/>
+            <constraints>
+                <constraint firstItem="beW-92-62A" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9Uq-XM-Zog"/>
+                <constraint firstItem="beW-92-62A" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YzB-qa-JTp"/>
+                <constraint firstAttribute="bottom" secondItem="beW-92-62A" secondAttribute="bottom" id="kNF-R6-wgl"/>
+                <constraint firstAttribute="trailing" secondItem="beW-92-62A" secondAttribute="trailing" id="m4c-GK-gTz"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="103.79464285714285"/>
         </collectionViewCell>
     </objects>
 </document>
