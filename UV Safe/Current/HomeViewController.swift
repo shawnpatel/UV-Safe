@@ -295,7 +295,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         generateCells()
         reloadMainSection() {
-            timerCell.time.text = "90"
+            timerCell.time.text = "-"
         }
     }
     
