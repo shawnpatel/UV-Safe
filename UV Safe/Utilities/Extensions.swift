@@ -47,3 +47,15 @@ extension UIVisualEffectView {
         }
     }
 }
+
+extension UIViewController {
+    public func presentAlert(title: String? = nil, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(action)
+        
+        self.present(alert, animated: true)
+    }
+}

@@ -325,16 +325,19 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func skinCancerButton(_ sender: UIButton) {
         if skinCancer.currentTitle != "Match*" {
-            let alertController = UIAlertController(title: "Continue to Cancer.org?", message: "Learn about skin cancer along with diagnosis and treatment options.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Continue to Cancer.org?",
+                                                    message: "Learn about skin cancer along with diagnosis and treatment options.",
+                                                    preferredStyle: .alert)
+            
             alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
             alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.open(url: "https://www.cancer.org/cancer/skin-cancer.html")
             }))
+            
             self.present(alertController, animated: true, completion: nil)
         } else {
-            let alertController = UIAlertController(title: "Scan your skin!", message: "You have to scan your skin to access the analysis.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+            self.presentAlert(title: "Scan your skin!",
+                              message: "You have to scan your skin to access the analysis.")
         }
     }
     

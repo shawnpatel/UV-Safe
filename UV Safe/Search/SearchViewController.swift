@@ -91,8 +91,7 @@ class SearchViewController: UIViewController {
         
         NetworkCalls.getWeatherbitUVIndex(latitude, longitude) { response in
             if response.isFailure {
-                let alert = AlertService.alert(message: response.error!.localizedDescription)
-                self.present(alert, animated: true)
+                self.presentAlert(title: "Error", message: response.error!.localizedDescription)
             }
             
             if let UVIndex = response.value {
@@ -103,8 +102,7 @@ class SearchViewController: UIViewController {
         
         NetworkCalls.getWeather(latitude, longitude, units) { response in
             if response.isFailure {
-                let alert = AlertService.alert(message: response.error!.localizedDescription)
-                self.present(alert, animated: true)
+                self.presentAlert(title: "Error", message: response.error!.localizedDescription)
             }
             
             if let weatherData = response.value {

@@ -90,6 +90,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         progressBar.tintColor = Constants.UV_SAFE_YELLOW
         progressBar.progressTintColor = Constants.UV_SAFE_RED
         
+        if UserDefaults.standard.stringArray(forKey: "savedUVIndex") == nil {
+            collectionView.alpha = 0
+        }
+        
         getCurrentLocation()
     }
     
@@ -200,8 +204,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         NetworkCalls.getWeatherbitUVIndex(latitude, longitude) { response in
             
             if response.isFailure {
-                let alert = AlertService.alert(message: response.error!.localizedDescription)
-                self.present(alert, animated: true)
+                self.presentAlert(title: "Error", message: response.error!.localizedDescription)
             }
             
             if let UVIndex = response.value {
@@ -213,8 +216,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         NetworkCalls.getWeather(latitude, longitude, units) { response in
             
             if response.isFailure {
-                let alert = AlertService.alert(message: response.error!.localizedDescription)
-                self.present(alert, animated: true)
+                self.presentAlert(title: "Error", message: response.error!.localizedDescription)
             }
             
             if let weatherData = response.value {
@@ -234,6 +236,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedIconString")
                 
                 self.reloadMainSection()
+                
+                UIView.animate(withDuration: 0.5) {
+                    self.collectionView.alpha = 1
+                }
             }
             
             self.progressBar.progress = 1
