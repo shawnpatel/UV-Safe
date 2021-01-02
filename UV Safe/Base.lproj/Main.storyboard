@@ -247,63 +247,6 @@
             </objects>
             <point key="canvasLocation" x="2298" y="-671"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="jwX-1w-pmT">
-            <objects>
-                <viewController id="nf9-yN-H10" customClass="SettingsViewController" customModule="UV_Safe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Adp-SK-43a"/>
-                        <viewControllerLayoutGuide type="bottom" id="5mT-Lh-roT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="I3L-N2-l9d">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="puq-NS-4L1">
-                                <rect key="frame" x="5" y="49" width="418" height="838"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH0-pB-Hfy">
-                                        <rect key="frame" x="0.0" y="0.0" width="418" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rq0-Fa-KYM">
-                                        <rect key="frame" x="0.0" y="25.333333333333329" width="418" height="32"/>
-                                        <color key="backgroundColor" red="0.9195778966" green="0.7677442431" blue="0.3258422017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <segments>
-                                            <segment title="Imperial"/>
-                                            <segment title="Metric"/>
-                                        </segments>
-                                        <color key="selectedSegmentTintColor" red="0.77485328909999995" green="0.33717393880000002" blue="0.28786873819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="unitControllerValueChanged:" destination="nf9-yN-H10" eventType="valueChanged" id="V61-KT-4FV"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ma-5Z-oID">
-                                        <rect key="frame" x="0.0" y="61.333333333333314" width="418" height="776.66666666666674"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="puq-NS-4L1" firstAttribute="leading" secondItem="I3L-N2-l9d" secondAttribute="leading" constant="5" id="1Dx-bH-7Qb"/>
-                            <constraint firstItem="5mT-Lh-roT" firstAttribute="top" secondItem="puq-NS-4L1" secondAttribute="bottom" constant="5" id="A1x-KZ-M1P"/>
-                            <constraint firstAttribute="trailing" secondItem="puq-NS-4L1" secondAttribute="trailing" constant="5" id="TNm-0M-qqw"/>
-                            <constraint firstItem="puq-NS-4L1" firstAttribute="top" secondItem="Adp-SK-43a" secondAttribute="bottom" constant="5" id="ZkU-pT-x4H"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Settings" id="0UD-VN-6uU"/>
-                    <connections>
-                        <outlet property="unitController" destination="rq0-Fa-KYM" id="mXI-ma-tUH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0yg-k1-yiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1510" y="-1332"/>
-        </scene>
         <!--UV Vision-->
         <scene sceneID="7qH-bv-ahd">
             <objects>

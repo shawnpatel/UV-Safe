@@ -230,6 +230,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.setHeight(to: ceil(CELL_BOX_SIZE))
         
         cell.currentTempTopConstraint.constant = -16
+        cell.unitSegment.isHidden = true
         
         if let currentTemp = UserDefaults.standard.string(forKey: "savedSearchTemp") {
             cell.currentTemp.text = currentTemp

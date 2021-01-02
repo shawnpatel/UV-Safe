@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
-		CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */; };
 		CA5D8414259E5C450090ADBA /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8412259E5C450090ADBA /* LocationCell.swift */; };
 		CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5D8413259E5C450090ADBA /* LocationCell.xib */; };
 		CA5D8417259E5CAA0090ADBA /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */; };
@@ -57,7 +56,6 @@
 		B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.release.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.release.xcconfig"; sourceTree = "<group>"; };
 		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
-		CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = "UV Safe/Current/SettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
 		CA5D8412259E5C450090ADBA /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		CA5D8413259E5C450090ADBA /* LocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
 		CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingCell.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				CAC36C341EF99B960083F6DC /* HomeViewController.swift */,
-				CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */,
 			);
 			path = Current;
 			sourceTree = "<group>";
@@ -390,7 +387,6 @@
 				CA5D8417259E5CAA0090ADBA /* SelfSizingCell.swift in Sources */,
 				CA5D846D259EB2DF0090ADBA /* ReminderCell.swift in Sources */,
 				CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */,
-				CA49201C20CAFD6D00571AD1 /* SettingsViewController.swift in Sources */,
 				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
 				CA5D8430259E63DE0090ADBA /* Constants.swift in Sources */,
 				CACF17982288A0F700D2E0B8 /* AlertService.swift in Sources */,

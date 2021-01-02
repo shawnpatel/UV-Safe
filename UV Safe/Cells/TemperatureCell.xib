@@ -43,14 +43,28 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KKx-b8-Pqg">
+                                <rect key="frame" x="115" y="153" width="69" height="32"/>
+                                <segments>
+                                    <segment title="°F"/>
+                                    <segment title="°C"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="unitsChanged:" destination="gTV-IL-0wX" eventType="valueChanged" id="Ih0-jv-285"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zup-DW-zoW" firstAttribute="leading" secondItem="OMm-Y3-ci9" secondAttribute="leading" constant="16" id="Bcm-x4-H7j"/>
+                            <constraint firstAttribute="bottom" secondItem="KKx-b8-Pqg" secondAttribute="bottom" constant="16" id="Fhm-JC-3dl"/>
                             <constraint firstAttribute="bottom" secondItem="Z7i-DK-x1l" secondAttribute="bottom" constant="16" id="Hhr-hi-APn"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Z7i-DK-x1l" secondAttribute="trailing" constant="16" id="ME8-tu-HaS"/>
+                            <constraint firstAttribute="trailing" secondItem="KKx-b8-Pqg" secondAttribute="trailing" constant="16" id="UVG-Ka-uRQ"/>
                             <constraint firstItem="zup-DW-zoW" firstAttribute="top" secondItem="OMm-Y3-ci9" secondAttribute="top" constant="16" id="bi7-Hc-L6n"/>
                             <constraint firstItem="Z7i-DK-x1l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zup-DW-zoW" secondAttribute="bottom" id="jo0-UC-ZXb"/>
                             <constraint firstItem="Z7i-DK-x1l" firstAttribute="leading" secondItem="OMm-Y3-ci9" secondAttribute="leading" constant="16" id="rOr-LA-7rv"/>
+                            <constraint firstItem="KKx-b8-Pqg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z7i-DK-x1l" secondAttribute="trailing" constant="8" id="yFp-cG-rQa"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zup-DW-zoW" secondAttribute="trailing" constant="16" id="ywr-4G-3XO"/>
                         </constraints>
                     </view>
@@ -68,6 +82,7 @@
                 <outlet property="currentTempTopConstraint" destination="bi7-Hc-L6n" id="UfS-2K-1Fp"/>
                 <outlet property="highTemp" destination="UdE-Lc-XPi" id="Hqn-lz-xoV"/>
                 <outlet property="lowTemp" destination="i6f-kG-d1P" id="jSW-lL-2ox"/>
+                <outlet property="unitSegment" destination="KKx-b8-Pqg" id="h0g-8Z-q7O"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
         </collectionViewCell>

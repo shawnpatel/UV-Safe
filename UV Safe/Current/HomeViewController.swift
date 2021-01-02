@@ -83,12 +83,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         getCurrentLocation()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        units = UserDefaults.standard.integer(forKey: "units")
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         movedToForeground()
     }
@@ -189,6 +183,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func updateWeatherInfo() {
+        units = UserDefaults.standard.integer(forKey: "units")
+        
         progressBar.progress = 0
         
         NetworkCalls.getWeatherbitUVIndex(latitude, longitude) { response in
@@ -234,11 +230,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             
             self.progressBar.progress = 1
         }
-    }
-    
-    @IBAction func UVIndexButton(_ sender: UIButton) {
-        canCall = true
-        getCurrentLocation()
     }
     
     @objc func updateTimer() {
@@ -419,11 +410,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
+    private func unitsChanged() {
+        updateWeatherInfo()
+    }
+    
     private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.temperature.rawValue,
                                                       for: indexPath) as! TemperatureCell
         cell.setWidth(to: CELL_BOX_SIZE)
         cell.setHeight(to: CELL_BOX_SIZE)
+        
+        cell.unitsChanged = self.unitsChanged
+        
+        let unitIndex = UserDefaults.standard.integer(forKey: "units")
+        cell.unitSegment.selectedSegmentIndex = unitIndex
         
         if let currentTemp = UserDefaults.standard.string(forKey: "savedTemp") {
             cell.currentTemp.text = currentTemp
