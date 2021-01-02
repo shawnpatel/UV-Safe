@@ -102,14 +102,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func movedToForeground() {
+        let indexPath = IndexPath(row: self.sectionIndex(for: .reminder),
+                                  section: Section.cells.rawValue)
+        guard let reminderCell = self.collectionView.cellForItem(at: indexPath) as? ReminderCell else { return }
+        
         UIApplication.shared.applicationIconBadgeNumber = 0
         DispatchQueue.main.async {
             if let checkStartStop = UserDefaults.standard.object(forKey: "savedStartStop") as? Bool {
                 self.startStop = checkStartStop
                 if self.startStop == false {
-                    //self.startStopButton.setTitle("Remind Me!", for: .normal)
+                    reminderCell.reminderButton.setTitle("Remind Me!", for: .normal)
                 } else if self.startStop == true {
-                    //self.startStopButton.setTitle("Cancel", for: .normal)
+                    reminderCell.reminderButton.setTitle("Cancel Reminder", for: .normal)
                     self.seconds = UserDefaults.standard.integer(forKey: "savedSeconds")
                     let newTimestamp = Int(Date().timeIntervalSince1970)
                     if let savedTimestamp = UserDefaults.standard.object(forKey: "savedTimestamp") as? Int {
@@ -244,6 +248,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func updateTimer() {
+        let indexPath = IndexPath(row: self.sectionIndex(for: .timer),
+                                  section: Section.cells.rawValue)
+        guard let timerCell = self.collectionView.cellForItem(at: indexPath) as? TimerCell else { return }
+        
         seconds -= 1
         if seconds == 0 {
             let alertController = UIAlertController(title: "Are you still in the sun?", message: "It has been 90 minutes or more since you last applied sunscreen. Would you like to set a new reminder?", preferredStyle: .alert)
@@ -260,7 +268,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
         let minutes = seconds / 60
-        //timeLabel.text = String(minutes) + " mins"
+        timerCell.time.text = String(minutes)
         UserDefaults.standard.set(seconds, forKey: "savedSeconds")
     }
     
@@ -269,21 +277,39 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func resetTimer() {
+        let reminderIndexPath = IndexPath(row: self.sectionIndex(for: .reminder),
+                                  section: Section.cells.rawValue)
+        let timerIndexPath = IndexPath(row: self.sectionIndex(for: .timer),
+                                  section: Section.cells.rawValue)
+        
+        guard let reminderCell = self.collectionView.cellForItem(at: reminderIndexPath) as? ReminderCell,
+              let timerCell = self.collectionView.cellForItem(at: timerIndexPath) as? TimerCell else { return }
+        
         self.timer.invalidate()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         self.startStop = false
-        //self.startStopButton.setTitle("Remind Me!", for: .normal)
+        reminderCell.reminderButton.setTitle("Remind Me!", for: .normal)
         UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
         self.seconds = 5400
         UserDefaults.standard.set(self.seconds, forKey: "savedSeconds")
-        //self.timeLabel.text = "90 mins"
+        timerCell.time.text = "90"
+        
+        generateCells()
+        reloadMainSection()
     }
     
     func startTimer() {
+        let indexPath = IndexPath(row: self.sectionIndex(for: .reminder),
+                                  section: Section.cells.rawValue)
+        guard let reminderCell = self.collectionView.cellForItem(at: indexPath) as? ReminderCell else { return }
+        
         startStop = true
-        //startStopButton.setTitle("Cancel", for: .normal)
+        reminderCell.reminderButton.setTitle("Cancel Reminder", for: .normal)
         runTimer()
         UserDefaults.standard.set(startStop, forKey: "savedStartStop")
+        
+        generateCells()
+        reloadMainSection()
     }
     
     func triggerNotification(whenToSend: Int) {
@@ -296,44 +322,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(whenToSend), repeats: false)
         let request = UNNotificationRequest(identifier: "Reminder", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    }
-    
-    @IBAction func startStopButton(_ sender: UIButton) {
-        if startStop == false {
-            // Stop -> Start
-            
-            let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int
-            if UVIndex! <= 2 {
-                let alertController = UIAlertController(title: "Are you sure?", message: "The UV Index is 0-2, which is a safe level. You only need to apply sunscreen if your skin is sensitive to the sun. Do you wish to continue?", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-                    self.startStop = false
-                    UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
-                }))
-                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                    self.startStop = true
-                    UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
-                    self.startTimer()
-                    self.triggerNotification(whenToSend: 5400)
-                }))
-                self.present(alertController, animated: true, completion: nil)
-            } else {
-                startStop = true
-                UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
-                startTimer()
-                triggerNotification(whenToSend: 5400)
-            }
-        } else if startStop == true {
-            // Start -> Stop
-            
-            let alertController = UIAlertController(title: "Are you sure?", message: "By pressing 'Stop', the sunscreen timer will reset. Are you sure you want to continue?", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                self.startStop = false
-                UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
-                self.resetTimer()
-            }))
-            self.present(alertController, animated: true, completion: nil)
-        }
     }
 }
 
@@ -493,9 +481,41 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     private func remindButtonPressed() {
-        
-        generateCells()
-        reloadMainSection()
+        if startStop == false {
+            // Stop -> Start
+            
+            let UVIndex = UserDefaults.standard.object(forKey: "savedUVIndexInt") as? Int
+            if UVIndex! <= 2 {
+                let alertController = UIAlertController(title: "Are you sure?", message: "The UV Index is 0-2, which is a safe level. You only need to apply sunscreen if your skin is sensitive to the sun. Do you wish to continue?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+                    self.startStop = false
+                    UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
+                }))
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.startStop = true
+                    UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
+                    self.startTimer()
+                    self.triggerNotification(whenToSend: 5400)
+                }))
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                startStop = true
+                UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
+                startTimer()
+                triggerNotification(whenToSend: 5400)
+            }
+        } else if startStop == true {
+            // Start -> Stop
+            
+            let alertController = UIAlertController(title: "Are you sure?", message: "By pressing 'Stop', the sunscreen timer will reset. Are you sure you want to continue?", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.startStop = false
+                UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
+                self.resetTimer()
+            }))
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     private func cellForReminderSection(indexPath: IndexPath) -> UICollectionViewCell {

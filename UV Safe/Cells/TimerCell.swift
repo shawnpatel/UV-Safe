@@ -17,6 +17,8 @@ class TimerCell: SelfSizingCell {
         
         self.layer.cornerRadius = Constants.CELL_RADIUS
         self.backgroundColor = Constants.CELL_BACKGROUND
+        
+        time.text = "90"
     }
 
 }
