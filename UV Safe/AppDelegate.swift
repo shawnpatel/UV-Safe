@@ -33,13 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.isTranslucent = false
         navBar.tintColor = .black
         navBar.titleTextAttributes = [
-            .foregroundColor: UIColor.lightGray
+            .foregroundColor: UIColor.white
         ]
         navBar.barTintColor = Constants.UV_SAFE_RED
         
         let tabBar = UITabBar.appearance()
         tabBar.isTranslucent = false
-        tabBar.tintColor = .lightGray
+        tabBar.tintColor = .white
         tabBar.unselectedItemTintColor = .black
         tabBar.barTintColor = Constants.UV_SAFE_RED
         

@@ -15,8 +15,8 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var infoStack: UIStackView!
+    @IBOutlet weak var skinCancerParent: UIView!
     @IBOutlet weak var skinCancer: UIButton!
-    @IBOutlet weak var riskLevel: UILabel!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     let activityView = UIActivityIndicatorView(style: .large)
@@ -28,13 +28,10 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         
         self.overrideUserInterfaceStyle = .dark
         
-        riskLevel.isHidden = true
-        
-        skinCancer.layer.cornerRadius = 10
-        skinCancer.layer.borderWidth = 2
-        skinCancer.layer.borderColor = UIColor.white.cgColor
-        skinCancer.backgroundColor = Constants.UV_SAFE_YELLOW
-        skinCancer.setTitleColor(Constants.UV_SAFE_RED, for: .normal)
+        skinCancerParent.layer.cornerRadius = 8.5
+        skinCancer.layer.cornerRadius = 8
+        skinCancer.setTitleColor(.white, for: .normal)
+        skinCancer.backgroundColor = Constants.UV_SAFE_RED.withAlphaComponent(0.9)
         
         activityView.center = self.infoStack.center
         activityView.isHidden = true
@@ -336,7 +333,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
             self.present(alertController, animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(title: "Scan your skin!", message: "You have to scan your skin to access the analysis.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
     }
