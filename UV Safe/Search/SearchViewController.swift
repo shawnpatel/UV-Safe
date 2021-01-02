@@ -194,6 +194,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.setWidth(to: ceil(CELL_BOX_SIZE))
         cell.setHeight(to: ceil(CELL_BOX_SIZE))
         
+        cell.stackViewTop.constant = 8
+        cell.stackViewBottom.constant = 8
+        cell.stackViewLeading.constant = 8
+        cell.stackViewTrailing.constant = 8
+        
         if let latitude = Double(UserDefaults.standard.string(forKey: "savedSearchLatitude") ?? ""),
            let longitude = Double(UserDefaults.standard.string(forKey: "savedSearchLongitude") ?? "") {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

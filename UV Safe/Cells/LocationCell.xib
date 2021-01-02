@@ -29,7 +29,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="8I1-rx-Jpd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8I1-rx-Jpd">
                                 <rect key="frame" x="0.0" y="41" width="81.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,6 +56,10 @@
                 <outlet property="city" destination="ZJP-fL-8RQ" id="dSy-Cu-guG"/>
                 <outlet property="country" destination="8I1-rx-Jpd" id="3y4-SJ-Vvo"/>
                 <outlet property="mapView" destination="zuR-au-6At" id="yEn-lK-gvI"/>
+                <outlet property="stackViewBottom" destination="vV4-iQ-xOd" id="9F4-jh-xp2"/>
+                <outlet property="stackViewLeading" destination="clp-Nn-AmT" id="JWx-1u-9uI"/>
+                <outlet property="stackViewTop" destination="SrH-x8-2q4" id="rUp-fH-mfa"/>
+                <outlet property="stackViewTrailing" destination="CoT-YW-SbY" id="axh-rK-DU8"/>
             </connections>
             <point key="canvasLocation" x="117" y="125"/>
         </collectionViewCell>

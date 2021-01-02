@@ -15,6 +15,11 @@ class LocationCell: SelfSizingCell {
     @IBOutlet weak var city: UILabel!
     @IBOutlet weak var country: UILabel!
     
+    @IBOutlet weak var stackViewTop: NSLayoutConstraint!
+    @IBOutlet weak var stackViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var stackViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var stackViewTrailing: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
