@@ -90,7 +90,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         progressBar.tintColor = Constants.UV_SAFE_YELLOW
         progressBar.progressTintColor = Constants.UV_SAFE_RED
         
-        if UserDefaults.standard.stringArray(forKey: "savedUVIndex") == nil {
+        if UserDefaults.standard.string(forKey: "savedUVIndex") == nil {
             collectionView.alpha = 0
         }
         
@@ -188,11 +188,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error: \(error)")
-        /*self.cityLabel.text = "Enable Location Services!"
-        self.tempButton.isEnabled = false
-        self.windButton.isEnabled = false
-        self.startStopButton.isEnabled = false*/
+        self.presentAlert(title: "Error",
+                          message: "Please enable location services to access local weather.")
         progressBar.progress = 1
     }
     
