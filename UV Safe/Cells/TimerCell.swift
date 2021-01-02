@@ -8,11 +8,15 @@
 
 import UIKit
 
-class TimerCell: UICollectionViewCell {
+class TimerCell: SelfSizingCell {
 
+    @IBOutlet weak var time: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.layer.cornerRadius = Constants.CELL_RADIUS
+        self.backgroundColor = Constants.CELL_BACKGROUND
     }
 
 }

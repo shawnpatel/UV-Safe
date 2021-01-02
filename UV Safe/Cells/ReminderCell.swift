@@ -29,6 +29,8 @@ class ReminderCell: SelfSizingCell {
     @IBOutlet weak var yellowBar: UIView!
     @IBOutlet weak var greenBar: UIView!
     
+    public var remindButtonPressed: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -81,5 +83,9 @@ class ReminderCell: SelfSizingCell {
             intensity.text = "Intense"
             protection.text = "Extra Protection"
         }
+    }
+    
+    @IBAction func remindButtonPressed(_ sender: Any) {
+        remindButtonPressed?()
     }
 }

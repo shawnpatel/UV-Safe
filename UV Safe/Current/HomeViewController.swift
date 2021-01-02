@@ -26,6 +26,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             case TemperatureCell
             case WeatherDescriptionCell
             case ReminderCell
+            case TimerCell
         }
         
         enum Identifier: String, CaseIterable {
@@ -34,6 +35,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             case temperature
             case weatherDescription
             case reminder
+            case timer
         }
         
         enum Cells: Int, CaseIterable {
@@ -42,6 +44,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             case temperature
             case weatherDescription
             case reminder
+            case timer
         }
     }
     
@@ -59,6 +62,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var longitude = ""
     var canCall = true
     
+    var sections: [Section.Cells] = []
+    
     var CELL_WIDTH: CGFloat {
         return collectionView.frame.width - 20
     }
@@ -69,6 +74,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        generateCells()
         
         self.overrideUserInterfaceStyle = .dark
         
@@ -226,9 +233,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 UserDefaults.standard.set(weatherData["conditions"] as! String, forKey: "savedWeather")
                 UserDefaults.standard.set(weatherData["icon"] as! String, forKey: "savedIconString")
                 
-                DispatchQueue.main.async {
-                    self.collectionView.reloadSections(IndexSet(0 ..< Section.allCases.count))
-                }
+                self.reloadMainSection()
             }
             
             self.progressBar.progress = 1
@@ -330,10 +335,31 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     private func registerNibs() {
         for i in 0 ..< Section.NibName.allCases.count {
             let nib = UINib(nibName: Section.NibName.allCases[i].rawValue, bundle: nil)
             collectionView.register(nib, forCellWithReuseIdentifier: Section.Identifier.allCases[i].rawValue)
+        }
+    }
+    
+    private func reloadMainSection () {
+        DispatchQueue.main.async {
+            self.collectionView.reloadSections(IndexSet(0 ..< Section.allCases.count))
+        }
+    }
+    
+    private func sectionIndex(for section: Section.Cells) -> Int {
+        return sections.firstIndex(of: section) ?? NSNotFound
+    }
+    
+    private func generateCells() {
+        sections = []
+        
+        sections.append(contentsOf: [.location, .uvIndex, .temperature, .weatherDescription, .reminder])
+        
+        if timer.isValid {
+            sections.append(.timer)
         }
     }
     
@@ -349,7 +375,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch sectionType {
             case .cells:
-                return Section.Cells.allCases.count
+                return sections.count
         }
     }
     
@@ -374,6 +400,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
             case .reminder:
                 return cellForReminderSection(indexPath: indexPath)
+                
+            case .timer:
+                return cellForTimerSection(indexPath: indexPath)
         }
     }
     
@@ -460,15 +489,33 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
+    private func remindButtonPressed() {
+        
+        generateCells()
+        reloadMainSection()
+    }
+    
     private func cellForReminderSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.reminder.rawValue,
                                                       for: indexPath) as! ReminderCell
         cell.setWidth(to: CELL_WIDTH)
         cell.setHeight(to: CELL_BOX_SIZE)
         
-        let uvIndex = UserDefaults.standard.integer(forKey: "savedUVIndexInt")
+        cell.remindButtonPressed = self.remindButtonPressed
         
+        let uvIndex = UserDefaults.standard.integer(forKey: "savedUVIndexInt")
         cell.updateChart(uvIndex: uvIndex)
+        
+        return cell
+    }
+    
+    private func cellForTimerSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.timer.rawValue,
+                                                      for: indexPath) as! TimerCell
+        cell.setWidth(to: CELL_WIDTH)
+        cell.setHeight(to: CELL_BOX_SIZE / 2)
+        
+        
         
         return cell
     }
