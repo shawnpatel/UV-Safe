@@ -32,6 +32,8 @@
 		CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAC36C2B1EF999E50083F6DC /* LaunchScreen.storyboard */; };
 		CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C341EF99B960083F6DC /* HomeViewController.swift */; };
 		CAC36C371EF99E990083F6DC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC36C361EF99E990083F6DC /* SearchViewController.swift */; };
+		CAC87C4225A1029700D01B4A /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC87C4025A1029700D01B4A /* TimerCell.swift */; };
+		CAC87C4325A1029700D01B4A /* TimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAC87C4125A1029700D01B4A /* TimerCell.xib */; };
 		CACF17982288A0F700D2E0B8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17972288A0F700D2E0B8 /* AlertService.swift */; };
 		CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF17992288ABEC00D2E0B8 /* NetworkError.swift */; };
 		CAE2D74D23CD94E4007808DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAE2D74C23CD94E4007808DE /* GoogleService-Info.plist */; };
@@ -82,6 +84,8 @@
 		CAC36C2E1EF999E50083F6DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAC36C341EF99B960083F6DC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CAC36C361EF99E990083F6DC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CAC87C4025A1029700D01B4A /* TimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
+		CAC87C4125A1029700D01B4A /* TimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerCell.xib; sourceTree = "<group>"; };
 		CACF17972288A0F700D2E0B8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		CACF17992288ABEC00D2E0B8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CAE2D74C23CD94E4007808DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				CA5D8468259EB1660090ADBA /* WeatherDescriptionCell.xib */,
 				CA5D846B259EB2DF0090ADBA /* ReminderCell.swift */,
 				CA5D846C259EB2DF0090ADBA /* ReminderCell.xib */,
+				CAC87C4025A1029700D01B4A /* TimerCell.swift */,
+				CAC87C4125A1029700D01B4A /* TimerCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -294,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA5D846A259EB1660090ADBA /* WeatherDescriptionCell.xib in Resources */,
+				CAC87C4325A1029700D01B4A /* TimerCell.xib in Resources */,
 				CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */,
 				CA5D8466259EB14A0090ADBA /* TemperatureCell.xib in Resources */,
 				CAC36C2D1EF999E50083F6DC /* LaunchScreen.storyboard in Resources */,
@@ -402,6 +409,7 @@
 				CACF179A2288ABEC00D2E0B8 /* NetworkError.swift in Sources */,
 				CAC36C351EF99B960083F6DC /* HomeViewController.swift in Sources */,
 				CA5D8461259EAA170090ADBA /* UVIndexCell.swift in Sources */,
+				CAC87C4225A1029700D01B4A /* TimerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

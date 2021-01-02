@@ -464,9 +464,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.reminder.rawValue,
                                                       for: indexPath) as! ReminderCell
         cell.setWidth(to: CELL_WIDTH)
-        cell.setHeight(to: 150)
+        cell.setHeight(to: CELL_BOX_SIZE)
         
+        let uvIndex = UserDefaults.standard.integer(forKey: "savedUVIndexInt")
         
+        cell.updateChart(uvIndex: uvIndex)
         
         return cell
     }
