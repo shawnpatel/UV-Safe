@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMm-Y3-ci9">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z7i-DK-x1l">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Z7i-DK-x1l">
                                 <rect key="frame" x="16" y="126" width="78.5" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UdE-Lc-XPi">
@@ -37,7 +37,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zup-DW-zoW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="C Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="zup-DW-zoW">
                                 <rect key="frame" x="16" y="16" width="168" height="79"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="66"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,7 +49,7 @@
                             <constraint firstAttribute="bottom" secondItem="Z7i-DK-x1l" secondAttribute="bottom" constant="16" id="Hhr-hi-APn"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Z7i-DK-x1l" secondAttribute="trailing" constant="16" id="ME8-tu-HaS"/>
                             <constraint firstItem="zup-DW-zoW" firstAttribute="top" secondItem="OMm-Y3-ci9" secondAttribute="top" constant="16" id="bi7-Hc-L6n"/>
-                            <constraint firstItem="Z7i-DK-x1l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zup-DW-zoW" secondAttribute="bottom" constant="16" id="jo0-UC-ZXb"/>
+                            <constraint firstItem="Z7i-DK-x1l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zup-DW-zoW" secondAttribute="bottom" id="jo0-UC-ZXb"/>
                             <constraint firstItem="Z7i-DK-x1l" firstAttribute="leading" secondItem="OMm-Y3-ci9" secondAttribute="leading" constant="16" id="rOr-LA-7rv"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zup-DW-zoW" secondAttribute="trailing" constant="16" id="ywr-4G-3XO"/>
                         </constraints>
@@ -65,6 +65,7 @@
             </constraints>
             <connections>
                 <outlet property="currentTemp" destination="zup-DW-zoW" id="zrX-hd-7kM"/>
+                <outlet property="currentTempTopConstraint" destination="bi7-Hc-L6n" id="UfS-2K-1Fp"/>
                 <outlet property="highTemp" destination="UdE-Lc-XPi" id="Hqn-lz-xoV"/>
                 <outlet property="lowTemp" destination="i6f-kG-d1P" id="jSW-lL-2ox"/>
             </connections>

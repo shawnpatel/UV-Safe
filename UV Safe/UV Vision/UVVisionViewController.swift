@@ -17,6 +17,7 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var infoStack: UIStackView!
     @IBOutlet weak var skinCancer: UIButton!
     @IBOutlet weak var riskLevel: UILabel!
+    @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     let activityView = UIActivityIndicatorView(style: .large)
     

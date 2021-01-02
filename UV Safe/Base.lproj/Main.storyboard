@@ -480,6 +480,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="aboutButton" destination="8Ac-84-6RG" id="e8k-vb-FLF"/>
                         <outlet property="imageView" destination="TLE-LG-fbq" id="mNg-EC-fAk"/>
                         <outlet property="infoStack" destination="E7A-Is-Cz4" id="S5Y-pR-jDP"/>
                         <outlet property="logoImageView" destination="rtn-c2-MCd" id="o3B-fE-1Cp"/>
@@ -625,7 +626,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sL9-fp-JVY">
                                                     <rect key="frame" x="0.0" y="0.0" width="388" height="183"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkW-7u-LV4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="dkW-7u-LV4">
                                                     <rect key="frame" x="0.0" y="183" width="388" height="61"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

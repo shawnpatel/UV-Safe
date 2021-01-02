@@ -20,7 +20,7 @@ extension UIImage {
 extension UIView {
     // Less Blur in Effects View from: https://stackoverflow.com/questions/29498884/less-blur-with-visual-effect-view-with-blur
     public func pauseAnimation() {
-        let time = 0.2 + CFAbsoluteTimeGetCurrent()
+        let time = 0.25 + CFAbsoluteTimeGetCurrent()
         let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, time, 0, 0, 0, { timer in
             let layer = self.layer
             let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)

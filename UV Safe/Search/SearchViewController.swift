@@ -54,8 +54,10 @@ class SearchViewController: UIViewController {
         
         registerNibs()
         
-        popupView.layer.cornerRadius = Constants.CELL_RADIUS / 2
-        collectionView.layer.cornerRadius = Constants.CELL_RADIUS / 2
+        popupView.layer.borderWidth = 1
+        popupView.layer.borderColor = UIColor.white.cgColor
+        popupView.layer.cornerRadius = Constants.CELL_RADIUS
+        collectionView.layer.cornerRadius = Constants.CELL_RADIUS
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         self.overrideUserInterfaceStyle = .dark
@@ -74,6 +76,9 @@ class SearchViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurView = UIVisualEffectView(frame: view.frame)
         blurView.applyBlur(with: blurEffect)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
+        blurView.addGestureRecognizer(tap)
 
         self.view.insertSubview(blurView, belowSubview: popupView)
     }
@@ -129,6 +134,10 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func closeButton(_ sender: Any) {
+        self.dismissView()
+    }
+    
+    @objc private func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -181,8 +190,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForLocationSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
                                                       for: indexPath) as! LocationCell
-        cell.setWidth(to: CELL_BOX_SIZE)
-        cell.setHeight(to: CELL_BOX_SIZE)
+        cell.setWidth(to: ceil(CELL_BOX_SIZE))
+        cell.setHeight(to: ceil(CELL_BOX_SIZE))
         
         if let latitude = Double(UserDefaults.standard.string(forKey: "savedSearchLatitude") ?? ""),
            let longitude = Double(UserDefaults.standard.string(forKey: "savedSearchLongitude") ?? "") {
@@ -205,8 +214,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForUVIndexSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
                                                       for: indexPath) as! UVIndexCell
-        cell.setWidth(to: CELL_BOX_SIZE)
-        cell.setHeight(to: CELL_BOX_SIZE)
+        cell.setWidth(to: floor(CELL_BOX_SIZE))
+        cell.setHeight(to: floor(CELL_BOX_SIZE))
         
         let uvIndex = UserDefaults.standard.integer(forKey: "savedSearchUVIndexInt")
         cell.uvIndex.text = String(uvIndex)
@@ -217,8 +226,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.temperature.rawValue,
                                                       for: indexPath) as! TemperatureCell
-        cell.setWidth(to: CELL_BOX_SIZE)
-        cell.setHeight(to: CELL_BOX_SIZE)
+        cell.setWidth(to: ceil(CELL_BOX_SIZE))
+        cell.setHeight(to: ceil(CELL_BOX_SIZE))
+        
+        cell.currentTempTopConstraint.constant = -16
         
         if let currentTemp = UserDefaults.standard.string(forKey: "savedSearchTemp") {
             cell.currentTemp.text = currentTemp
@@ -238,8 +249,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForWeatherDescriptionSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.weatherDescription.rawValue,
                                                       for: indexPath) as! WeatherDescriptionCell
-        cell.setWidth(to: CELL_BOX_SIZE)
-        cell.setHeight(to: CELL_BOX_SIZE)
+        cell.setWidth(to: floor(CELL_BOX_SIZE))
+        cell.setHeight(to: floor(CELL_BOX_SIZE))
         
         if let details = UserDefaults.standard.string(forKey: "savedSearchWeather") {
             cell.details.text = details

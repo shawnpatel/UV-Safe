@@ -10,6 +10,7 @@ import UIKit
 
 class TemperatureCell: SelfSizingCell {
 
+    @IBOutlet weak var currentTempTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var currentTemp: UILabel!
     @IBOutlet weak var highTemp: UILabel!
     @IBOutlet weak var lowTemp: UILabel!

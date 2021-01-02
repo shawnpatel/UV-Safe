@@ -37,11 +37,24 @@ class InformationTableViewController: UITableViewController {
         } else {
             informationTableView.rowHeight = (250 * (screenWidth - 16)) / 398
         }
+        
+        addEasterEgg()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func addEasterEgg() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(performEasterEgg))
+        longPress.minimumPressDuration = 5
+        navigationController?.navigationBar.addGestureRecognizer(longPress)
+    }
+    
+    @objc private func performEasterEgg() {
+        let alert = UIAlertController(title: nil, message: "Designed by Mandy ™", preferredStyle: .alert)
+        alert.view.tintColor = .black
+        self.present(alert, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            alert.dismiss(animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
