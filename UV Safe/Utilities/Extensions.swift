@@ -16,3 +16,34 @@ extension UIImage {
         }
     }
 }
+
+extension UIView {
+    // Less Blur in Effects View from: https://stackoverflow.com/questions/29498884/less-blur-with-visual-effect-view-with-blur
+    public func pauseAnimation() {
+        let time = 0.2 + CFAbsoluteTimeGetCurrent()
+        let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, time, 0, 0, 0, { timer in
+            let layer = self.layer
+            let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+            layer.speed = 0.0
+            layer.timeOffset = pausedTime
+        })
+        CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, CFRunLoopMode.commonModes)
+    }
+
+    public func resumeAnimation() {
+        let pausedTime = layer.timeOffset
+
+        layer.speed = 1.0
+        layer.timeOffset = 0.0
+        layer.beginTime = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+    }
+}
+
+extension UIVisualEffectView {
+    public func applyBlur(with blurEffect: UIBlurEffect) {
+        self.pauseAnimation()
+        UIView.animate(withDuration: 0.75) {
+            self.effect = blurEffect
+        }
+    }
+}

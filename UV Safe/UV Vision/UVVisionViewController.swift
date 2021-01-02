@@ -12,19 +12,20 @@ import Vision
 
 class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var scans: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var infoStack: UIStackView!
     @IBOutlet weak var skinCancer: UIButton!
     @IBOutlet weak var riskLevel: UILabel!
     
-    let activityView = UIActivityIndicatorView(style: .whiteLarge)
+    let activityView = UIActivityIndicatorView(style: .large)
     
     var request: VNCoreMLRequest!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.overrideUserInterfaceStyle = .dark
         
         riskLevel.isHidden = true
         

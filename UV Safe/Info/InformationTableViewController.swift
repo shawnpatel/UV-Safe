@@ -22,6 +22,8 @@ class InformationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.overrideUserInterfaceStyle = .dark
+        
         informationTableView.delegate = self
         informationTableView.dataSource = self
         informationTableView.allowsSelection = false

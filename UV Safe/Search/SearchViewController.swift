@@ -7,9 +7,37 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SearchViewController: UIViewController {
     
+    enum Section: Int, CaseIterable {
+        
+        case cells
+        
+        enum NibName: String, CaseIterable {
+            case LocationCell
+            case UVIndexCell
+            case TemperatureCell
+            case WeatherDescriptionCell
+        }
+        
+        enum Identifier: String, CaseIterable {
+            case location
+            case uvIndex
+            case temperature
+            case weatherDescription
+        }
+        
+        enum Cells: Int, CaseIterable {
+            case location
+            case uvIndex
+            case temperature
+            case weatherDescription
+        }
+    }
+    
+    @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -17,16 +45,37 @@ class SearchViewController: UIViewController {
     public var latitude: String!
     public var longitude: String!
     
+    var CELL_BOX_SIZE: CGFloat {
+        return collectionView.frame.width / 2 - 15
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerNibs()
+        
+        popupView.layer.cornerRadius = Constants.CELL_RADIUS / 2
+        collectionView.layer.cornerRadius = Constants.CELL_RADIUS / 2
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        
+        self.overrideUserInterfaceStyle = .dark
         collectionView.alpha = 0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         units = UserDefaults.standard.integer(forKey: "units")
+        latitude = UserDefaults.standard.string(forKey: "savedSearchLatitude") ?? ""
+        longitude = UserDefaults.standard.string(forKey: "savedSearchLongitude") ?? ""
+        
+        updateWeatherInfo()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(frame: view.frame)
+        blurView.applyBlur(with: blurEffect)
+
+        self.view.insertSubview(blurView, belowSubview: popupView)
     }
     
     func updateWeatherInfo() {
@@ -73,7 +122,133 @@ class SearchViewController: UIViewController {
                         self.collectionView.alpha = 1
                     }
                 }
+                
+                self.progressBar.progress = 1
             }
         }
     }
+    
+    @IBAction func closeButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    private func registerNibs() {
+        for i in 0 ..< Section.NibName.allCases.count {
+            let nib = UINib(nibName: Section.NibName.allCases[i].rawValue, bundle: nil)
+            collectionView.register(nib, forCellWithReuseIdentifier: Section.Identifier.allCases[i].rawValue)
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return Section.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let sectionType = Section(rawValue: section) else {
+            print("Cannot find section at index \(section).")
+            return 0
+        }
+        
+        switch sectionType {
+            case .cells:
+                return Section.Cells.allCases.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let row = Section.Cells(rawValue: indexPath.row) else {
+            print("Cannot find section at index \(indexPath.section).")
+            return UICollectionViewCell()
+        }
+        
+        switch row {
+            case .location:
+                return cellForLocationSection(indexPath: indexPath)
+                
+            case .uvIndex:
+                return cellForUVIndexSection(indexPath: indexPath)
+                
+            case .temperature:
+                return cellForTemperatureSection(indexPath: indexPath)
+                
+            case .weatherDescription:
+                return cellForWeatherDescriptionSection(indexPath: indexPath)
+        }
+    }
+    
+    private func cellForLocationSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
+                                                      for: indexPath) as! LocationCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        if let latitude = Double(UserDefaults.standard.string(forKey: "savedSearchLatitude") ?? ""),
+           let longitude = Double(UserDefaults.standard.string(forKey: "savedSearchLongitude") ?? "") {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            cell.setLocation(to: coordinate)
+        }
+        
+        if let cityAndCountry = UserDefaults.standard.string(forKey: "savedSearchCityName") {
+            let split = cityAndCountry.split(separator: ",")
+            let city = String(split[0])
+            let country = String(split[1])
+            
+            cell.city.text = city
+            cell.country.text = country
+        }
+        
+        return cell
+    }
+    
+    private func cellForUVIndexSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.uvIndex.rawValue,
+                                                      for: indexPath) as! UVIndexCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        let uvIndex = UserDefaults.standard.integer(forKey: "savedSearchUVIndexInt")
+        cell.uvIndex.text = String(uvIndex)
+        
+        return cell
+    }
+    
+    private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.temperature.rawValue,
+                                                      for: indexPath) as! TemperatureCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        if let currentTemp = UserDefaults.standard.string(forKey: "savedSearchTemp") {
+            cell.currentTemp.text = currentTemp
+        }
+        
+        if let minTemp = UserDefaults.standard.string(forKey: "savedSearchMinTemp") {
+            cell.lowTemp.text = "L: \(minTemp)"
+        }
+        
+        if let maxTemp = UserDefaults.standard.string(forKey: "savedSearchMaxTemp") {
+            cell.highTemp.text = "H: \(maxTemp)"
+        }
+        
+        return cell
+    }
+    
+    private func cellForWeatherDescriptionSection(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.weatherDescription.rawValue,
+                                                      for: indexPath) as! WeatherDescriptionCell
+        cell.setWidth(to: CELL_BOX_SIZE)
+        cell.setHeight(to: CELL_BOX_SIZE)
+        
+        if let details = UserDefaults.standard.string(forKey: "savedSearchWeather") {
+            cell.details.text = details
+        }
+        
+        if let icon = UserDefaults.standard.string(forKey: "savedSearchIconString") {
+            cell.icon.image = UIImage(named: icon)
+        }
+        
+        return cell
+    }   
 }

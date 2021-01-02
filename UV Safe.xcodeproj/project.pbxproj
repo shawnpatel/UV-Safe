@@ -132,7 +132,6 @@
 			children = (
 				CAC36C341EF99B960083F6DC /* HomeViewController.swift */,
 				CA49201B20CAFD6D00571AD1 /* SettingsViewController.swift */,
-				CA5D8411259E5BE80090ADBA /* Cells */,
 			);
 			path = Current;
 			sourceTree = "<group>";
@@ -193,6 +192,7 @@
 			children = (
 				CA4085611F245A4200BD4696 /* UV Safe.entitlements */,
 				CAC36C201EF999E40083F6DC /* AppDelegate.swift */,
+				CA5D8411259E5BE80090ADBA /* Cells */,
 				CA091C611FC4AF83002F1F85 /* Current */,
 				CA091C621FC4AF92002F1F85 /* Search */,
 				CA091C601FC4AF55002F1F85 /* UV Vision */,
