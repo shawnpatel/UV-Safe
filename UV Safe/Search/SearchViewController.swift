@@ -191,8 +191,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForLocationSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.location.rawValue,
                                                       for: indexPath) as! LocationCell
-        cell.setWidth(to: ceil(CELL_BOX_SIZE))
-        cell.setHeight(to: ceil(CELL_BOX_SIZE))
+        cell.setWidth(to: ceil(CELL_BOX_SIZE) - 0.2)
+        cell.setHeight(to: ceil(CELL_BOX_SIZE) - 0.2)
         
         cell.stackViewTop.constant = 8
         cell.stackViewBottom.constant = 8
@@ -232,8 +232,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     private func cellForTemperatureSection(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Section.Identifier.temperature.rawValue,
                                                       for: indexPath) as! TemperatureCell
-        cell.setWidth(to: ceil(CELL_BOX_SIZE))
-        cell.setHeight(to: ceil(CELL_BOX_SIZE))
+        cell.setWidth(to: ceil(CELL_BOX_SIZE) - 0.2)
+        cell.setHeight(to: ceil(CELL_BOX_SIZE) - 0.2)
         
         cell.currentTempTopConstraint.constant = -16
         cell.unitSegment.isHidden = true
