@@ -53,6 +53,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     var units: Int!
     
+    var firstLaunch = false
     var startStop = false
     var seconds = 5400
     var timer = Timer()
@@ -91,6 +92,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         progressBar.progressTintColor = Constants.UV_SAFE_RED
         
         if UserDefaults.standard.string(forKey: "savedUVIndex") == nil {
+            firstLaunch = true
             collectionView.alpha = 0
         }
         
@@ -192,9 +194,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.presentAlert(title: "Error",
-                          message: "Please enable location services to access local weather.")
-        progressBar.progress = 1
+        if !firstLaunch {
+            self.presentAlert(title: "Error",
+                              message: "Please enable location services to access local weather.")
+            progressBar.progress = 1
+        }
     }
     
     func updateWeatherInfo() {
