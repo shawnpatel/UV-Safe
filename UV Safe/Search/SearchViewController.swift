@@ -63,6 +63,9 @@ class SearchViewController: UIViewController {
         self.overrideUserInterfaceStyle = .dark
         collectionView.alpha = 0
         
+        progressBar.tintColor = Constants.UV_SAFE_YELLOW
+        progressBar.progressTintColor = Constants.UV_SAFE_RED
+        
         units = UserDefaults.standard.integer(forKey: "units")
         latitude = UserDefaults.standard.string(forKey: "savedSearchLatitude") ?? ""
         longitude = UserDefaults.standard.string(forKey: "savedSearchLongitude") ?? ""

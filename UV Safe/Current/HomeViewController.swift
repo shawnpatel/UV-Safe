@@ -80,6 +80,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(HomeViewController.movedToForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
         
+        progressBar.tintColor = Constants.UV_SAFE_YELLOW
+        progressBar.progressTintColor = Constants.UV_SAFE_RED
+        
         getCurrentLocation()
     }
     

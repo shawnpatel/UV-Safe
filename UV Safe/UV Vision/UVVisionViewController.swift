@@ -32,8 +32,9 @@ class UVVisionViewController: UIViewController, UIImagePickerControllerDelegate,
         
         skinCancer.layer.cornerRadius = 10
         skinCancer.layer.borderWidth = 2
-        skinCancer.layer.borderColor = UIColor.lightGray.cgColor
-        skinCancer.backgroundColor = UIColor(red: 243/255, green: 178/255, blue: 41/255, alpha: 1)
+        skinCancer.layer.borderColor = UIColor.white.cgColor
+        skinCancer.backgroundColor = Constants.UV_SAFE_YELLOW
+        skinCancer.setTitleColor(Constants.UV_SAFE_RED, for: .normal)
         
         activityView.center = self.infoStack.center
         activityView.isHidden = true
