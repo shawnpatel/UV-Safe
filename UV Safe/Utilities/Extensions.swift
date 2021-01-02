@@ -59,3 +59,12 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
 }
+
+extension UIButton {
+    public func setTitleWithoutAnimation(_ text: String?, for state: UIControl.State) {
+        UIView.performWithoutAnimation {
+            self.setTitle(text, for: state)
+            self.layoutIfNeeded()
+        }
+    }
+}

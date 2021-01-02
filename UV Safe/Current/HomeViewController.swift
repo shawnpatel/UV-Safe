@@ -111,9 +111,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if let checkStartStop = UserDefaults.standard.object(forKey: "savedStartStop") as? Bool {
                 self.startStop = checkStartStop
                 if self.startStop == false {
-                    reminderCell.reminderButton.setTitle("Remind Me!", for: .normal)
+                    reminderCell.reminderButton.setTitleWithoutAnimation("Remind Me!", for: .normal)
                 } else if self.startStop == true {
-                    reminderCell.reminderButton.setTitle("Cancel Reminder", for: .normal)
+                    reminderCell.reminderButton.setTitleWithoutAnimation("Cancel Reminder", for: .normal)
                     self.seconds = UserDefaults.standard.integer(forKey: "savedSeconds")
                     let newTimestamp = Int(Date().timeIntervalSince1970)
                     if let savedTimestamp = UserDefaults.standard.object(forKey: "savedTimestamp") as? Int {
@@ -288,14 +288,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.timer.invalidate()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         self.startStop = false
-        reminderCell.reminderButton.setTitle("Remind Me!", for: .normal)
+        reminderCell.reminderButton.setTitleWithoutAnimation("Remind Me!", for: .normal)
         UserDefaults.standard.set(self.startStop, forKey: "savedStartStop")
         self.seconds = 5400
         UserDefaults.standard.set(self.seconds, forKey: "savedSeconds")
-        timerCell.time.text = "90"
         
         generateCells()
-        reloadMainSection()
+        reloadMainSection() {
+            timerCell.time.text = "90"
+        }
     }
     
     func startTimer() {
@@ -304,7 +305,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         guard let reminderCell = self.collectionView.cellForItem(at: indexPath) as? ReminderCell else { return }
         
         startStop = true
-        reminderCell.reminderButton.setTitle("Cancel Reminder", for: .normal)
+        reminderCell.reminderButton.setTitleWithoutAnimation("Cancel Reminder", for: .normal)
         runTimer()
         UserDefaults.standard.set(startStop, forKey: "savedStartStop")
         
@@ -334,9 +335,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-    private func reloadMainSection () {
+    private func reloadMainSection (completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            self.collectionView.reloadSections(IndexSet(0 ..< Section.allCases.count))
+            self.collectionView.performBatchUpdates({
+                self.collectionView.reloadSections(IndexSet(0 ..< Section.allCases.count))
+            }, completion: { _ in
+                completion?()
+            })
         }
     }
     
@@ -507,7 +512,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else if startStop == true {
             // Start -> Stop
             
-            let alertController = UIAlertController(title: "Are you sure?", message: "By pressing 'Stop', the sunscreen timer will reset. Are you sure you want to continue?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Are you sure?", message: "By pressing 'Cancel', the sunscreen timer will reset. Are you sure you want to continue?", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
             alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
                 self.startStop = false
@@ -526,6 +531,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.remindButtonPressed = self.remindButtonPressed
         
+        if timer.isValid {
+            cell.reminderButton.setTitleWithoutAnimation("Cancel Reminder", for: .normal)
+        } else {
+            cell.reminderButton.setTitleWithoutAnimation("Remind Me!", for: .normal)
+        }
+        
         let uvIndex = UserDefaults.standard.integer(forKey: "savedUVIndexInt")
         cell.updateChart(uvIndex: uvIndex)
         
@@ -537,8 +548,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                       for: indexPath) as! TimerCell
         cell.setWidth(to: CELL_WIDTH)
         cell.setHeight(to: CELL_BOX_SIZE / 2)
-        
-        
         
         return cell
     }
