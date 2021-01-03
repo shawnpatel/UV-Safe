@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navBar = UINavigationBar.appearance()
         navBar.isTranslucent = false
-        navBar.tintColor = .black
+        navBar.tintColor = .white
         navBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]

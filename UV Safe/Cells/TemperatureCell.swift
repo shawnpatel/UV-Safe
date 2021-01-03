@@ -24,8 +24,8 @@ class TemperatureCell: SelfSizingCell {
         self.layer.cornerRadius = Constants.CELL_RADIUS
         self.backgroundColor = Constants.CELL_BACKGROUND
         
-        unitSegment.backgroundColor = Constants.UV_SAFE_RED
-        unitSegment.setTitleTextAttributes([
+        unitSegment?.backgroundColor = Constants.UV_SAFE_RED
+        unitSegment?.setTitleTextAttributes([
             .foregroundColor: UIColor.black
         ], for: .normal)
     }

@@ -95,7 +95,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="UV Safe" id="ndb-bt-aII">
                         <barButtonItem key="backBarButtonItem" title="Back" id="fFI-Jf-8OG"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Search" id="FYE-jW-c7x">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="FYE-jW-c7x">
                             <connections>
                                 <action selector="searchButton:" destination="zhO-tL-Dpt" id="RHU-DU-cP5"/>
                             </connections>
@@ -424,7 +424,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="UV Vision" id="rdG-sO-cJk">
                         <barButtonItem key="backBarButtonItem" title="Back" id="c4o-qZ-yUh"/>
-                        <barButtonItem key="leftBarButtonItem" image="Help" largeContentSizeImage="Help" id="8Ac-84-6RG">
+                        <barButtonItem key="leftBarButtonItem" image="questionmark.circle" catalog="system" largeContentSizeImage="questionmark.circle" id="8Ac-84-6RG">
                             <connections>
                                 <segue destination="5bJ-b5-cv9" kind="show" id="kjO-nO-w2A"/>
                             </connections>
@@ -639,7 +639,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-P5-hRY">
                                 <rect key="frame" x="8" y="96" width="412" height="739"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">UV Vision is powered by Apple's Core ML and Vision frameworks. UV Vision uses machine learning and computer vision to compare the similarities between the photo of your mole/lesion and pre-classified photos of different types of benign and malignant moles/lesions. Based on the similarities between your photo and the pre-classified photos, a prediction is made with a confidence level. The higher the confidence level, the more likely the identified area on your skin is malignant.  UV Vision is continually improving as more pre-classified images are trained. I, along with Apple, do not guarantee the accuracy of the UV Vision service; use at your own discretion. UV Vision should not be used to diagnose skin cancer. If you believe you may have skin cancer, contact your doctor or a dermatologist immediately for an official diagnosis.</mutableString>
+                                <string key="text">UV Vision is powered by Apple's Core ML and Vision frameworks. UV Vision uses machine learning and computer vision to compare the similarities between the photo of your mole/lesion and pre-classified photos of different types of benign and malignant moles/lesions. Based on the similarities between your photo and the pre-classified photos, a prediction is made with a confidence level. The higher the confidence level, the more likely the identified area on your skin is malignant.  UV Vision is continually improving as more pre-classified images are trained. I, along with Apple, do not guarantee the accuracy of the UV Vision service; use at your own discretion. UV Vision should not be used to diagnose skin cancer. If you believe you may have skin cancer, contact your doctor or a dermatologist immediately for an official diagnosis.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -719,11 +719,11 @@
     </scenes>
     <resources>
         <image name="App Logo" width="2000" height="2000"/>
-        <image name="Help" width="24" height="24"/>
         <image name="Information" width="24" height="24"/>
         <image name="Location" width="24" height="24"/>
         <image name="Search" width="24" height="24"/>
         <image name="Sun" width="24" height="24"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
