@@ -381,7 +381,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let row = Section.Cells(rawValue: indexPath.row) else {
-            print("Cannot find section at index \(indexPath.section).")
+            print("Cannot find section at index \(indexPath.row).")
             return UICollectionViewCell()
         }
         

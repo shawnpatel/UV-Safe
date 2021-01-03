@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		CA0FEB0C25A1798B00FB6E92 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0FEB0A25A1798B00FB6E92 /* InfoCell.swift */; };
 		CA0FEB0D25A1798B00FB6E92 /* InfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0FEB0B25A1798B00FB6E92 /* InfoCell.xib */; };
-		CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationTableViewController.swift */; };
+		CA0FEB1025A1926500FB6E92 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0FEB0E25A1926500FB6E92 /* ImageCell.swift */; };
+		CA0FEB1125A1926500FB6E92 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0FEB0F25A1926500FB6E92 /* ImageCell.xib */; };
+		CA22BA311F26C34B00413405 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BA301F26C34B00413405 /* InformationViewController.swift */; };
 		CA5D8414259E5C450090ADBA /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8412259E5C450090ADBA /* LocationCell.swift */; };
 		CA5D8415259E5C450090ADBA /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5D8413259E5C450090ADBA /* LocationCell.xib */; };
 		CA5D8417259E5CAA0090ADBA /* SelfSizingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D8416259E5CAA0090ADBA /* SelfSizingCell.swift */; };
@@ -59,7 +61,9 @@
 		B9C8A68C517EA10238C8A818 /* Pods-UV Safe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UV Safe.release.xcconfig"; path = "Pods/Target Support Files/Pods-UV Safe/Pods-UV Safe.release.xcconfig"; sourceTree = "<group>"; };
 		CA0FEB0A25A1798B00FB6E92 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		CA0FEB0B25A1798B00FB6E92 /* InfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCell.xib; sourceTree = "<group>"; };
-		CA22BA301F26C34B00413405 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
+		CA0FEB0E25A1926500FB6E92 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		CA0FEB0F25A1926500FB6E92 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		CA22BA301F26C34B00413405 /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		CA4085611F245A4200BD4696 /* UV Safe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UV Safe.entitlements"; sourceTree = "<group>"; };
 		CA5D8412259E5C450090ADBA /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		CA5D8413259E5C450090ADBA /* LocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
@@ -150,7 +154,7 @@
 		CA091C631FC4AFAA002F1F85 /* Info */ = {
 			isa = PBXGroup;
 			children = (
-				CA22BA301F26C34B00413405 /* InformationTableViewController.swift */,
+				CA22BA301F26C34B00413405 /* InformationViewController.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -172,6 +176,8 @@
 				CAC87C4125A1029700D01B4A /* TimerCell.xib */,
 				CA0FEB0A25A1798B00FB6E92 /* InfoCell.swift */,
 				CA0FEB0B25A1798B00FB6E92 /* InfoCell.xib */,
+				CA0FEB0E25A1926500FB6E92 /* ImageCell.swift */,
+				CA0FEB0F25A1926500FB6E92 /* ImageCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 				CAC36C2A1EF999E50083F6DC /* Assets.xcassets in Resources */,
 				CA5D846E259EB2DF0090ADBA /* ReminderCell.xib in Resources */,
 				CA5D8462259EAA170090ADBA /* UVIndexCell.xib in Resources */,
+				CA0FEB1125A1926500FB6E92 /* ImageCell.xib in Resources */,
 				CA0FEB0D25A1798B00FB6E92 /* InfoCell.xib in Resources */,
 				CAC36C281EF999E50083F6DC /* Main.storyboard in Resources */,
 			);
@@ -399,9 +406,10 @@
 				CA5D846D259EB2DF0090ADBA /* ReminderCell.swift in Sources */,
 				CA721AAA1FC0F2770014FBFC /* UVVisionViewController.swift in Sources */,
 				CAC36C211EF999E40083F6DC /* AppDelegate.swift in Sources */,
+				CA0FEB1025A1926500FB6E92 /* ImageCell.swift in Sources */,
 				CA5D8430259E63DE0090ADBA /* Constants.swift in Sources */,
 				CA5D8414259E5C450090ADBA /* LocationCell.swift in Sources */,
-				CA22BA311F26C34B00413405 /* InformationTableViewController.swift in Sources */,
+				CA22BA311F26C34B00413405 /* InformationViewController.swift in Sources */,
 				CABB7FE523CD8FB6006AFFCC /* APIKeys.swift in Sources */,
 				CA0FEB0C25A1798B00FB6E92 /* InfoCell.swift in Sources */,
 				CAA79F8F21B21AEF00E0C692 /* SkinCancerClassifier2.mlmodel in Sources */,

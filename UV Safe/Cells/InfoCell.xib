@@ -17,43 +17,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvt-83-HXp">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ve7-zm-Jf9">
-                                <rect key="frame" x="25" y="15" width="150" height="170.5"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qys-id-yLS">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Qys-id-yLS" secondAttribute="height" multiplier="1:1" id="qOY-Eg-7OQ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-g3-Rfj">
-                                        <rect key="frame" x="0.0" y="150" width="150" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ve7-zm-Jf9" secondAttribute="trailing" constant="16" id="2Cb-tJ-WsB"/>
-                            <constraint firstItem="Ve7-zm-Jf9" firstAttribute="centerX" secondItem="Hvt-83-HXp" secondAttribute="centerX" id="N6L-gz-9VF"/>
-                            <constraint firstItem="Ve7-zm-Jf9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hvt-83-HXp" secondAttribute="leading" constant="16" id="RQA-0U-xLv"/>
-                            <constraint firstItem="Ve7-zm-Jf9" firstAttribute="centerY" secondItem="Hvt-83-HXp" secondAttribute="centerY" id="pOa-Rx-2Xn"/>
-                            <constraint firstItem="Qys-id-yLS" firstAttribute="width" secondItem="Hvt-83-HXp" secondAttribute="width" multiplier="0.75" id="raC-CC-gea"/>
-                        </constraints>
-                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qys-id-yLS">
+                        <rect key="frame" x="16" y="16" width="168" height="131.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-g3-Rfj">
+                        <rect key="frame" x="73" y="163.5" width="54" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="Hvt-83-HXp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VTx-lB-2zz"/>
-                <constraint firstAttribute="trailing" secondItem="Hvt-83-HXp" secondAttribute="trailing" id="hDV-Ms-onf"/>
-                <constraint firstAttribute="bottom" secondItem="Hvt-83-HXp" secondAttribute="bottom" id="wRl-tD-4DX"/>
-                <constraint firstItem="Hvt-83-HXp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="yMg-WO-sfL"/>
+                <constraint firstItem="Qys-id-yLS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="ETB-RX-VSq"/>
+                <constraint firstItem="YD1-g3-Rfj" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="INr-Ui-xcU"/>
+                <constraint firstAttribute="bottom" secondItem="YD1-g3-Rfj" secondAttribute="bottom" constant="16" id="KHd-lS-Spk"/>
+                <constraint firstAttribute="trailing" secondItem="Qys-id-yLS" secondAttribute="trailing" constant="16" id="YXZ-6c-0Sf"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YD1-g3-Rfj" secondAttribute="trailing" constant="16" id="ahS-ow-4i4"/>
+                <constraint firstItem="YD1-g3-Rfj" firstAttribute="top" secondItem="Qys-id-yLS" secondAttribute="bottom" constant="16" id="dy4-Xg-9RN"/>
+                <constraint firstItem="Qys-id-yLS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="h3W-Wq-gq7"/>
+                <constraint firstItem="YD1-g3-Rfj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="iMU-oT-sUu"/>
             </constraints>
             <connections>
                 <outlet property="details" destination="YD1-g3-Rfj" id="7wq-1E-b4H"/>

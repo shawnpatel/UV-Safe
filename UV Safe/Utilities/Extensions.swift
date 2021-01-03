@@ -18,6 +18,13 @@ extension UIImage {
 }
 
 extension UIView {
+    public func removeAllConstraints() {
+        for constraint in self.constraints {
+            constraint.isActive = false
+            self.removeConstraint(constraint)
+        }
+    }
+    
     // Less Blur in Effects View from: https://stackoverflow.com/questions/29498884/less-blur-with-visual-effect-view-with-blur
     public func pauseAnimation() {
         let time = 0.25 + CFAbsoluteTimeGetCurrent()
